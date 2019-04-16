@@ -18,6 +18,7 @@ gem 'dotenv-rails'
 
 # ================ APIs Related Gems ================
 gem 'jbuilder', '~> 2.5'
+gem 'swagger-docs'
 # gem 'rack-cors'
 
 # ============ Action Cable Related Gems ============
