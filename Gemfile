@@ -12,8 +12,8 @@ gem 'tzinfo-data'
 gem 'dotenv-rails'
 
 # =============== Authentication Gems ===============
-# gem 'devise', '~> 4.6', '>= 4.6.1'
-# gem 'cancancan', '~> 2.3'
+gem 'devise', '~> 4.6', '>= 4.6.1'
+gem 'cancancan', '~> 2.3'
 # gem 'omniauth-facebook', '~> 5.0'
 
 # ================ APIs Related Gems ================
@@ -25,9 +25,9 @@ gem 'swagger-docs'
 # gem 'redis', '~> 4.0'
 
 # =============== Images Related Gems ===============
-# gem 'carrierwave'
-# gem 'carrierwave-base64'
-# gem 'mini_magick', '~> 4.9', '>= 4.9.3'
+gem 'carrierwave'
+gem 'carrierwave-base64'
+gem 'mini_magick', '~> 4.9', '>= 4.9.3'
 
 # =============== Development & Test ================
 group :development, :test do
