@@ -32,18 +32,18 @@ gem 'swagger-docs'
 # =============== Development & Test ================
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
-  # gem 'factory_bot', '~> 5.0', '>= 5.0.2'
-  # gem 'faker', '~> 1.9', '>= 1.9.3'
-  # gem 'guard', '~> 2.15'
-  # gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'factory_bot', '~> 5.0', '>= 5.0.2'
+  gem 'faker', '~> 1.9', '>= 1.9.3'
+  gem 'guard', '~> 2.15'
+  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
 end
 
 # ===================== Testing =====================
 group :test do
-  # gem 'database_cleaner', '~> 1.7'
-  # gem 'shoulda-matchers', '~> 4.0', '>= 4.0.1'
-  # gem 'rails-controller-testing', '~> 1.0', '>= 1.0.4'
+  gem 'database_cleaner', '~> 1.7'
+  gem 'shoulda-matchers', '~> 4.0', '>= 4.0.1'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.4'
 end
 
 # =================== Development ===================
