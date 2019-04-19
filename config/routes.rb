@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
+        resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
       end
     end
