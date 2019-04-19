@@ -6,7 +6,7 @@ class Api::V1::Admin::BaseAdminController < Api::V1::BaseApiController
 
   private
 
-  def authenticate_user
+  def authenticate_admin
     return if current_admin
     render json: { error: 'unauthorized access, please re-login' }, status: :unauthorized
   end

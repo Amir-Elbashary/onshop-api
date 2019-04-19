@@ -4,6 +4,10 @@
   "basePath": "/",
   "apis": [
     {
+      "path": "/api/v1/admin/app_tokens.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/sessions.{format}",
       "description": "Admin"
     }
