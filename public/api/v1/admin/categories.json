@@ -1,0 +1,67 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "categories",
+  "apis": [
+    {
+      "path": "/api/v1/admin/categories.json",
+      "operations": [
+        {
+          "summary": "Create new categories and sub categories",
+          "notes": "\n      <h4>This APIs creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only like 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category, so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "parent_category",
+              "type": "string",
+              "description": "Parent Categories",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "sub_categories",
+              "type": "string",
+              "description": "Sub Categories",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#create",
+          "method": "post"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

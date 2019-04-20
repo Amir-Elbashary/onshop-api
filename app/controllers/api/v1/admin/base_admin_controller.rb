@@ -1,4 +1,5 @@
 class Api::V1::Admin::BaseAdminController < Api::V1::BaseApiController
+  before_action :authenticate_admin
 
   def current_admin
     @current_admin ||= Admin.find_by(authentication_token: request.headers['X-User-Token'])
