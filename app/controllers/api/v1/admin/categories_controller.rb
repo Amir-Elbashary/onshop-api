@@ -1,11 +1,43 @@
 class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
+  skip_before_action :authenticate_admin, only: :index
+  before_action :set_category, only: :index
 
   swagger_controller :categories, 'Admin'
+
+  swagger_api :index do
+    summary 'Listing categories'
+    notes "
+      <h4>This API lists categories and sub_categories as following:</h4>
+      <p>Enter an ID of a category and you'll have response with it's type and info</p>
+      <p>Leave ID blank if you want list of all categories</p>
+    "
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :query, :id, :string, 'Category ID'
+    response :ok
+    response :unauthorized
+    response :not_found
+  end
+
+  def index
+    if params[:id].present?
+      if @category.root?
+        render json: { category_type: 'main category',
+                       main_category: @category,
+                       sub_categories: @category.children }, status: :ok
+      else
+        render json: { category_type: 'sub category',
+                       sub_category: @category,
+                       main_category: @category.parent }, status: :ok
+      end
+    end
+
+    @categories = Category.roots unless params[:id]
+  end
 
   swagger_api :create do
     summary 'Create new categories and sub categories'
     notes "
-      <h4>This APIs creates categories and sub_categories as following:</h4>
+      <h4>This API creates categories and sub_categories as following:</h4>
       <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>
       <p>Enter one or multiple sub_categories sperated by comma only</p>
       <p>Example: 'computers,phone,laptops' (Downcase is recommended)</p>
@@ -20,6 +52,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     response :ok
     response :unauthorized
     response :unprocessable_entity
+    response :not_found
   end
 
   def create
@@ -61,5 +94,11 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
                             "#{existing_children} existing ignored",
                    parent_category: parent_category,
                    sub_categories: parent_category.children }, status: :ok
+  end
+
+  private
+
+  def set_category
+    @category = Category.find(params[:id]) if params[:id]
   end
 end

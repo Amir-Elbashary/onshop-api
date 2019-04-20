@@ -12,7 +12,7 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
       params = { 'parent_category' => 'Electronics',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.count).to eq(1)
@@ -25,7 +25,7 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
       params = { 'parent_category' => '',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('422')
       expect(Category.roots.count).to eq(0)
@@ -35,7 +35,7 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
       params = { 'parent_category' => 'Electronics,Clothes',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('422')
       expect(Category.roots.count).to eq(0)
@@ -49,7 +49,7 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
       params = { 'parent_category' => 'Electronics',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.count).to eq(1)
@@ -67,13 +67,13 @@ RSpec.describe 'Creating parent category only' do
 
   context 'with valid data' do
     it 'should create new category' do
-        params = { 'parent_category' => 'Electronics' }
+      params = { 'parent_category' => 'Electronics' }
 
-        post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
-        expect(response.code).to eq('200')
-        expect(Category.roots.count).to eq(1)
-        expect(Category.first.children.count).to eq(0)
+      expect(response.code).to eq('200')
+      expect(Category.roots.count).to eq(1)
+      expect(Category.first.children.count).to eq(0)
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe 'Creating parent category only' do
     it 'should not create new category with an empty parent name' do
       params = { 'parent_category' => '' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('422')
       expect(Category.roots.count).to eq(0)
@@ -90,7 +90,7 @@ RSpec.describe 'Creating parent category only' do
     it 'should not create new category with multiple parent names' do
       params = { 'parent_category' => 'Electronics,Clothes' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('422')
       expect(Category.roots.count).to eq(0)
@@ -103,7 +103,7 @@ RSpec.describe 'Creating parent category only' do
 
       params = { 'parent_category' => 'Electronics' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.count).to eq(1)
@@ -125,7 +125,7 @@ RSpec.describe 'Creating sub categories to and existing category' do
       params = { 'parent_category' => 'electronics',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.count).to eq(1)
@@ -140,7 +140,7 @@ RSpec.describe 'Creating sub categories to and existing category' do
       params = { 'parent_category' => '',
                  'sub_categories' => 'Computers,Phones,Laptops' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('422')
       expect(Category.roots.count).to eq(1)
@@ -159,7 +159,7 @@ RSpec.describe 'Creating sub categories to and existing category' do
       params = { 'parent_category' => 'electronics',
                  'sub_categories' => 'Computers, mobile  phones ,Laptops ' }
 
-      post '/api/v1/admin/categories.json', headers: @headers, params: params
+      post '/v1/admin/categories.json', headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.count).to eq(1)

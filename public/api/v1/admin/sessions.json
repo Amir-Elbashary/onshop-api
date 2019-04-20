@@ -5,7 +5,7 @@
   "resourcePath": "sessions",
   "apis": [
     {
-      "path": "/api/v1/admin/sessions.json",
+      "path": "/v1/admin/sessions.json",
       "operations": [
         {
           "summary": "Sign in To OnShop",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "path": "/api/v1/admin/sessions/{id}.json",
+      "path": "/v1/admin/sessions/{id}.json",
       "operations": [
         {
           "summary": "Sign out",

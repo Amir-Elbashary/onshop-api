@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   acts_as_tree order: 'name'   
-  mount_uploader :logo, ImageUploader
+  mount_uploader :image, ImageUploader
 
   validates :name, presence: true
 

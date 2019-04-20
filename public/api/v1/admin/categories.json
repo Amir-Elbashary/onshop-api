@@ -5,11 +5,55 @@
   "resourcePath": "categories",
   "apis": [
     {
-      "path": "/api/v1/admin/categories.json",
+      "path": "/v1/admin/categories.json",
+      "operations": [
+        {
+          "summary": "Listing categories",
+          "notes": "\n      <h4>This API lists categories and sub_categories as following:</h4>\n      <p>Enter an ID of a category and you'll have response with it's type and info</p>\n      <p>Leave ID blank if you want list of all categories</p>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "string",
+              "description": null,
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories.json",
       "operations": [
         {
           "summary": "Create new categories and sub categories",
-          "notes": "\n      <h4>This APIs creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only</p>\n      <p>Example: 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category,</p>\n      <p>so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
+          "notes": "\n      <h4>This API creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only</p>\n      <p>Example: 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category,</p>\n      <p>so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
           "parameters": [
             {
               "paramType": "header",
@@ -50,6 +94,11 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
             },
             {
               "code": 422,

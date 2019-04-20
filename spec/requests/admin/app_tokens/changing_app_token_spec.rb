@@ -10,7 +10,7 @@ RSpec.describe 'Changing AppToken by admin', type: :request do
     it 'should be able to generate new token' do
       headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
 
-      post '/api/v1/admin/app_tokens.json', headers: headers
+      post '/v1/admin/app_tokens.json', headers: headers
 
       expect(response.code).to eq('200')
       expect(AppToken.first.token).not_to eq(@app_token.token)
@@ -20,13 +20,13 @@ RSpec.describe 'Changing AppToken by admin', type: :request do
       # Generating new app token
       headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
 
-      post '/api/v1/admin/app_tokens.json', headers: headers
+      post '/v1/admin/app_tokens.json', headers: headers
 
       # logging in using the old token
       headers = { 'X-APP-Token' => @app_token.token }
       params = { 'admin[email]' => @admin.email, 'admin[password]' => @admin.password }
 
-      post '/api/v1/admin/sessions.json', headers: headers, params: params
+      post '/v1/admin/sessions.json', headers: headers, params: params
 
       expect(response.code).to eq('401')
     end
@@ -36,7 +36,7 @@ RSpec.describe 'Changing AppToken by admin', type: :request do
     it 'should not be able to generate new token' do
       headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => 'wrong token' }
 
-      post '/api/v1/admin/app_tokens.json', headers: headers
+      post '/v1/admin/app_tokens.json', headers: headers
 
       expect(response.code).to eq('401')
       expect(AppToken.first.token).to eq(@app_token.token)

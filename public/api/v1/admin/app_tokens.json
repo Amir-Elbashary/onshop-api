@@ -5,7 +5,7 @@
   "resourcePath": "app_tokens",
   "apis": [
     {
-      "path": "/api/v1/admin/app_tokens.json",
+      "path": "/v1/admin/app_tokens.json",
       "operations": [
         {
           "summary": "Generating new API token",
