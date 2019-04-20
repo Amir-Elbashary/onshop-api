@@ -3,7 +3,6 @@ class Category < ApplicationRecord
   mount_uploader :logo, ImageUploader
 
   validates :name, presence: true
-  # validates :name, uniqueness: { case_sensitive: false }
 
   has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Category', optional: true
