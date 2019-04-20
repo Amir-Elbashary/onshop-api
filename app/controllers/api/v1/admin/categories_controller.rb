@@ -23,13 +23,16 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
   end
 
   def create
+    # Performing essential checks
     return render json: { error: 'parent category must exist' }, status: :unprocessable_entity if params[:parent_category].blank?
     return render json: { error: 'only 1 parent category is allowed per call' }, status: :unprocessable_entity if params[:parent_category].split(',').count > 1
 
+    # Initialize values to be used as results
     new_parent = false
     added_children = 0
     existing_children = 0
 
+    # Checking for parent category existance (find or create)
     parent_category = Category.where("lower(categories.name) = '#{params[:parent_category].downcase.strip.squeeze}'").first
 
     new_parent = false if parent_category
@@ -39,6 +42,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       parent_category = Category.create(name: params[:parent_category].downcase.strip.squeeze)
     end
 
+    # Checking for sub categories (as children)
     new_children = params[:sub_categories].split(',') if params[:sub_categories].present?
 
     new_children&.map do |child|
@@ -51,6 +55,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       added_children += 1
     end
 
+    # Responding with results
     render json: { summary: "#{new_parent ? 'new parent category created' : 'parent category already exists'}, "\
                             "#{added_children} new sub categories added, "\
                             "#{existing_children} existing ignored",
