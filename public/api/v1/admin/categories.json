@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Create new categories and sub categories",
-          "notes": "\n      <h4>This APIs creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only like 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category, so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
+          "notes": "\n      <h4>This APIs creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only</p>\n      <p>Example: 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category,</p>\n      <p>so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
           "parameters": [
             {
               "paramType": "header",

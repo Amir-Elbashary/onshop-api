@@ -7,7 +7,7 @@ RSpec.describe Category, type: :model do
     end
 
     it 'should has a unique name' do
-      should validate_uniqueness_of(:name).case_insensitive
+      # Processed via create action
     end
   end
 
