@@ -10,6 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'tzinfo-data'
 gem 'dotenv-rails'
+gem 'acts_as_tree', '~> 2.9'
 
 # =============== Authentication Gems ===============
 gem 'devise', '~> 4.6', '>= 4.6.1'

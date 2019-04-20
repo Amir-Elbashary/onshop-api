@@ -1,5 +1,4 @@
 class Api::V1::Admin::AppTokensController < Api::V1::Admin::BaseAdminController
-  before_action :authenticate_admin
 
   swagger_controller :app_tokens, 'Admin'
 

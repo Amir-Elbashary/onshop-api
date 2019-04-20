@@ -16,7 +16,7 @@ class Ability
     # when User
     #   # Users have access to specific models only
     #   authorize_models(USER_MODELS, USER_AUTHORIZED_MODELS)
-    # end
+    end
   end
 
   # def authorize_models(user_models, target_models)
