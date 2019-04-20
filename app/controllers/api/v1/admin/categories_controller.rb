@@ -1,6 +1,6 @@
 class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
   skip_before_action :authenticate_admin, only: :index
-  before_action :set_category, only: :index
+  before_action :set_category, only: %i[index update destroy]
 
   swagger_controller :categories, 'Admin'
 
@@ -94,6 +94,48 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
                             "#{existing_children} existing ignored",
                    parent_category: parent_category,
                    sub_categories: parent_category.children }, status: :ok
+  end
+
+  swagger_api :update do
+    summary 'Edit categories info'
+    notes "
+      <h4>This API updates categories information</h4>
+    "
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
+    param :path, :id, :integer, :required, 'Category ID'
+    param :query, :name, :string, :required, 'Category Name'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
+  def update
+    if params[:name].present?
+      @category.update(name: params[:name].downcase)
+      render json: { message: 'category info updated' }, status: :ok
+    else
+      render json: @category.errors, status: :unprocessable_entity
+    end
+  end
+
+  swagger_api :destroy do
+    summary 'Delete categories'
+    notes "
+      <h4>This API deletes categories</h4>
+    "
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
+    param :path, :id, :integer, :required, 'Category ID'
+    response :ok
+    response :unauthorized
+    response :not_found
+  end
+
+  def destroy
+    return render json: { error: 'unknown error occured' }, status: :unprocessable_entity unless @category.destroy
+    render json: { message: 'category was deleted' }, status: :ok
   end
 
   private
