@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
       namespace :merchant do
         resources :sessions, only: %i[create destroy]
+        resources :merchants
       end
     end
   end

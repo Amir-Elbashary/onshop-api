@@ -49,14 +49,14 @@
             {
               "paramType": "form",
               "name": "merchant[first_name]",
-              "type": "password",
+              "type": "string",
               "description": "Merchant first name",
               "required": true
             },
             {
               "paramType": "form",
               "name": "merchant[last_name]",
-              "type": "password",
+              "type": "string",
               "description": "Merchant last name",
               "required": true
             }
