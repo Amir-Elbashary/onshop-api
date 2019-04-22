@@ -14,6 +14,10 @@
     {
       "path": "/api/v1/admin/categories.{format}",
       "description": "Admin"
+    },
+    {
+      "path": "/api/v1/admin/merchants.{format}",
+      "description": "Admin"
     }
   ],
   "authorizations": null

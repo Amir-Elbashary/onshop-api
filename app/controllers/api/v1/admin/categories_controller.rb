@@ -1,5 +1,4 @@
 class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
-  skip_before_action :authenticate_admin, only: :index
   before_action :set_category, only: %i[index update destroy]
 
   swagger_controller :categories, 'Admin'
@@ -12,6 +11,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       <p>Leave ID blank if you want list of all categories</p>
     "
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
     param :query, :id, :string, 'Category ID'
     response :ok
     response :unauthorized
@@ -116,7 +116,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       @category.update(name: params[:name].downcase)
       render json: { message: 'category info updated' }, status: :ok
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: @category.errors.full_messages, status: :unprocessable_entity
     end
   end
 

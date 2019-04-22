@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
+        resources :merchants
       end
     end
   end

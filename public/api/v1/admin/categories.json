@@ -19,6 +19,13 @@
               "required": true
             },
             {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
               "paramType": "query",
               "name": "id",
               "type": "string",
@@ -108,6 +115,120 @@
           ],
           "nickname": "Api::V1::Admin::Categories#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Edit categories info",
+          "notes": "\n      <h4>This API updates categories information</h4>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "Category Name",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Delete categories",
+          "notes": "\n      <h4>This API deletes categories</h4>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#destroy",
+          "method": "delete"
         }
       ]
     }
