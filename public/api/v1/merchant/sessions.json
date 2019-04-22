@@ -5,7 +5,7 @@
   "resourcePath": "sessions",
   "apis": [
     {
-      "path": "/v1/admin/sessions.json",
+      "path": "/v1/merchant/sessions.json",
       "operations": [
         {
           "summary": "Sign in To OnShop",
@@ -20,16 +20,16 @@
             },
             {
               "paramType": "form",
-              "name": "admin[email]",
+              "name": "merchant[email]",
               "type": "email",
-              "description": "Admin Email",
+              "description": "Merchant Email",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "admin[password]",
+              "name": "merchant[password]",
               "type": "password",
-              "description": "Admin password",
+              "description": "Merchant password",
               "required": true
             }
           ],
@@ -50,13 +50,13 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Admin::Sessions#create",
+          "nickname": "Api::V1::Merchant::Sessions#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/v1/admin/sessions/{id}.json",
+      "path": "/v1/merchant/sessions/{id}.json",
       "operations": [
         {
           "summary": "Sign out",
@@ -72,7 +72,7 @@
               "paramType": "header",
               "name": "X-User-Token",
               "type": "string",
-              "description": "Admin Authentication Token",
+              "description": "Merchant Authentication Token",
               "required": true
             }
           ],
@@ -88,7 +88,7 @@
               "message": "Unauthorized"
             }
           ],
-          "nickname": "Api::V1::Admin::Sessions#destroy",
+          "nickname": "Api::V1::Merchant::Sessions#destroy",
           "method": "delete"
         }
       ]
