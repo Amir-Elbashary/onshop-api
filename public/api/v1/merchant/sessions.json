@@ -2,27 +2,20 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "/",
-  "resourcePath": "merchants",
+  "resourcePath": "sessions",
   "apis": [
     {
-      "path": "/v1/admin/merchants.json",
+      "path": "/v1/merchant/sessions.json",
       "operations": [
         {
-          "summary": "Adding new merchant to OnShop",
-          "notes": "Provide the required info to create new merchant",
+          "summary": "Sign in To OnShop",
+          "notes": "      Signing in should give you `authentication_token`.<br />\n      You should add `authentication_token` to all upgoing requests\n      in header to authenticate your self!<br />\n      Header should be like this:</br>\n      <b>X-User-Token</b> 1G8_s7P-V-4MGojaKD7a<br />\n      <br />\n",
           "parameters": [
             {
               "paramType": "header",
               "name": "X-APP-Token",
               "type": "string",
               "description": "App Authentication Token",
-              "required": true
-            },
-            {
-              "paramType": "header",
-              "name": "X-User-Token",
-              "type": "string",
-              "description": "Admin Authentication Token",
               "required": true
             },
             {
@@ -37,27 +30,6 @@
               "name": "merchant[password]",
               "type": "password",
               "description": "Merchant password",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "merchant[password_confirmation]",
-              "type": "password",
-              "description": "Merchant password password confirmation",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "merchant[first_name]",
-              "type": "string",
-              "description": "Merchant first name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "merchant[last_name]",
-              "type": "string",
-              "description": "Merchant last name",
               "required": true
             }
           ],
@@ -78,17 +50,16 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Admin::Merchants#create",
+          "nickname": "Api::V1::Merchant::Sessions#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/v1/admin/merchants/{id}.json",
+      "path": "/v1/merchant/sessions/{id}.json",
       "operations": [
         {
-          "summary": "Deleting merchant from OnShop",
-          "notes": "WARNING: This will delete the merchant and all his associated items permanently",
+          "summary": "Sign out",
           "parameters": [
             {
               "paramType": "header",
@@ -101,14 +72,7 @@
               "paramType": "header",
               "name": "X-User-Token",
               "type": "string",
-              "description": "Admin Authentication Token",
-              "required": true
-            },
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "Merchant ID",
+              "description": "Merchant Authentication Token",
               "required": true
             }
           ],
@@ -122,14 +86,9 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Admin::Merchants#destroy",
+          "nickname": "Api::V1::Merchant::Sessions#destroy",
           "method": "delete"
         }
       ]

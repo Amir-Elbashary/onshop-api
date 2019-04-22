@@ -18,6 +18,14 @@
     {
       "path": "/api/v1/admin/merchants.{format}",
       "description": "Admin"
+    },
+    {
+      "path": "/api/v1/merchant/sessions.{format}",
+      "description": "Merchant"
+    },
+    {
+      "path": "/api/v1/merchant/merchants.{format}",
+      "description": "Merchant"
     }
   ],
   "authorizations": null

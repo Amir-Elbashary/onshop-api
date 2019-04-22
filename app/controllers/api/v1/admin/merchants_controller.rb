@@ -11,8 +11,8 @@ class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
     param :form, 'merchant[email]', :email, :required, 'Merchant Email'
     param :form, 'merchant[password]', :password, :required, 'Merchant password'
     param :form, 'merchant[password_confirmation]', :password, :required, 'Merchant password password confirmation'
-    param :form, 'merchant[first_name]', :password, :required, 'Merchant first name'
-    param :form, 'merchant[last_name]', :password, :required, 'Merchant last name'
+    param :form, 'merchant[first_name]', :string, :required, 'Merchant first name'
+    param :form, 'merchant[last_name]', :string, :required, 'Merchant last name'
     response :ok
     response :unauthorized
     response :unprocessable_entity
