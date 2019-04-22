@@ -9,8 +9,8 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
 
   context 'with valid data' do
     it 'should create new category' do
-      params = { 'parent_category' => 'Electronics',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: 'Electronics',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -22,8 +22,8 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
 
   context 'with invalid data' do
     it 'should not create new category with an empty parent name' do
-      params = { 'parent_category' => '',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: '',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -32,8 +32,8 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
     end
 
     it 'should not create new category with multiple parent names' do
-      params = { 'parent_category' => 'Electronics,Clothes',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: 'Electronics,Clothes',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -46,8 +46,8 @@ RSpec.describe 'Creating categories and sub categories together', type: :request
     it 'should not create new category' do
       create(:category, name: 'electronics')
 
-      params = { 'parent_category' => 'Electronics',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: 'Electronics',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -67,7 +67,7 @@ RSpec.describe 'Creating parent category only' do
 
   context 'with valid data' do
     it 'should create new category' do
-      params = { 'parent_category' => 'Electronics' }
+      params = { parent_category: 'Electronics' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -79,7 +79,7 @@ RSpec.describe 'Creating parent category only' do
 
   context 'with invalid data' do
     it 'should not create new category with an empty parent name' do
-      params = { 'parent_category' => '' }
+      params = { parent_category: '' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -88,7 +88,7 @@ RSpec.describe 'Creating parent category only' do
     end
 
     it 'should not create new category with multiple parent names' do
-      params = { 'parent_category' => 'Electronics,Clothes' }
+      params = { parent_category: 'Electronics,Clothes' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -101,7 +101,7 @@ RSpec.describe 'Creating parent category only' do
     it 'should not create new category' do
       create(:category, name: 'Electronics')
 
-      params = { 'parent_category' => 'Electronics' }
+      params = { parent_category: 'Electronics' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -122,8 +122,8 @@ RSpec.describe 'Creating sub categories to and existing category' do
     it 'should create new sub categories' do
       @category = create(:category, name: 'electronics')
 
-      params = { 'parent_category' => 'electronics',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: 'electronics',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -137,8 +137,8 @@ RSpec.describe 'Creating sub categories to and existing category' do
     it 'should not create new category' do
       @category = create(:category, name: 'electronics')
 
-      params = { 'parent_category' => '',
-                 'sub_categories' => 'Computers,Phones,Laptops' }
+      params = { parent_category: '',
+                 sub_categories: 'Computers,Phones,Laptops' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
@@ -156,8 +156,8 @@ RSpec.describe 'Creating sub categories to and existing category' do
 
       # Spaces are put intentionly to make sure
       # they won't affect the response results
-      params = { 'parent_category' => 'electronics',
-                 'sub_categories' => 'Computers, mobile  phones ,Laptops ' }
+      params = { parent_category: 'electronics',
+                 sub_categories: 'Computers, mobile  phones ,Laptops ' }
 
       post '/v1/admin/categories.json', headers: @headers, params: params
 
