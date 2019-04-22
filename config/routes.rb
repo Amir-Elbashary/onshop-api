@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :merchants
   devise_for :admins
   namespace :api, path: '/', defaults: { format: :json } do
     namespace :v1 do
