@@ -6,18 +6,48 @@ RSpec.describe 'Editing categories', type: :request do
     @admin = create(:admin)
     @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
     @category = create(:category)
+    @category2 = create(:category)
     @sub_category1 = create(:category, parent_id: @category.id)
     @sub_category2 = create(:category, parent_id: @category.id)
   end
 
-  context 'with valid data' do
-    it 'should update category info' do
+  context 'updating parent category with valid data' do
+    it 'should update with unique name' do
       params = { name: 'New name' }
 
       put "/v1/admin/categories/#{@category.id}", headers: @headers, params: params
 
       expect(response.code).to eq('200')
       expect(Category.roots.first.name).to eq('new name')
+    end
+
+    it 'should not update with duplicated name' do
+      params = { name: @category2.name }
+
+      put "/v1/admin/categories/#{@category.id}", headers: @headers, params: params
+
+      expect(response.code).to eq('422')
+      expect(Category.roots.first.name).to eq(@category.name)
+    end
+  end
+
+  context 'updating sub category with valid data' do
+    it 'should update with unique name within the parent category' do
+      params = { name: 'New name' }
+
+      put "/v1/admin/categories/#{@sub_category1.id}", headers: @headers, params: params
+
+      expect(response.code).to eq('200')
+      expect(Category.roots.first.children.first.name).to eq('new name')
+    end
+
+    it 'should not update with duplicated name within the parent category' do
+      params = { name: @sub_category2.name }
+
+      put "/v1/admin/categories/#{@sub_category1.id}", headers: @headers, params: params
+
+      expect(response.code).to eq('422')
+      expect(Category.roots.first.children.first.name).to eq(@sub_category1.name)
     end
   end
 
