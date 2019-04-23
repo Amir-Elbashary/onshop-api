@@ -87,10 +87,10 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
           valid_child = false
           break
         end
-
       end
 
       next if valid_child == false
+
       Category.create(name: child.downcase.strip.squeeze, parent: parent_category)
       added_children += 1
     end
