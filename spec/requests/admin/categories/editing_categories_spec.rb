@@ -13,12 +13,14 @@ RSpec.describe 'Editing categories', type: :request do
 
   context 'updating parent category with valid data' do
     it 'should update with unique name' do
-      params = { name: 'New name' }
+      params = { name: 'New name',
+                 name_ar: 'اسم جديد' }
 
       put "/v1/admin/categories/#{@category.id}", headers: @headers, params: params
 
       expect(response.code).to eq('200')
-      expect(Category.roots.first.name).to eq('new name')
+      expect(Category.roots.first.name_en).to eq('new name')
+      expect(Category.roots.first.name_ar).to eq('اسم جديد')
     end
 
     it 'should not update with duplicated name' do
@@ -33,12 +35,14 @@ RSpec.describe 'Editing categories', type: :request do
 
   context 'updating sub category with valid data' do
     it 'should update with unique name within the parent category' do
-      params = { name: 'New name' }
+      params = { name: 'New name',
+                 name_ar: 'اسم جديد'}
 
       put "/v1/admin/categories/#{@sub_category1.id}", headers: @headers, params: params
 
       expect(response.code).to eq('200')
-      expect(Category.roots.first.children.first.name).to eq('new name')
+      expect(Category.roots.first.children.first.name_en).to eq('new name')
+      expect(Category.roots.first.children.first.name_ar).to eq('اسم جديد')
     end
 
     it 'should not update with duplicated name within the parent category' do
