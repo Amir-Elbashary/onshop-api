@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { Faker::Name.unique.name.downcase.strip.squeeze }
+    name { Faker::Name.unique.name.downcase.strip.squeeze.parameterize }
     image { Faker::Avatar.image }
 
     factory :sub_category do
