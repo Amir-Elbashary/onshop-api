@@ -69,7 +69,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     existing_children = 0
 
     # Checking for parent category existance (find or create)
-    parent_category = Category.with_translations(:en).where("lower(category_translations.name) = '#{params[:parent_category].downcase.strip.squeeze}'").first
+    parent_category = Category.with_translations(:en).where('lower(category_translations.name) = ?', "#{params[:parent_category].downcase.strip.squeeze}").first
 
     new_parent = false if parent_category
 
@@ -85,7 +85,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       valid_child = true
 
       parent_category.children.each do |category|
-        if category.translations.where("lower(category_translations.name) = '#{child.downcase.strip.squeeze}'").any?
+        if category.translations.where('lower(category_translations.name) = ?', "#{child.downcase.strip.squeeze}").any?
           existing_children += 1
           valid_child = false
           break
@@ -152,7 +152,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
         child_exists = false
 
         @category.parent.children.each do |child|
-          if child.translations.where("category_translations.name = '#{params[:name].downcase.strip.squeeze}'").any?
+          if child.translations.where('category_translations.name = ?', "#{params[:name].downcase.strip.squeeze}").any?
             child_exists = true
             break
           end
