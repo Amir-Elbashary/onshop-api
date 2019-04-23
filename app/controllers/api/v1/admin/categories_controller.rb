@@ -7,11 +7,14 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     summary 'Listing categories'
     notes "
       <h4>This API lists categories and sub_categories as following:</h4>
+      <p>Enter locale to get the corresponding language, Available localed: en, ar</p>
+      <p>If locale left blank, Default english locale will be used</p>
       <p>Enter an ID of a category and you'll have response with it's type and info</p>
       <p>Leave ID blank if you want list of all categories</p>
     "
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
+    param :query, :language, :string, 'Locale'
     param :query, :id, :string, 'Category ID'
     response :ok
     response :unauthorized
@@ -66,7 +69,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     existing_children = 0
 
     # Checking for parent category existance (find or create)
-    parent_category = Category.where("lower(categories.name) = '#{params[:parent_category].downcase.strip.squeeze}'").first
+    parent_category = Category.with_translations(:en).where("lower(category_translations.name) = '#{params[:parent_category].downcase.strip.squeeze}'").first
 
     new_parent = false if parent_category
 
@@ -79,10 +82,17 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     new_children = params[:sub_categories].split(',') if params[:sub_categories].present?
 
     new_children&.map do |child|
-      if parent_category.children.where("lower(categories.name) = '#{child.downcase.strip.squeeze}'").any?
-        existing_children += 1
-        next
+      valid_child = true
+
+      parent_category.children.each do |category|
+        if category.translations.where("lower(category_translations.name) = '#{child.downcase.strip.squeeze}'").any?
+          existing_children += 1
+          valid_child = false
+          break
+        end
       end
+
+      next if valid_child == false
 
       Category.create(name: child.downcase.strip.squeeze, parent: parent_category)
       added_children += 1
@@ -105,6 +115,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
     param :path, :id, :integer, :required, 'Category ID'
     param :query, :name, :string, :required, 'Category Name'
+    param :query, :name_ar, :string, :required, 'Category Arabic Name'
     response :ok
     response :unauthorized
     response :unprocessable_entity
@@ -113,10 +124,52 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
 
   def update
     if params[:name].present?
-      @category.update(name: params[:name].downcase)
-      render json: { message: 'category info updated' }, status: :ok
+      @existing_category = Category.find_by(name: params[:name].downcase.strip.squeeze)
+
+      if @category == @existing_category
+        if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+          return render json: { message: 'category info updated' }, status: :ok
+        end
+      end
+
+      # In case we have a parent category
+      if @category.root?
+        if @existing_category && @existing_category.root?
+          if Category.with_translations.where('category_translations.name = ?', @existing_category.name).any?
+            return render json: { error: 'parent category with same name already exists' }, status: :unprocessable_entity
+          end
+        else
+          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+            render json: { message: 'category info updated' }, status: :ok
+          else
+            render json: @category.errors.full_messages, status: :unprocessable_entity
+          end
+        end
+      end
+
+      # In case we have a sub category
+      unless @category.root?
+        child_exists = false
+
+        @category.parent.children.each do |child|
+          if child.translations.where("category_translations.name = '#{params[:name].downcase.strip.squeeze}'").any?
+            child_exists = true
+            break
+          end
+        end
+
+        if child_exists == true
+          return render json: { error: 'sub category with same name already exists within it\'s parent category' }, status: :unprocessable_entity
+        else
+          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+            render json: { message: 'category info updated' }, status: :ok
+          else
+            render json: @category.errors.full_messages, status: :unprocessable_entity
+          end
+        end
+      end
     else
-      render json: @category.errors.full_messages, status: :unprocessable_entity
+      render json: { error: 'unique category name is required' }, status: :unprocessable_entity
     end
   end
 

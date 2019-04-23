@@ -1,8 +1,15 @@
 class Category < ApplicationRecord
   acts_as_tree order: 'name'   
   mount_uploader :image, ImageUploader
+  translates :name, fallbacks_for_empty_translations: true
+  globalize_accessors locales: [:en, :ar]
+  globalize_validations locales: [:en, :ar]
+
+  Globalize.fallbacks = { en: [:en, :ar], ar: [:ar, :en] }
 
   validates :name, presence: true
+
+  validate :validates_globalized_attributes
 
   has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Category', optional: true
