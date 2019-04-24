@@ -9,6 +9,11 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     end
   end
 
+  def destroy
+    return render json: { error: 'an error occured' }, status: :unprocessable_entity unless @product.destroy
+    render json: { message: 'product was deleted', product: @product }, status: :ok
+  end
+
   private
 
   def product_params
