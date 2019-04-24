@@ -16,6 +16,10 @@ RSpec.describe Category, type: :model do
       should have_many :sub_categories
     end
 
+    it 'has many products' do
+      should have_many :products
+    end
+
     it 'belongs to parent category' do
       should belong_to(:parent).optional
     end

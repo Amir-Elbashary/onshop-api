@@ -1,4 +1,6 @@
 class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
+  load_and_authorize_resource
+  skip_load_resource
   before_action :set_category, only: %i[index update destroy]
 
   swagger_controller :categories, 'Admin'

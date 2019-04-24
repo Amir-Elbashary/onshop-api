@@ -1,4 +1,5 @@
 class Api::V1::Merchant::SessionsController < Api::V1::Merchant::BaseMerchantController
+  skip_authorization_check
   skip_before_action :authenticate_merchant
 
   swagger_controller :sessions, 'Merchant'

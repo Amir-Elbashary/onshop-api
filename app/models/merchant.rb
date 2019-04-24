@@ -6,6 +6,8 @@ class Merchant < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  has_many :products, dependent: :destroy
+
   def generate_authentication_token!
     self.authentication_token = Devise.friendly_token
   end

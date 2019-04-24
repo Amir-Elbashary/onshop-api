@@ -18,4 +18,10 @@ RSpec.describe Merchant, type: :model do
       should validate_presence_of(:last_name)
     end
   end
+
+  describe 'Has associations' do
+    it 'has many products' do
+      should have_many :products
+    end
+  end
 end

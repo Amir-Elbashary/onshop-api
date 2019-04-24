@@ -17,7 +17,7 @@ RSpec.describe 'Creating merchant by admin', type: :request do
 
       post '/v1/admin/merchants', headers: @headers, params: params
 
-      expect(response.code).to eq('200')
+      expect(response.code).to eq('201')
       expect(Merchant.first.email).to eq('merchant@onshop.com')
       expect(Merchant.first.full_name).to eq('OnShop Merchant')
     end

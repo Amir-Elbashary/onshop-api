@@ -12,8 +12,9 @@ class Category < ApplicationRecord
   validate :validates_globalized_attributes
 
   has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
+  has_many :products, dependent: :destroy
   belongs_to :parent, class_name: 'Category', optional: true
 
-  accepts_nested_attributes_for :sub_categories, allow_destroy: true,
-                                                 reject_if: ->(a) { a[:name].blank? }
+  # accepts_nested_attributes_for :sub_categories, allow_destroy: true,
+  #                                                reject_if: ->(a) { a[:name].blank? }
 end
