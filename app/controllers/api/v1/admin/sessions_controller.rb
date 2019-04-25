@@ -1,4 +1,5 @@
 class Api::V1::Admin::SessionsController < Api::V1::Admin::BaseAdminController
+  skip_authorization_check
   skip_before_action :authenticate_admin
 
   swagger_controller :sessions, 'Admin'

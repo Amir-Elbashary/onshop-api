@@ -12,7 +12,7 @@ RSpec.describe 'Changing AppToken by admin', type: :request do
 
       post '/v1/admin/app_tokens.json', headers: headers
 
-      expect(response.code).to eq('200')
+      expect(response.code).to eq('201')
       expect(AppToken.first.token).not_to eq(@app_token.token)
     end
 

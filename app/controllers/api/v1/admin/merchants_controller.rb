@@ -1,4 +1,6 @@
 class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
+  load_and_authorize_resource
+  skip_load_resource
   before_action :set_merchant, only: :destroy
 
   swagger_controller :merchants, 'Admin'
@@ -21,7 +23,7 @@ class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
   def create
     @merchant = Merchant.new(merchant_params)
     if @merchant.save
-      render json: { message: 'merchant has been added', merchant: @merchant }, status: :ok
+      render json: { message: 'merchant has been added', merchant: @merchant }, status: :created
     else
       render json: @merchant.errors.full_messages, status: :unprocessable_entity
     end

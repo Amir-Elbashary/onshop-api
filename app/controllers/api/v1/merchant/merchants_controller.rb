@@ -1,4 +1,6 @@
 class Api::V1::Merchant::MerchantsController < Api::V1::Merchant::BaseMerchantController
+  load_and_authorize_resource
+  skip_load_resource
 
   swagger_controller :merchants, 'Merchant'
 

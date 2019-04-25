@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include Swagger::Docs::Methods
+  check_authorization
   before_action :set_locale
 
   def set_locale

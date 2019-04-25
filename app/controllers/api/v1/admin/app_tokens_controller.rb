@@ -1,4 +1,6 @@
 class Api::V1::Admin::AppTokensController < Api::V1::Admin::BaseAdminController
+  load_and_authorize_resource
+  skip_load_resource
 
   swagger_controller :app_tokens, 'Admin'
 
@@ -15,6 +17,6 @@ class Api::V1::Admin::AppTokensController < Api::V1::Admin::BaseAdminController
     AppToken.destroy_all
     @app_token = AppToken.create(title: 'OnShop')
 
-    render json: { status: 'success', new_token: @app_token.token }
+    render json: { status: 'success', new_token: @app_token.token }, status: :created
   end
 end

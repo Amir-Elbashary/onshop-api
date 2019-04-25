@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_101225) do
+ActiveRecord::Schema.define(version: 2019_04_24_111806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,4 +78,29 @@ ActiveRecord::Schema.define(version: 2019_04_23_101225) do
     t.index ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true
   end
 
+  create_table "product_translations", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "description"
+    t.index ["locale"], name: "index_product_translations_on_locale"
+    t.index ["product_id"], name: "index_product_translations_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "merchant_id"
+    t.bigint "category_id"
+    t.string "name"
+    t.text "description"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["merchant_id"], name: "index_products_on_merchant_id"
+  end
+
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "merchants"
 end
