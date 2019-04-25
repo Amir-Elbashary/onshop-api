@@ -1,5 +1,7 @@
 class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantController
   load_and_authorize_resource
+  skip_load_resource only: :index
+  before_action :require_same_merchant, except: %i[create index]
 
   swagger_controller :products, 'Merchant'
 
@@ -26,6 +28,33 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     end
   end
 
+  swagger_api :update do
+    summary 'Updating product by merchant'
+    notes "Update a product info"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :path, :id, :integer, :required, 'Product ID'
+    param :form, 'product[category_id]', :integer, :required, 'Category ID'
+    param :form, 'product[name]', :string, :required, 'Product name'
+    param :form, 'product[description]', :text, :optional, 'Product description'
+    param :form, 'product[image]', :string, :required, 'Product cover image'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+  end
+
+  def update
+    if @product.update(product_params)
+      render json: { message: 'product info has been updated', product: @product }, status: :ok
+    else
+      render json: @product.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
+  def index
+    @products = current_merchant.products
+  end
+
   swagger_api :destroy do
     summary 'Deleting product by merchant'
     notes "Delete a product"
@@ -39,7 +68,6 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
   end
 
   def destroy
-    return render json: { error: 'you can only delete your own products' }, status: :unprocessable_entity unless current_merchant.products.include?(@product)
     return render json: { error: 'an error occured' }, status: :unprocessable_entity unless @product.destroy
     render json: { message: 'product was deleted', product: @product }, status: :ok
   end
@@ -48,5 +76,9 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
 
   def product_params
     params.require(:product).permit(:merchant_id, :category_id, :name, :description, :image)
+  end
+
+  def require_same_merchant
+    return render json: { error: 'you can only delete your own products' }, status: :unprocessable_entity unless current_merchant.products.include?(@product)
   end
 end
