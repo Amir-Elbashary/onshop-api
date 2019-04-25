@@ -26,6 +26,10 @@
     {
       "path": "/api/v1/merchant/merchants.{format}",
       "description": "Merchant"
+    },
+    {
+      "path": "/api/v1/merchant/products.{format}",
+      "description": "Merchant"
     }
   ],
   "authorizations": null

@@ -1,6 +1,23 @@
 class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantController
   load_and_authorize_resource
 
+  swagger_controller :products, 'Merchant'
+
+  swagger_api :create do
+    summary 'Creating product by merchant'
+    notes "Create a product to be pending approval of admins"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :form, 'product[merchant_id]', :integer, :required, 'Merchant ID'
+    param :form, 'product[category_id]', :integer, :required, 'Category ID'
+    param :form, 'product[name]', :string, :required, 'Product name'
+    param :form, 'product[description]', :text, :optional, 'Product description'
+    param :form, 'product[image]', :string, :required, 'Product cover image'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+  end
+
   def create
     if @product.save
       render json: { message: 'product has been created', product: @product }, status: :created
@@ -9,7 +26,20 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     end
   end
 
+  swagger_api :destroy do
+    summary 'Deleting product by merchant'
+    notes "Delete a product"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :path, :id, :integer, :required, 'Product ID'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
   def destroy
+    return render json: { error: 'you can only delete your own products' }, status: :unprocessable_entity unless current_merchant.products.include?(@product)
     return render json: { error: 'an error occured' }, status: :unprocessable_entity unless @product.destroy
     render json: { message: 'product was deleted', product: @product }, status: :ok
   end

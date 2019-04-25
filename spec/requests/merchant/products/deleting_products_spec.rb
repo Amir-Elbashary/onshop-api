@@ -5,15 +5,25 @@ RSpec.describe 'Deleting product', type: :request do
     @app_token = create(:app_token)
     @merchant = create(:merchant)
     @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
-    @product = create(:product)
+    @merchant_product = create(:product, merchant: @merchant)
+    @others_product = create(:product)
   end
 
-  context 'while providing product ID' do
+  context 'while providing product ID which belongs to the same merchant' do
     it 'should delete that product' do
-      delete "/v1/merchant/products/#{@product.id}", headers: @headers
+      delete "/v1/merchant/products/#{@merchant_product.id}", headers: @headers
 
       expect(response.code).to eq('200')
-      expect(Product.count).to eq(0)
+      expect(Product.count).to eq(1)
+    end
+  end
+
+  context 'while providing product ID which does not belong to the same merchant' do
+    it 'should not delete that product' do
+      delete "/v1/merchant/products/#{@others_product.id}", headers: @headers
+
+      expect(response.code).to eq('422')
+      expect(Product.count).to eq(2)
     end
   end
 
@@ -22,7 +32,7 @@ RSpec.describe 'Deleting product', type: :request do
       delete "/v1/merchant/products/88", headers: @headers
 
       expect(response.code).to eq('404')
-      expect(Product.count).to eq(1)
+      expect(Product.count).to eq(2)
     end
   end
 end
