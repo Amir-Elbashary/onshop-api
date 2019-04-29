@@ -17,9 +17,9 @@ class Api::V1::BaseApiController < ApplicationController
   end
 
   def set_locale 
-    if params[:locale] == 'en'
+    if params[:loc] == 'en'
       I18n.locale = :en
-    elsif params[:locale] == 'ar'
+    elsif params[:loc] == 'ar'
       I18n.locale = :ar 
     else
       I18n.default_locale
