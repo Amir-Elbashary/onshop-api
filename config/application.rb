@@ -32,6 +32,7 @@ module OnshopApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    I18n.config.available_locales = %i[en ar]
     config.i18n.fallbacks = true
   end
 end
