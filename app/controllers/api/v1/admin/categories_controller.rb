@@ -16,7 +16,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     "
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
-    param :query, :language, :string, 'Locale'
+    param :query, :loc, :string, 'Locale'
     param :query, :id, :string, 'Category ID'
     response :ok
     response :unauthorized
