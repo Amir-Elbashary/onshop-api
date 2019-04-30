@@ -1,0 +1,139 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "merchants",
+  "apis": [
+    {
+      "path": "/v1/admin/merchants.json",
+      "operations": [
+        {
+          "summary": "Adding new merchant to OnShop",
+          "notes": "Provide the required info to create new merchant",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[email]",
+              "type": "email",
+              "description": "Merchant Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[password]",
+              "type": "password",
+              "description": "Merchant password",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[password_confirmation]",
+              "type": "password",
+              "description": "Merchant password password confirmation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[first_name]",
+              "type": "string",
+              "description": "Merchant first name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[last_name]",
+              "type": "string",
+              "description": "Merchant last name",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Merchants#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/merchants/{id}.json",
+      "operations": [
+        {
+          "summary": "Deleting merchant from OnShop",
+          "notes": "WARNING: This will delete the merchant and all his associated items permanently",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Merchant ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Merchants#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

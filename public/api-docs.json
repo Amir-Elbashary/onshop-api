@@ -1,0 +1,36 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "apis": [
+    {
+      "path": "/api/v1/admin/app_tokens.{format}",
+      "description": "Admin"
+    },
+    {
+      "path": "/api/v1/admin/sessions.{format}",
+      "description": "Admin"
+    },
+    {
+      "path": "/api/v1/admin/categories.{format}",
+      "description": "Admin"
+    },
+    {
+      "path": "/api/v1/admin/merchants.{format}",
+      "description": "Admin"
+    },
+    {
+      "path": "/api/v1/merchant/sessions.{format}",
+      "description": "Merchant"
+    },
+    {
+      "path": "/api/v1/merchant/merchants.{format}",
+      "description": "Merchant"
+    },
+    {
+      "path": "/api/v1/merchant/products.{format}",
+      "description": "Merchant"
+    }
+  ],
+  "authorizations": null
+}

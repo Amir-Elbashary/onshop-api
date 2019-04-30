@@ -1,0 +1,251 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "categories",
+  "apis": [
+    {
+      "path": "/v1/admin/categories.json",
+      "operations": [
+        {
+          "summary": "Listing categories",
+          "notes": "\n      <h4>This API lists categories and sub_categories as following:</h4>\n      <p>Enter locale to get the corresponding language, Available localed: en, ar</p>\n      <p>If locale left blank, Default english locale will be used</p>\n      <p>Enter an ID of a category and you'll have response with it's type and info</p>\n      <p>Leave ID blank if you want list of all categories</p>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "loc",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "string",
+              "description": null,
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories.json",
+      "operations": [
+        {
+          "summary": "Create new categories and sub categories",
+          "notes": "\n      <h4>This API creates categories and sub_categories as following:</h4>\n      <p>Enter ONE parent_category like 'electronics' (Downcase is recommended)</p>\n      <p>Enter one or multiple sub_categories sperated by comma only</p>\n      <p>Example: 'computers,phone,laptops' (Downcase is recommended)</p>\n      <p>API by default ignores the existing parent categories so it won't be duplicated</p>\n      <p>while is ignores the existing sub categories for the parent category,</p>\n      <p>so sub category can be entered with same name UNDER A DIFFERENT parent category</p>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "parent_category",
+              "type": "string",
+              "description": "Parent Categories",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "sub_categories",
+              "type": "string",
+              "description": "Sub Categories",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Edit categories info",
+          "notes": "\n      <h4>This API updates categories information</h4>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "name",
+              "type": "string",
+              "description": "Category Name",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "name_ar",
+              "type": "string",
+              "description": "Category Arabic Name",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/categories/{id}.json",
+      "operations": [
+        {
+          "summary": "Delete categories",
+          "notes": "\n      <h4>This API deletes categories</h4>\n    ",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Categories#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
