@@ -58,10 +58,10 @@ group :development do
   gem 'rails-erd', '~> 1.5', '>= 1.5.2'
 
   # ============ Deployment Related Gems ============
-  # gem 'capistrano', '~> 3.7', '>= 3.7.1'
-  # gem 'capistrano-passenger', '~> 0.2.0'
-  # gem 'capistrano-rails', '~> 1.2'
-  # gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano', '~> 3.7', '>= 3.7.1'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rbenv', '~> 2.1'
 end
 
 
