@@ -1,6 +1,6 @@
 set :application, 'onshop'
 set :repo_url, 'git@gitlab.com:hanymoh/onshop-api.git'
-set :branch, 'deploy_to_production'
+set :branch, 'master'
 
 set :deploy_to, '/home/deploy/onshop'
 
