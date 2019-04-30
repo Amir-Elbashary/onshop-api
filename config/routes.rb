@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   devise_for :merchants
   devise_for :admins
 
-  get '/api' => redirect('/api')
-
   namespace :api, path: '/', defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
