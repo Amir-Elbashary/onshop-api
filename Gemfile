@@ -23,7 +23,7 @@ gem 'cancancan', '~> 2.3'
 # ================ APIs Related Gems ================
 gem 'jbuilder', '~> 2.5'
 gem 'swagger-docs'
-# gem 'rack-cors'
+gem 'rack-cors'
 
 # ============ Action Cable Related Gems ============
 # gem 'redis', '~> 4.0'
