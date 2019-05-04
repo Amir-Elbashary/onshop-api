@@ -41,14 +41,28 @@
             },
             {
               "paramType": "form",
-              "name": "product[name]",
+              "name": "product[name_en]",
               "type": "string",
               "description": "Product name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[description]",
+              "name": "product[name_ar]",
+              "type": "string",
+              "description": "Product name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[description_en]",
+              "type": "text",
+              "description": "Product description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[description_ar]",
               "type": "text",
               "description": "Product description",
               "required": false
@@ -120,14 +134,28 @@
             },
             {
               "paramType": "form",
-              "name": "product[name]",
+              "name": "product[name_en]",
               "type": "string",
               "description": "Product name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[description]",
+              "name": "product[name_ar]",
+              "type": "string",
+              "description": "Product name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[description_en]",
+              "type": "text",
+              "description": "Product description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "product[description_ar]",
               "type": "text",
               "description": "Product description",
               "required": false
