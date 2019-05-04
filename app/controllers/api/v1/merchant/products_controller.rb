@@ -12,8 +12,10 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
     param :form, 'product[merchant_id]', :integer, :required, 'Merchant ID'
     param :form, 'product[category_id]', :integer, :required, 'Category ID'
-    param :form, 'product[name]', :string, :required, 'Product name'
-    param :form, 'product[description]', :text, :optional, 'Product description'
+    param :form, 'product[name_en]', :string, :required, 'Product name'
+    param :form, 'product[name_ar]', :string, :optional, 'Product name'
+    param :form, 'product[description_en]', :text, :optional, 'Product description'
+    param :form, 'product[description_ar]', :text, :optional, 'Product description'
     param :form, 'product[image]', :string, :required, 'Product cover image'
     response :ok
     response :unauthorized
@@ -35,8 +37,10 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
     param :path, :id, :integer, :required, 'Product ID'
     param :form, 'product[category_id]', :integer, :required, 'Category ID'
-    param :form, 'product[name]', :string, :required, 'Product name'
-    param :form, 'product[description]', :text, :optional, 'Product description'
+    param :form, 'product[name_en]', :string, :required, 'Product name'
+    param :form, 'product[name_ar]', :string, :optional, 'Product name'
+    param :form, 'product[description_en]', :text, :optional, 'Product description'
+    param :form, 'product[description_ar]', :text, :optional, 'Product description'
     param :form, 'product[image]', :string, :required, 'Product cover image'
     response :ok
     response :unauthorized
@@ -75,7 +79,8 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
   private
 
   def product_params
-    params.require(:product).permit(:merchant_id, :category_id, :name, :description, :image)
+    params.require(:product).permit(:merchant_id, :category_id, :name_en, :name_ar,
+                                    :description_en, :description_ar, :image)
   end
 
   def require_same_merchant
