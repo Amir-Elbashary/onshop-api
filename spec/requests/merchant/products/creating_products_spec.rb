@@ -13,12 +13,14 @@ RSpec.describe 'Creating products as merchant', type: :request do
     it 'should create a products that is pending to be approved' do
       params = { 'product[merchant_id]' => @merchant.id,
                  'product[category_id]' => @sub_category.id,
-                 'product[name]' => 'New product',
-                 'product[description]' => 'This is new product',
+                 'product[name_en]' => 'New product',
+                 'product[name_ar]' => 'Arabic Name',
+                 'product[description_en]' => 'This is new product',
                  'product[image]' => '' }
 
       post '/v1/merchant/products', headers: @headers, params: params
 
+      expect(Product.first.name_en).not_to eq(Product.first.name_ar)
       expect(response.code).to eq('201')
       expect(Product.count).to eq(1)
     end
@@ -28,8 +30,8 @@ RSpec.describe 'Creating products as merchant', type: :request do
     it 'should not create a product' do
       params = { 'product[merchant_id]' => @merchant.id,
                  'product[category_id]' => '',
-                 'product[name]' => 'New product',
-                 'product[description]' => 'This is new product',
+                 'product[name_en]' => 'New product',
+                 'product[description_en]' => 'This is new product',
                  'product[image]' => '' }
 
       post '/v1/merchant/products', headers: @headers, params: params
@@ -45,8 +47,8 @@ RSpec.describe 'Creating products as merchant', type: :request do
 
       params = { 'product[merchant_id]' => @merchant.id,
                  'product[category_id]' => @sub_category.id,
-                 'product[name]' => 'helmet',
-                 'product[description]' => 'This is new product',
+                 'product[name_en]' => 'helmet',
+                 'product[description_en]' => 'This is new product',
                  'product[image]' => '' }
 
       post '/v1/merchant/products', headers: @headers, params: params
