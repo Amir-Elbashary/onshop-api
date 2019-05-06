@@ -2,14 +2,14 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "/",
-  "resourcePath": "products",
+  "resourcePath": "variants",
   "apis": [
     {
-      "path": "/v1/merchant/products.json",
+      "path": "/v1/merchant/products/{product_id}/variants.json",
       "operations": [
         {
-          "summary": "Get merchant products",
-          "notes": "Get all products of specific merchant",
+          "summary": "Get merchant product variants",
+          "notes": "Get all product variants of specific merchant",
           "parameters": [
             {
               "paramType": "header",
@@ -23,6 +23,13 @@
               "name": "X-User-Token",
               "type": "string",
               "description": "Merchant Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product ID",
               "required": true
             }
           ],
@@ -48,17 +55,17 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Merchant::Products#index",
+          "nickname": "Api::V1::Merchant::Variants#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/v1/merchant/products.json",
+      "path": "/v1/merchant/products/{product_id}/variants.json",
       "operations": [
         {
-          "summary": "Creating product by merchant",
-          "notes": "Create a product to be pending approval of admins",
+          "summary": "Creating product variant by merchant",
+          "notes": "Create a product variant to be pending approval of admins",
           "parameters": [
             {
               "paramType": "header",
@@ -76,51 +83,58 @@
             },
             {
               "paramType": "form",
-              "name": "product[merchant_id]",
+              "name": "variant[product_id]",
               "type": "integer",
               "description": "Merchant ID",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[category_id]",
-              "type": "integer",
-              "description": "Category ID",
+              "name": "variant[color_en]",
+              "type": "string",
+              "description": "Product variant color",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[name_en]",
+              "name": "variant[color_ar]",
               "type": "string",
-              "description": "Product name",
+              "description": "Product variant color",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[size_en]",
+              "type": "text",
+              "description": "Product variant size",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[size_ar]",
+              "type": "text",
+              "description": "Product variant size",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[price]",
+              "type": "text",
+              "description": "Product variant price",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[name_ar]",
-              "type": "string",
-              "description": "Product name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "product[description_en]",
+              "name": "variant[discount]",
               "type": "text",
-              "description": "Product description",
+              "description": "Product variant discount",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "product[description_ar]",
-              "type": "text",
-              "description": "Product description",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "product[image]",
+              "name": "variant[image]",
               "type": "string",
-              "description": "Product cover image",
+              "description": "Product variant image",
               "required": true
             }
           ],
@@ -141,17 +155,17 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Merchant::Products#create",
+          "nickname": "Api::V1::Merchant::Variants#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/v1/merchant/products/{id}.json",
+      "path": "/v1/merchant/products/{product_id}/variants/{id}.json",
       "operations": [
         {
-          "summary": "Updating product by merchant",
-          "notes": "Update a product info",
+          "summary": "Update product variant by merchant",
+          "notes": "Update a product variant info",
           "parameters": [
             {
               "paramType": "header",
@@ -169,51 +183,58 @@
             },
             {
               "paramType": "path",
-              "name": "id",
+              "name": "product_id",
               "type": "integer",
               "description": "Product ID",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[category_id]",
-              "type": "integer",
-              "description": "Category ID",
+              "name": "variant[color_en]",
+              "type": "string",
+              "description": "Product variant color",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[name_en]",
+              "name": "variant[color_ar]",
               "type": "string",
-              "description": "Product name",
+              "description": "Product variant color",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[size_en]",
+              "type": "text",
+              "description": "Product variant size",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[size_ar]",
+              "type": "text",
+              "description": "Product variant size",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[price]",
+              "type": "text",
+              "description": "Product variant price",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "product[name_ar]",
-              "type": "string",
-              "description": "Product name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "product[description_en]",
+              "name": "variant[discount]",
               "type": "text",
-              "description": "Product description",
+              "description": "Product variant discount",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "product[description_ar]",
-              "type": "text",
-              "description": "Product description",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "product[image]",
+              "name": "variant[image]",
               "type": "string",
-              "description": "Product cover image",
+              "description": "Product variant image",
               "required": true
             }
           ],
@@ -234,17 +255,17 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Merchant::Products#update",
+          "nickname": "Api::V1::Merchant::Variants#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/v1/merchant/products/{id}.json",
+      "path": "/v1/merchant/products/{product_id}/variants/{id}.json",
       "operations": [
         {
-          "summary": "Deleting product by merchant",
-          "notes": "Delete a product",
+          "summary": "Deleting product variant by merchant",
+          "notes": "Delete a product variant",
           "parameters": [
             {
               "paramType": "header",
@@ -264,7 +285,7 @@
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Product ID",
+              "description": "Product Variant ID",
               "required": true
             }
           ],
@@ -290,7 +311,7 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Merchant::Products#destroy",
+          "nickname": "Api::V1::Merchant::Variants#destroy",
           "method": "delete"
         }
       ]

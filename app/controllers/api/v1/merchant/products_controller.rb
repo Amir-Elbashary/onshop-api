@@ -55,6 +55,17 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     end
   end
 
+  swagger_api :index do
+    summary 'Get merchant products'
+    notes "Get all products of specific merchant"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
   def index
     @products = current_merchant.products
   end
@@ -84,6 +95,6 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
   end
 
   def require_same_merchant
-    return render json: { error: 'you can only delete your own products' }, status: :unprocessable_entity unless current_merchant.products.include?(@product)
+    return render json: { error: 'you can only access your own products' }, status: :unprocessable_entity unless current_merchant.products.include?(@product)
   end
 end

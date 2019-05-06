@@ -12,9 +12,9 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'Has associations' do
-    # it 'has many variants' do
-    #   should have_many :variants
-    # end
+    it 'has many variants' do
+      should have_many :variants
+    end
 
     it 'belongs to merchant' do
       should belong_to(:merchant)

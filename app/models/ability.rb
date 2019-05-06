@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
   MERCHANT_MODELS = [Merchant]
-  MERCHANT_AUTHORIZED_MODELS = [Product]
+  MERCHANT_AUTHORIZED_MODELS = [Product, Variant]
   # USER_MODELS = []
   # USER_AUTHORIZED_MODELS = []
 
