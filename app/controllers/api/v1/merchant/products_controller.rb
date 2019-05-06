@@ -60,6 +60,7 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     notes "Get all products of specific merchant"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
     response :unprocessable_entity
