@@ -11,7 +11,7 @@ RSpec.describe 'Listing products', type: :request do
   end
 
   context 'when presenting valid merchant token' do
-    it 'list this merchant products only' do
+    it 'should list this merchant products only' do
       get '/v1/merchant/products', headers: @headers
       response_body = JSON.parse(response.body)
 

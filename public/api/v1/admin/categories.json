@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Listing categories",
-          "notes": "\n      <h4>This API lists categories and sub_categories as following:</h4>\n      <p>Enter locale to get the corresponding language, Available localed: en, ar</p>\n      <p>If locale left blank, Default english locale will be used</p>\n      <p>Enter an ID of a category and you'll have response with it's type and info</p>\n      <p>Leave ID blank if you want list of all categories</p>\n    ",
+          "notes": "\n      <h4>This API lists categories and sub_categories as following:</h4>\n      <p>Enter locale to get the corresponding language, Available locales: en, ar</p>\n      <p>If locale left blank, Default english locale will be used</p>\n      <p>Enter an ID of a category and you'll have response with it's type and info</p>\n      <p>Leave ID blank if you want list of all categories</p>\n    ",
           "parameters": [
             {
               "paramType": "header",

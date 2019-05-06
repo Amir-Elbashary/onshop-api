@@ -9,7 +9,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     summary 'Listing categories'
     notes "
       <h4>This API lists categories and sub_categories as following:</h4>
-      <p>Enter locale to get the corresponding language, Available localed: en, ar</p>
+      <p>Enter locale to get the corresponding language, Available locales: en, ar</p>
       <p>If locale left blank, Default english locale will be used</p>
       <p>Enter an ID of a category and you'll have response with it's type and info</p>
       <p>Leave ID blank if you want list of all categories</p>

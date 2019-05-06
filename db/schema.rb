@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_111806) do
+ActiveRecord::Schema.define(version: 2019_05_06_150704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,30 @@ ActiveRecord::Schema.define(version: 2019_04_24_111806) do
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
+  create_table "variant_translations", force: :cascade do |t|
+    t.integer "variant_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "color"
+    t.string "size"
+    t.index ["locale"], name: "index_variant_translations_on_locale"
+    t.index ["variant_id"], name: "index_variant_translations_on_variant_id"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "color"
+    t.string "size"
+    t.decimal "price"
+    t.decimal "discount"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_variants_on_product_id"
+  end
+
   add_foreign_key "products", "categories"
   add_foreign_key "products", "merchants"
+  add_foreign_key "variants", "products"
 end
