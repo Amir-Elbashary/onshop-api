@@ -18,6 +18,10 @@ Rails.application.routes.draw do
           resources :variants
         end
       end
+
+      namespace :onshop do
+        resources :products
+      end
     end
   end
 end
