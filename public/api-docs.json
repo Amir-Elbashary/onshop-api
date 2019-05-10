@@ -36,6 +36,10 @@
       "description": "Merchant"
     },
     {
+      "path": "/api/v1/onshop/categories.{format}",
+      "description": "OnShop"
+    },
+    {
       "path": "/api/v1/onshop/products.{format}",
       "description": "OnShop"
     }
