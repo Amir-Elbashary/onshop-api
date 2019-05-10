@@ -73,6 +73,62 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "path": "/v1/onshop/products/{id}.json",
+      "operations": [
+        {
+          "summary": "Showing Product",
+          "notes": "Showing product info with it's variants",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Product ID",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "loc",
+              "type": "string",
+              "description": null,
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Onshop::Products#show",
+          "method": "get"
+        }
+      ]
     }
   ],
   "authorizations": null
