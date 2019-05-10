@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       end
 
       namespace :onshop do
+        resources :categories
         resources :products
       end
     end
