@@ -1,5 +1,4 @@
 class Api::V1::BaseApiController < ApplicationController
-  # protect_from_forgery with: :null_session, if: proc { |c| c.request.format == 'application/json' }
   respond_to :json
   rescue_from ActiveRecord::RecordNotFound, ActiveRecord::InvalidForeignKey, with: :not_found
   before_action :authenticate_app_token!
