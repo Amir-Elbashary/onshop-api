@@ -14,6 +14,7 @@ gem 'globalize', '~> 5.2'
 gem 'globalize-accessors', '~> 0.2.1'
 gem 'globalize-validations', '~> 0.0.4'
 gem 'acts_as_tree', '~> 2.9'
+gem 'will_paginate', '~> 3.1', '>= 3.1.7'
 
 # =============== Authentication Gems ===============
 gem 'devise', '~> 4.6', '>= 4.6.1'
