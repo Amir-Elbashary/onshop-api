@@ -54,6 +54,7 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
     notes "Shows specific variant and it's product"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :path, :product_id, :integer, :required, 'Product ID'
     param :path, :id, :integer, :required, 'Variant ID'
     param :query, :loc, :string, 'Locale'
     response :ok
