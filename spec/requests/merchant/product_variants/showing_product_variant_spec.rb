@@ -12,7 +12,7 @@ RSpec.describe 'Showing product variant', type: :request do
 
   describe 'when presenting valid variant ID' do
     context 'if this variant/products belongs to merchant' do
-      it 'should show this variant and it\'s products' do
+      it 'should show this variant and it\'s product' do
         get "/v1/merchant/products/#{@product.id}/variants/#{@product_variant.id}", headers: @headers
 
         expect(response.code).to eq('200')
