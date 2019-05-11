@@ -8,6 +8,45 @@
       "path": "/v1/admin/merchants.json",
       "operations": [
         {
+          "summary": "Listing all merchants",
+          "notes": "This API lists all merchants available on the system",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Merchants#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/merchants.json",
+      "operations": [
+        {
           "summary": "Adding new merchant to OnShop",
           "notes": "Provide the required info to create new merchant",
           "parameters": [

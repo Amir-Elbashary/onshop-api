@@ -1,6 +1,6 @@
 class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
   load_and_authorize_resource
-  skip_load_resource
+  skip_load_resource expect: :index
   before_action :set_merchant, only: :destroy
 
   swagger_controller :merchants, 'Admin'
@@ -27,6 +27,19 @@ class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
     else
       render json: @merchant.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  swagger_api :index do
+    summary 'Listing all merchants'
+    notes "This API lists all merchants available on the system"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
+    response :ok
+    response :unauthorized
+  end
+
+  def index
+    return render json: { message: 'no merchants on the system' }, status: :ok unless @merchants.any?
   end
 
   swagger_api :destroy do
