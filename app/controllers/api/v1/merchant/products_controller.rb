@@ -71,6 +71,23 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     @products = current_merchant.products
   end
 
+  swagger_api :show do
+    summary 'Get merchant product'
+    notes "Get all info of a specific product and it's variants"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :path, :id, :integer, :required, 'Product ID'
+    param :query, :loc, :string, 'Locale'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
+  def show
+    render json: @product.to_json(include: :variants)
+  end
+
   swagger_api :destroy do
     summary 'Deleting product by merchant'
     notes "Delete a product"
