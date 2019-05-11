@@ -49,6 +49,23 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
     @variants = @product.variants
   end
 
+  swagger_api :show do
+    summary 'Get merchant product variant'
+    notes "Shows specific variant and it's product"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :path, :id, :integer, :required, 'Variant ID'
+    param :query, :loc, :string, 'Locale'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
+  def show
+    render json: { product: @product, variant: @variant }, status: :ok 
+  end
+
   swagger_api :update do
     summary 'Update product variant by merchant'
     notes "Update a product variant info"
