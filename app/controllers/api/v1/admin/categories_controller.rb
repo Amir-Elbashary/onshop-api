@@ -129,7 +129,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       @existing_category = Category.find_by(name: params[:name].downcase.strip.squeeze)
 
       if @category == @existing_category
-        if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+        if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
           return render json: { message: 'category info updated' }, status: :ok
         end
       end
@@ -141,7 +141,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
             return render json: { error: 'parent category with same name already exists' }, status: :unprocessable_entity
           end
         else
-          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
             render json: { message: 'category info updated' }, status: :ok
           else
             render json: @category.errors.full_messages, status: :unprocessable_entity
@@ -163,7 +163,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
         if child_exists == true
           return render json: { error: 'sub category with same name already exists within it\'s parent category' }, status: :unprocessable_entity
         else
-          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar])
+          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
             render json: { message: 'category info updated' }, status: :ok
           else
             render json: @category.errors.full_messages, status: :unprocessable_entity
