@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :merchants
   devise_for :admins
 
@@ -16,6 +17,19 @@ Rails.application.routes.draw do
         resources :merchants
         resources :products do
           resources :variants
+        end
+      end
+
+      namespace :user do
+        resources :users do
+          collection do
+            get :favourite_products
+          end
+        end
+        resources :products do
+          member do
+            post :favourite_product
+          end
         end
       end
 

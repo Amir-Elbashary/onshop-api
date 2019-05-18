@@ -4,6 +4,7 @@ FactoryBot.define do
     size { Faker::Number.decimal }
     price { Faker::Number.decimal }
     discount { Faker::Number.decimal }
+    quantity { Faker::Number.number(2) }
     image { Faker::Avatar.image }
     product
   end

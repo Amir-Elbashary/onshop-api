@@ -36,6 +36,14 @@
       "description": "Merchant"
     },
     {
+      "path": "/api/v1/user/users.{format}",
+      "description": "User"
+    },
+    {
+      "path": "/api/v1/user/products.{format}",
+      "description": "User"
+    },
+    {
       "path": "/api/v1/onshop/categories.{format}",
       "description": "OnShop"
     },
