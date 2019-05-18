@@ -34,6 +34,11 @@ Rails.application.routes.draw do
             post :favourite_product
           end
         end
+        resources :carts do
+          collection do
+            get :active_cart
+          end
+        end
       end
 
       namespace :onshop do
