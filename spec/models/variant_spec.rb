@@ -13,6 +13,10 @@ RSpec.describe Variant, type: :model do
     it 'should validates numericality of price' do
       validate_numericality_of(:discount)
     end
+
+    it 'should validates numericality of quantity' do
+      validate_numericality_of(:quantity)
+    end
   end
 
   describe 'Has associations' do

@@ -19,6 +19,7 @@ RSpec.describe 'Creating product variant as merchant', type: :request do
                  'variant[size_ar]' => 'وسط',
                  'variant[price]' => '18.88',
                  'variant[discount]' => '0.88',
+                 'variant[quantity]' => '8',
                  'variant[image]' => '' }
 
       post "/v1/merchant/products/#{@product.id}/variants", headers: @headers, params: params
@@ -38,6 +39,7 @@ RSpec.describe 'Creating product variant as merchant', type: :request do
                  'variant[size_ar]' => 'وسط',
                  'variant[price]' => 'number',
                  'variant[discount]' => '0.88',
+                 'variant[quantity]' => '-1',
                  'variant[image]' => '' }
 
       post "/v1/merchant/products/#{@product.id}/variants", headers: @headers, params: params
@@ -56,6 +58,7 @@ RSpec.describe 'Creating product variant as merchant', type: :request do
                  'variant[size_ar]' => 'وسط',
                  'variant[price]' => '18.88',
                  'variant[discount]' => '0.88',
+                 'variant[quantity]' => '8',
                  'variant[image]' => '' }
 
       post "/v1/merchant/products/#{@others_product.id}/variants", headers: @headers, params: params
