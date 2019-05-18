@@ -20,6 +20,10 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Has associations' do
+    it 'has many carts' do
+      should have_many :carts
+    end
+
     it 'has many favourites' do
       should have_many :favourites
     end

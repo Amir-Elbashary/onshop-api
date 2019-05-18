@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api, path: '/', defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
+        resources :admins
         resources :merchants
         resources :users
         resources :app_tokens, only: :create
@@ -31,6 +32,11 @@ Rails.application.routes.draw do
         resources :products do
           member do
             post :favourite_product
+          end
+        end
+        resources :carts do
+          collection do
+            get :active_cart
           end
         end
       end
