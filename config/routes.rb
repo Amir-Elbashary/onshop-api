@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api, path: '/', defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
+        resources :admins
         resources :merchants
         resources :users
         resources :app_tokens, only: :create
