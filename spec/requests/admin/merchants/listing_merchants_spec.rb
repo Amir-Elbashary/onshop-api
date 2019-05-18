@@ -21,7 +21,7 @@ RSpec.describe 'Listing merchants by admin', type: :request do
   end
 
   context 'if there are no merchants' do
-    it 'should list all merchants on the system' do
+    it 'should return no merchants on the system' do
       get '/v1/admin/merchants', headers: @headers
 
       response_body = JSON.parse(response.body)

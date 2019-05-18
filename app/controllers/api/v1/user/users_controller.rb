@@ -9,13 +9,14 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     notes "Listing user favourite products"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    param :query, :page, :string, 'Page'
     param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
   end
 
   def favourite_products
-    @favourite_products = current_user.favourite_products
+    @favourite_products = current_user.favourite_products.page(params[:page]).per_page(32)
   end
 
   private

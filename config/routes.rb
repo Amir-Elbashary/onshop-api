@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   namespace :api, path: '/', defaults: { format: :json } do
     namespace :v1 do
       namespace :admin do
+        resources :merchants
+        resources :users
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
-        resources :merchants
       end
 
       namespace :merchant do
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       end
 
       namespace :user do
+        resources :sessions, only: %i[create destroy]
         resources :users do
           collection do
             get :favourite_products
