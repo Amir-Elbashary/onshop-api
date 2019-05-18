@@ -27,6 +27,13 @@
             },
             {
               "paramType": "query",
+              "name": "page",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "loc",
               "type": "string",
               "description": null,

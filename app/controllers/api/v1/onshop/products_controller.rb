@@ -15,7 +15,7 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
     param :query, :loc, :string, 'Locale'
     param :query, :category_id, :integer, 'Category ID'
     param :query, :search, :string, 'Search'
-    param :query, :page, :integer, 'Page'
+    param :query, :page, :string, 'Page'
     response :ok
     response :unauthorized
     response :unprocessable_entity

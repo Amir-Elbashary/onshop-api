@@ -24,7 +24,7 @@ RSpec.describe 'Creating merchant by admin', type: :request do
   end
 
   context 'with invalid data' do
-    it 'should not create new admin' do
+    it 'should not create new merchant' do
       params = { 'merchant[email]' => 'merchant',
                  'merchant[password]' => '12345678',
                  'merchant[password_confirmation]' => '12345678',
@@ -39,7 +39,7 @@ RSpec.describe 'Creating merchant by admin', type: :request do
   end
 
   context 'with duplicated data' do
-    it 'should not create new admin' do
+    it 'should not create new merchant' do
       @merchant = create(:merchant)
 
       params = { 'merchant[email]' => @merchant.email,

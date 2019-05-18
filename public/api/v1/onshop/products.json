@@ -42,7 +42,7 @@
             {
               "paramType": "query",
               "name": "page",
-              "type": "integer",
+              "type": "string",
               "description": null,
               "required": false
             }
