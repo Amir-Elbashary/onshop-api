@@ -3,7 +3,7 @@ class Ability
   MERCHANT_MODELS = [Merchant]
   MERCHANT_AUTHORIZED_MODELS = [Product, Variant]
   USER_MODELS = [User]
-  USER_AUTHORIZED_MODELS = []
+  USER_AUTHORIZED_MODELS = [Product]
 
   def initialize(user)
     case user

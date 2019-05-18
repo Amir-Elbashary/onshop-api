@@ -20,6 +20,19 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :user do
+        resources :users do
+          collection do
+            get :favourite_products
+          end
+        end
+        resources :products do
+          member do
+            post :favourite_product
+          end
+        end
+      end
+
       namespace :onshop do
         resources :categories
         resources :products
