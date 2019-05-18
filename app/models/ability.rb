@@ -2,8 +2,8 @@ class Ability
   include CanCan::Ability
   MERCHANT_MODELS = [Merchant]
   MERCHANT_AUTHORIZED_MODELS = [Product, Variant]
-  # USER_MODELS = []
-  # USER_AUTHORIZED_MODELS = []
+  USER_MODELS = [User]
+  USER_AUTHORIZED_MODELS = []
 
   def initialize(user)
     case user
@@ -13,9 +13,9 @@ class Ability
     when Merchant
       # Merchants have access to specific models only
       authorize_models(MERCHANT_MODELS, MERCHANT_AUTHORIZED_MODELS)
-    # when User
-    #   # Users have access to specific models only
-    #   authorize_models(USER_MODELS, USER_AUTHORIZED_MODELS)
+    when User
+      # Users have access to specific models only
+      authorize_models(USER_MODELS, USER_AUTHORIZED_MODELS)
     end
   end
 

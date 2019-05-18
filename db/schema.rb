@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_000237) do
+ActiveRecord::Schema.define(version: 2019_05_18_003420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 2019_05_18_000237) do
     t.index ["locale"], name: "index_category_translations_on_locale"
   end
 
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "favourited_type"
+    t.bigint "favourited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favourited_type", "favourited_id"], name: "index_favourites_on_favourited_type_and_favourited_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "merchants", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -101,6 +111,27 @@ ActiveRecord::Schema.define(version: 2019_05_18_000237) do
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "authentication_token"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "avatar"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   create_table "variant_translations", force: :cascade do |t|
     t.integer "variant_id", null: false
     t.string "locale", null: false
@@ -125,6 +156,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_000237) do
     t.index ["product_id"], name: "index_variants_on_product_id"
   end
 
+  add_foreign_key "favourites", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "merchants"
   add_foreign_key "variants", "products"
