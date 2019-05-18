@@ -4,6 +4,10 @@
   "basePath": "/",
   "apis": [
     {
+      "path": "/api/v1/admin/admins.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/merchants.{format}",
       "description": "Admin"
     },
