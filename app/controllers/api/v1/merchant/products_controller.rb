@@ -60,6 +60,7 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
     notes "Get all products of specific merchant"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    param :query, :page, :string, 'Page'
     param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
@@ -68,7 +69,7 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
   end
 
   def index
-    @products = current_merchant.products
+    @products = current_merchant.products.page(params[:page]).per_page(32)
   end
 
   swagger_api :show do

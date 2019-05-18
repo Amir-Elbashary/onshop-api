@@ -4,6 +4,14 @@
   "basePath": "/",
   "apis": [
     {
+      "path": "/api/v1/admin/merchants.{format}",
+      "description": "Admin"
+    },
+    {
+      "path": "/api/v1/admin/users.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/app_tokens.{format}",
       "description": "Admin"
     },
@@ -13,10 +21,6 @@
     },
     {
       "path": "/api/v1/admin/categories.{format}",
-      "description": "Admin"
-    },
-    {
-      "path": "/api/v1/admin/merchants.{format}",
       "description": "Admin"
     },
     {
@@ -34,6 +38,10 @@
     {
       "path": "/api/v1/merchant/products.{format}",
       "description": "Merchant"
+    },
+    {
+      "path": "/api/v1/user/sessions.{format}",
+      "description": "User"
     },
     {
       "path": "/api/v1/user/users.{format}",
