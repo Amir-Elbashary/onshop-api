@@ -18,6 +18,7 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
     param :form, 'variant[size_ar]', :text, :optional, 'Product variant size'
     param :form, 'variant[price]', :text, :required, 'Product variant price'
     param :form, 'variant[discount]', :text, :optional, 'Product variant discount'
+    param :form, 'variant[quantity]', :text, :optional, 'Product variant quantity'
     param :form, 'variant[image]', :string, :required, 'Product variant image'
     response :ok
     response :unauthorized
@@ -79,6 +80,7 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
     param :form, 'variant[size_ar]', :text, :optional, 'Product variant size'
     param :form, 'variant[price]', :text, :required, 'Product variant price'
     param :form, 'variant[discount]', :text, :optional, 'Product variant discount'
+    param :form, 'variant[quantity]', :text, :optional, 'Product variant quantity'
     param :form, 'variant[image]', :string, :required, 'Product variant image'
     response :ok
     response :unauthorized
@@ -113,7 +115,7 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
   private
 
   def variant_params
-    params.require(:variant).permit(:product_id, :color_en, :color_ar,
+    params.require(:variant).permit(:product_id, :color_en, :color_ar, :quantity,
                                     :size_en, :size_ar, :price, :discount, :image)
   end
 
