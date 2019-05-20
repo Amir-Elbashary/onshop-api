@@ -73,35 +73,35 @@
             },
             {
               "paramType": "form",
-              "name": "merchant[email]",
+              "name": "user[email]",
               "type": "email",
               "description": "User Email",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "merchant[password]",
+              "name": "user[password]",
               "type": "password",
               "description": "User password",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "merchant[password_confirmation]",
+              "name": "user[password_confirmation]",
               "type": "password",
               "description": "User password confirmation",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "merchant[first_name]",
+              "name": "user[first_name]",
               "type": "string",
               "description": "User first name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "merchant[last_name]",
+              "name": "user[last_name]",
               "type": "string",
               "description": "User last name",
               "required": true

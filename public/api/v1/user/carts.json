@@ -42,6 +42,84 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "path": "/v1/user/carts.json",
+      "operations": [
+        {
+          "summary": "Get all user carts",
+          "notes": "This API get all user carts",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::User::Carts#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/user/carts/{id}.json",
+      "operations": [
+        {
+          "summary": "Get user cart info",
+          "notes": "This API get specific cart info along with it's items",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::User::Carts#show",
+          "method": "get"
+        }
+      ]
     }
   ],
   "authorizations": null

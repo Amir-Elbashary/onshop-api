@@ -11,11 +11,11 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::BaseAdminController
     notes "Provide the required info to create new user"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
-    param :form, 'merchant[email]', :email, :required, 'User Email'
-    param :form, 'merchant[password]', :password, :required, 'User password'
-    param :form, 'merchant[password_confirmation]', :password, :required, 'User password confirmation'
-    param :form, 'merchant[first_name]', :string, :required, 'User first name'
-    param :form, 'merchant[last_name]', :string, :required, 'User last name'
+    param :form, 'user[email]', :email, :required, 'User Email'
+    param :form, 'user[password]', :password, :required, 'User password'
+    param :form, 'user[password_confirmation]', :password, :required, 'User password confirmation'
+    param :form, 'user[first_name]', :string, :required, 'User first name'
+    param :form, 'user[last_name]', :string, :required, 'User last name'
     response :ok
     response :unauthorized
     response :unprocessable_entity
