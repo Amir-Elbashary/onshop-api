@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_150112) do
+ActiveRecord::Schema.define(version: 2019_05_24_114814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 2019_05_18_150112) do
     t.datetime "updated_at", null: false
     t.index ["favourited_type", "favourited_id"], name: "index_favourites_on_favourited_type_and_favourited_id"
     t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "variant_id"
+    t.integer "quantity", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_items_on_cart_id"
+    t.index ["variant_id"], name: "index_items_on_variant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -167,6 +177,8 @@ ActiveRecord::Schema.define(version: 2019_05_18_150112) do
 
   add_foreign_key "carts", "users"
   add_foreign_key "favourites", "users"
+  add_foreign_key "items", "carts"
+  add_foreign_key "items", "variants"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "merchants"
   add_foreign_key "variants", "products"

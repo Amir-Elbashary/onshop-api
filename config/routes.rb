@@ -35,6 +35,8 @@ Rails.application.routes.draw do
           end
         end
         resources :carts do
+          resources :items, expect: :show
+          
           collection do
             get :active_cart
           end
