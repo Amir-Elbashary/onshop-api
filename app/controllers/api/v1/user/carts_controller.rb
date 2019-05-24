@@ -46,7 +46,8 @@ class Api::V1::User::CartsController < Api::V1::User::BaseUserController
 
   def active_cart
     return render json: @active_cart, status: :ok if @active_cart
-    render json: { message: 'no active carts' }, status: :ok
+    @new_cart = Cart.create(user: current_user)
+    render json: @new_cart, status: :ok
   end
 
   private

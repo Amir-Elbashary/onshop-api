@@ -1,0 +1,263 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "items",
+  "apis": [
+    {
+      "path": "/v1/user/carts/{cart_id}/items.json",
+      "operations": [
+        {
+          "summary": "Listing cart items",
+          "notes": "Listing all items in this card for specific user",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "cart_id",
+              "type": "integer",
+              "description": "Cart ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::User::Items#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/user/carts/{cart_id}/items.json",
+      "operations": [
+        {
+          "summary": "Adding items to cart",
+          "notes": "Adding items in carts initially, then quantity can be updated on PUT APIs",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "cart_id",
+              "type": "integer",
+              "description": "Cart ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "item[variant_id]",
+              "type": "integer",
+              "description": "Variant ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "item[quantity]",
+              "type": "integer",
+              "description": "Item Quantity",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::User::Items#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/user/carts/{cart_id}/items/{id}.json",
+      "operations": [
+        {
+          "summary": "Updating item's quantities on cart",
+          "notes": "This APIs is used to update cart items quantities",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "cart_id",
+              "type": "integer",
+              "description": "Cart ID",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Item ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "item[variant_id]",
+              "type": "integer",
+              "description": "Variant ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "item[quantity]",
+              "type": "integer",
+              "description": "item quantity",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::User::Items#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/user/carts/{cart_id}/items/{id}.json",
+      "operations": [
+        {
+          "summary": "Removing item from user cart",
+          "notes": "Here you can remove item which has been added to cart",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "cart_id",
+              "type": "integer",
+              "description": "Cart ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::User::Items#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

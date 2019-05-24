@@ -20,14 +20,14 @@ RSpec.describe 'Getting user active cart', type: :request do
   end
 
   context 'when there is no active carts' do
-    it 'should return no active carts' do
+    it 'should create new active cart' do
       @inactive_cart1 = create(:cart, user: @user, state: 0)
       @inactive_cart2 = create(:cart, user: @user, state: 0)
       get '/v1/user/carts/active_cart', headers: @headers
       response_body = JSON.parse(response.body)
 
       expect(response.code).to eq('200')
-      expect(response_body['message']).to eq('no active carts')
+      expect(response_body['id']).to_not eq(nil)
     end
   end
 end
