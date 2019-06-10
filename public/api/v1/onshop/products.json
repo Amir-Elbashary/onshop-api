@@ -41,6 +41,13 @@
             },
             {
               "paramType": "query",
+              "name": "price",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "page",
               "type": "string",
               "description": null,
