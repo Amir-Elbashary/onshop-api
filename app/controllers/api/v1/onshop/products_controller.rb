@@ -25,6 +25,15 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
   def index
     @products = Product.all.page(params[:page]).per_page(32)
     @products = @category.products.page(params[:page]).per_page(32) if params[:category_id]
+
+    if params[:category_id]   
+      if @category.root?      
+        @products = Product.where(category: @category.children)
+      else                    
+        @products = @category.products.page(params[:page]).per_page(32)
+      end
+    end
+
     @products = @products.with_translations.where('lower(product_translations.name) like ?', "%#{params[:search].downcase.strip.squeeze}%") if params[:search]
   end
 
