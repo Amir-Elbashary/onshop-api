@@ -23,7 +23,7 @@ RSpec.describe 'Listing products', type: :request do
 
   context 'when providing invalid product id' do
     it 'should return 404 error' do
-      get "/v1/onshop/products/88", headers: @headers
+      get "/v1/onshop/products/488", headers: @headers
 
       expect(response.code).to eq('404')
     end

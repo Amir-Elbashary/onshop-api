@@ -15,6 +15,7 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
     param :query, :loc, :string, 'Locale'
     param :query, :category_id, :integer, 'Category ID'
     param :query, :search, :string, 'Search'
+    param :query, :price, :string, 'Price Range'
     param :query, :page, :string, 'Page'
     response :ok
     response :unauthorized
@@ -24,7 +25,22 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
 
   def index
     @products = Product.all.page(params[:page]).per_page(32)
-    @products = @category.products.page(params[:page]).per_page(32) if params[:category_id]
+
+    if params[:category_id]   
+      if @category.root?      
+        @products = Product.where(category: @category.children)
+      else                    
+        @products = @category.products.page(params[:page]).per_page(32)
+      end
+    end
+
+    if params[:price]
+      prices = params[:price].split(',').map { |p| p.strip }
+      return render json: { error: 'price range is not valid, user 2 numbers seperated by comma' }, status: :unprocessable_entity if prices[0].nil? || prices[1].nil?
+      price_range = prices[0].to_d..prices[1].to_d
+      @products = @products.includes(:variants).where(variants: { price: price_range })
+    end
+
     @products = @products.with_translations.where('lower(product_translations.name) like ?', "%#{params[:search].downcase.strip.squeeze}%") if params[:search]
   end
 
