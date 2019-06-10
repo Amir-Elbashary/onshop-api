@@ -22,7 +22,7 @@ RSpec.describe 'Listing products', type: :request do
       response_body = JSON.parse(response.body)
 
       expect(response.code).to eq('200')
-      expect(response_body.count).to eq(5)
+      expect(response_body['products'].count).to eq(5)
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe 'Listing products', type: :request do
         response_body = JSON.parse(response.body)
 
         expect(response.code).to eq('200')
-        expect(response_body.count).to eq(4)
+        expect(response_body['products'].count).to eq(4)
       end
     end
 
