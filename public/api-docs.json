@@ -44,6 +44,10 @@
       "description": "Merchant"
     },
     {
+      "path": "/api/v1/user/registrations.{format}",
+      "description": "User"
+    },
+    {
       "path": "/api/v1/user/sessions.{format}",
       "description": "User"
     },

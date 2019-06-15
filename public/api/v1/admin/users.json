@@ -105,6 +105,13 @@
               "type": "string",
               "description": "User last name",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[shipping_address]",
+              "type": "string",
+              "description": "User Shipping Address",
+              "required": true
             }
           ],
           "responseMessages": [
