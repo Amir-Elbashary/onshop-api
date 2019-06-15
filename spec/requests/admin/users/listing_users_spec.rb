@@ -21,7 +21,7 @@ RSpec.describe 'Listing users by admin', type: :request do
   end
 
   context 'if there are no users' do
-    it 'should return no merchants' do
+    it 'should return no users' do
       get '/v1/admin/users', headers: @headers
 
       response_body = JSON.parse(response.body)

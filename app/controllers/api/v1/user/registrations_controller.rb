@@ -24,7 +24,7 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
     if @user.save
       render json: { success: true, user: @user }, status: :ok
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
