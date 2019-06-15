@@ -13,7 +13,9 @@ RSpec.describe 'Creating user by admin', type: :request do
                  'user[password]' => '12345678',
                  'user[password_confirmation]' => '12345678',
                  'user[first_name]' => 'OnShop',
-                 'user[last_name]' => 'User' }
+                 'user[last_name]' => 'User',
+                 'user[shipping_address]' => 'User\'s Address' 
+               }
 
       post '/v1/admin/users', headers: @headers, params: params
 
@@ -29,7 +31,9 @@ RSpec.describe 'Creating user by admin', type: :request do
                  'user[password]' => '12345678',
                  'user[password_confirmation]' => '12345678',
                  'user[first_name]' => 'OnShop',
-                 'user[last_name]' => 'User' }
+                 'user[last_name]' => 'User',
+                 'user[shipping_address]' => 'User\'s Address' 
+               }
 
       post '/v1/admin/users', headers: @headers, params: params
 
@@ -46,7 +50,9 @@ RSpec.describe 'Creating user by admin', type: :request do
                  'user[password]' => '12345678',
                  'user[password_confirmation]' => '12345678',
                  'user[first_name]' => 'OnShop',
-                 'user[last_name]' => 'User' }
+                 'user[last_name]' => 'User',
+                 'user[shipping_address]' => 'User\'s Address' 
+               }
 
       post '/v1/admin/users', headers: @headers, params: params
 

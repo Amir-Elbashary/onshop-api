@@ -16,6 +16,7 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::BaseAdminController
     param :form, 'user[password_confirmation]', :password, :required, 'User password confirmation'
     param :form, 'user[first_name]', :string, :required, 'User first name'
     param :form, 'user[last_name]', :string, :required, 'User last name'
+    param :form, 'user[shipping_address]', :string, :required, 'User Shipping Address'
     response :ok
     response :unauthorized
     response :unprocessable_entity
@@ -61,7 +62,8 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::BaseAdminController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :first_name, :last_name, :shipping_address)
   end
 
   def set_users

@@ -23,9 +23,11 @@ Rails.application.routes.draw do
       end
 
       namespace :user do
+        resources :registrations, only: %i[create]
         resources :sessions, only: %i[create destroy]
         resources :users do
           collection do
+            put :update_profile
             get :favourite_products
           end
         end
