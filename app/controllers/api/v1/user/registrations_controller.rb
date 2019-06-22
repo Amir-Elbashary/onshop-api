@@ -13,12 +13,18 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
     param :form, 'user[password_confirmation]', :password, :required, 'User password confirmation'
     param :form, 'user[first_name]', :string, :required, 'User first name'
     param :form, 'user[last_name]', :string, :required, 'User last name'
+    param :form, 'user[gender]', :string, :optional, 'User gender'
     response :ok
     response :unauthorized
     response :unprocessable_entity
   end
 
   def create
+    if params[:user][:gender].present? && !['unspecified', 'male', 'female'].include?(params[:user][:gender])
+      return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' },
+                    status: :unprocessable_entity
+    end
+
     @user = User.new(user_params)
 
     if @user.save
@@ -32,6 +38,6 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :first_name, :last_name)
+                                 :first_name, :last_name, :gender)
   end
 end
