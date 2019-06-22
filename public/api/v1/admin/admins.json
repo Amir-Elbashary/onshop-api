@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Updating admin info",
-          "notes": "Update admin profile info",
+          "notes": "Update admin profile info<br/>For gender only: unspecified, male and female are allowed",
           "parameters": [
             {
               "paramType": "header",
@@ -38,6 +38,13 @@
               "type": "string",
               "description": "Admin last name",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "admin[gender]",
+              "type": "string",
+              "description": "Admin gender",
+              "required": false
             }
           ],
           "responseMessages": [

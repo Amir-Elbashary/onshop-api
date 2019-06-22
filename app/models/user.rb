@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include UserHelpers
+  enum gender: %i[unspecified male female]
   mount_uploader :avatar, AvatarUploader
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

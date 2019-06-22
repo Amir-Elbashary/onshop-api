@@ -38,6 +38,20 @@
               "type": "string",
               "description": "Merchant last name",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[gender]",
+              "type": "string",
+              "description": "Merchant gender",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[phone_number]",
+              "type": "string",
+              "description": "Merchant phone number",
+              "required": false
             }
           ],
           "responseMessages": [

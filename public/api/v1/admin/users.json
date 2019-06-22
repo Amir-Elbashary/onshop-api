@@ -112,6 +112,41 @@
               "type": "string",
               "description": "User Shipping Address",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[gender]",
+              "type": "string",
+              "description": "User gender",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[country]",
+              "type": "string",
+              "description": "User country",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[city]",
+              "type": "string",
+              "description": "User city",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[region]",
+              "type": "string",
+              "description": "User region",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[phone_number]",
+              "type": "string",
+              "description": "User phone number",
+              "required": false
             }
           ],
           "responseMessages": [
