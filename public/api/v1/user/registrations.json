@@ -52,6 +52,13 @@
               "type": "string",
               "description": "User last name",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[gender]",
+              "type": "string",
+              "description": "User gender",
+              "required": false
             }
           ],
           "responseMessages": [

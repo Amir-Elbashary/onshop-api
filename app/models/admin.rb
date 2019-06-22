@@ -1,5 +1,6 @@
 class Admin < ApplicationRecord
   include UserHelpers
+  enum gender: %i[unspecified male female]
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :recoverable, :rememberable, :validatable
   before_create :generate_authentication_token!

@@ -11,13 +11,23 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
     param :form, 'user[first_name]', :string, :required, 'User first name'
     param :form, 'user[last_name]', :string, :required, 'User last name'
+    param :form, 'user[gender]', :string, :optional, 'User gender'
     param :form, 'user[shipping_address]', :string, :required, 'User Shipping Address'
+    param :form, 'user[country]', :string, :optional, 'User country'
+    param :form, 'user[city]', :string, :optional, 'User city'
+    param :form, 'user[region]', :string, :optional, 'User region'
+    param :form, 'user[phone_number]', :string, :optional, 'User phone number'
     response :ok
     response :unauthorized
     response :unprocessable_entity
   end
 
   def update_profile
+    if params[:user][:gender].present? && !['unspecified', 'male', 'female'].include?(params[:user][:gender])
+      return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' },
+                    status: :unprocessable_entity
+    end
+
     if current_user.update(user_params)
       render json: { success: true, user: current_user }, status: :ok
     else
@@ -43,6 +53,7 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :shipping_address)
+    params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
+                                 :country, :city, :region, :phone_number)
   end
 end

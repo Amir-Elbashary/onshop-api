@@ -15,12 +15,19 @@ class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
     param :form, 'merchant[password_confirmation]', :password, :required, 'Merchant password confirmation'
     param :form, 'merchant[first_name]', :string, :required, 'Merchant first name'
     param :form, 'merchant[last_name]', :string, :required, 'Merchant last name'
+    param :form, 'merchant[gender]', :string, :optional, 'Merchant gender'
+    param :form, 'merchant[phone_number]', :string, :optional, 'Merchant phone number'
     response :ok
     response :unauthorized
     response :unprocessable_entity
   end
 
   def create
+    if params[:merchant][:gender].present? && !['unspecified', 'male', 'female'].include?(params[:merchant][:gender])
+      return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' },
+                    status: :unprocessable_entity
+    end
+
     @merchant = Merchant.new(merchant_params)
     if @merchant.save
       render json: { message: 'merchant has been added', merchant: @merchant }, status: :created
@@ -61,7 +68,8 @@ class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
   private
 
   def merchant_params
-    params.require(:merchant).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    params.require(:merchant).permit(:email, :password, :password_confirmation,
+                                     :first_name, :last_name, :gender, :phone_number)
   end
 
   def set_merchant
