@@ -65,7 +65,9 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
   end
 
   def show
-    render json: { product: @product, variant: @variant }, status: :ok 
+    render json: { product: @product.as_json.merge(name_en: @product.name_en, name_ar: @product.name_ar),
+                   variant: @variant.as_json.merge(color_en: @variant.color_en, color_ar: @variant.color_ar,
+                                                   size_en: @variant.size_en, size_ar: @variant.size_ar) }, status: :ok 
   end
 
   swagger_api :update do
