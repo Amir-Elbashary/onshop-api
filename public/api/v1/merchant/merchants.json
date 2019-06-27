@@ -52,6 +52,13 @@
               "type": "string",
               "description": "Merchant phone number",
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "merchant[avatar]",
+              "type": "string",
+              "description": "Merchant Avatar (Multipart)",
+              "required": false
             }
           ],
           "responseMessages": [
