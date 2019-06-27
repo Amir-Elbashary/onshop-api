@@ -15,9 +15,10 @@ RSpec.describe 'Listing products', type: :request do
       response_body = JSON.parse(response.body)
 
       expect(response.code).to eq('200')
-      expect(response_body['name']).to eq(@product.name)
-      expect(response_body['variants'][0]['color']).to eq(@variant1.color)
-      expect(response_body['variants'][1]['color']).to eq(@variant2.color)
+      expect(response_body['name_en']).to eq(@product.name_en)
+      expect(response_body['name_ar']).to eq(@product.name_ar)
+      expect(response_body['variants'][0]['color_en']).to eq(@variant1.color_en)
+      expect(response_body['variants'][1]['color_ar']).to eq(@variant2.color_ar)
     end
   end
 
