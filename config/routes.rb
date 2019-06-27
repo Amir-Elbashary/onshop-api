@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :admin do
         resources :admins
+        resources :statistics, only: :show
         resources :merchants
         resources :users
         resources :app_tokens, only: :create
