@@ -86,7 +86,7 @@ class Api::V1::Merchant::ProductsController < Api::V1::Merchant::BaseMerchantCon
   end
 
   def show
-    render json: @product.to_json(include: :variants)
+    @variants = @product.variants
   end
 
   swagger_api :destroy do

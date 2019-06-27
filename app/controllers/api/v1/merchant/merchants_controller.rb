@@ -13,6 +13,7 @@ class Api::V1::Merchant::MerchantsController < Api::V1::Merchant::BaseMerchantCo
     param :form, 'merchant[last_name]', :string, :required, 'Merchant last name'
     param :form, 'merchant[gender]', :string, :optional, 'Merchant gender'
     param :form, 'merchant[phone_number]', :string, :optional, 'Merchant phone number'
+    param :form, 'merchant[avatar]', :string, :optional, 'Merchant Avatar (Multipart)'
     response :ok
     response :unauthorized
     response :unprocessable_entity
@@ -34,7 +35,7 @@ class Api::V1::Merchant::MerchantsController < Api::V1::Merchant::BaseMerchantCo
   private
 
   def merchant_params
-    params.require(:merchant).permit(:email, :password, :password_confirmation,
+    params.require(:merchant).permit(:email, :password, :password_confirmation, :avatar,
                                      :first_name, :last_name, :gender, :phone_number)
   end
 end

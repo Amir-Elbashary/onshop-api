@@ -32,10 +32,8 @@ class Api::V1::Merchant::SessionsController < Api::V1::Merchant::BaseMerchantCon
         @merchant.generate_authentication_token!
         @merchant.save
         render json: { success: true,
-                       merchant_id: @merchant.id,
                        authentication_token: @merchant.authentication_token,
-                       email: @merchant.email,
-                       user_name: @merchant.full_name }
+                       merchant: @merchant }, status: :ok
       else
         render json: { errors: 'Invalid email or password' }, status: :unprocessable_entity
       end

@@ -32,10 +32,8 @@ class Api::V1::Admin::SessionsController < Api::V1::Admin::BaseAdminController
         @admin.generate_authentication_token!
         @admin.save
         render json: { success: true,
-                       admin_id: @admin.id,
                        authentication_token: @admin.authentication_token,
-                       email: @admin.email,
-                       user_name: @admin.full_name }
+                       admin: @admin }, status: :ok
       else
         render json: { errors: 'Invalid email or password' }, status: :unprocessable_entity
       end

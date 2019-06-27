@@ -8,6 +8,10 @@
       "description": "Admin"
     },
     {
+      "path": "/api/v1/admin/statistics.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/merchants.{format}",
       "description": "Admin"
     },

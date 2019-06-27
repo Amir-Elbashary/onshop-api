@@ -57,7 +57,8 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
   end
 
   def show
-    render json: @product.to_json(include: :variants), status: :ok
+    @variants = @product.variants
+    # render json: @product.to_json(include: :variants), status: :ok
   end
 
   private
