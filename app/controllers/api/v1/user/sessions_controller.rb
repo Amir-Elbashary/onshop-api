@@ -32,10 +32,8 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
         @user.generate_authentication_token!
         @user.save
         render json: { success: true,
-                       user_id: @user.id,
                        authentication_token: @user.authentication_token,
-                       email: @user.email,
-                       user_name: @user.full_name }
+                       user: @user }, status: :ok
       else
         render json: { errors: 'Invalid email or password' }, status: :unprocessable_entity
       end
