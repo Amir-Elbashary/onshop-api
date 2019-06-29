@@ -56,6 +56,10 @@
       "description": "User"
     },
     {
+      "path": "/api/v1/user/reviews.{format}",
+      "description": "User"
+    },
+    {
       "path": "/api/v1/user/users.{format}",
       "description": "User"
     },
@@ -77,6 +81,10 @@
     },
     {
       "path": "/api/v1/onshop/products.{format}",
+      "description": "OnShop"
+    },
+    {
+      "path": "/api/v1/onshop/reviews.{format}",
       "description": "OnShop"
     }
   ],

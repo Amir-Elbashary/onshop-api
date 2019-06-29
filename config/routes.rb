@@ -26,17 +26,21 @@ Rails.application.routes.draw do
       namespace :user do
         resources :registrations, only: %i[create]
         resources :sessions, only: %i[create destroy]
+        resources :reviews, except: %i[index show]
+
         resources :users do
           collection do
             put :update_profile
             get :favourite_products
           end
         end
+
         resources :products do
           member do
             post :favourite_product
           end
         end
+
         resources :carts do
           resources :items, expect: :show
           
@@ -49,6 +53,7 @@ Rails.application.routes.draw do
       namespace :onshop do
         resources :categories
         resources :products
+        resources :reviews, only: %i[index show]
       end
     end
   end

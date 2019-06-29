@@ -23,5 +23,9 @@ RSpec.describe Product, type: :model do
     it 'belongs to category' do
       should belong_to(:category)
     end
+
+    it 'has many reviews' do
+      should have_many :reviews
+    end
   end
 end
