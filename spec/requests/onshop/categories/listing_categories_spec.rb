@@ -30,7 +30,7 @@ RSpec.describe 'Listing categories', type: :request do
       response_body = JSON.parse(response.body)
 
       expect(response.code).to eq('200')
-      expect(response_body['category']['id']).to eq(@category1.id)
+      expect(response_body['id']).to eq(@category1.id)
       expect(response_body['sub_categories'][0]['id']).to eq(@cat1_sub1.id)
       expect(response_body['sub_categories'][1]['id']).to eq(@cat1_sub2.id)
     end
