@@ -20,7 +20,7 @@ RSpec.describe 'Listing categories', type: :request do
 
         expect(response.code).to eq('200')
         expect(response_body['category_type']).to eq('main category')
-        expect(response_body['main_category']['name']).to eq(@category.name)
+        expect(response_body['main_category']['name_en']).to eq(@category.name_en)
         expect(response_body['sub_categories'].size).to eq(2)
       end
     end
@@ -34,8 +34,8 @@ RSpec.describe 'Listing categories', type: :request do
 
         expect(response.code).to eq('200')
         expect(response_body['category_type']).to eq('sub category')
-        expect(response_body['sub_category']['name']).to eq(@sub_category1.name)
-        expect(response_body['main_category']['name']).to eq(@category.name)
+        expect(response_body['sub_category']['name_en']).to eq(@sub_category1.name_en)
+        expect(response_body['main_category']['name_en']).to eq(@category.name_en)
       end
     end
   end

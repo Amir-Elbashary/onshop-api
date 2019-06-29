@@ -31,5 +31,9 @@ RSpec.describe User, type: :model do
     it 'has many favourite products' do
       should have_many :favourite_products
     end
+
+    it 'has many reviews' do
+      should have_many :reviews
+    end
   end
 end
