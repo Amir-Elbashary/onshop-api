@@ -21,11 +21,7 @@ class Api::V1::Onshop::CategoriesController < Api::V1::Onshop::BaseOnshopControl
   end
 
   def index
-    if params[:category_id]
-      render json: { category: @category, sub_categories: @category.children }, status: :ok
-    else
-      @categories = Category.roots.page(params[:page]).per_page(32)
-    end
+    @categories = Category.roots.page(params[:page]).per_page(32) unless params[:category_id]
   end
 
   private
