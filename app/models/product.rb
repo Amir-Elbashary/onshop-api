@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   validate :validates_globalized_attributes
 
   has_many :variants, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   belongs_to :merchant
   belongs_to :category
 
