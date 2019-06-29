@@ -17,6 +17,8 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     param :form, 'user[city]', :string, :optional, 'User city'
     param :form, 'user[region]', :string, :optional, 'User region'
     param :form, 'user[phone_number]', :string, :optional, 'User phone number'
+    param :form, 'user[password]', :string, :optional, 'New password'
+    param :form, 'user[password_confirmation]', :string, :optional, 'Confirm new password'
     response :ok
     response :unauthorized
     response :unprocessable_entity
@@ -26,6 +28,11 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     if params[:user][:gender].present? && !['unspecified', 'male', 'female'].include?(params[:user][:gender])
       return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' },
                     status: :unprocessable_entity
+    end
+
+    if params[:user][:password].present? || params[:user][:password_confirmation].present?
+      return render json: { message: 'password and password confirmation do not match' },
+                    status: :unprocessable_entity if params[:user][:password] != params[:user][:password_confirmation]
     end
 
     if current_user.update(user_params)
@@ -54,6 +61,7 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
-                                 :country, :city, :region, :phone_number)
+                                 :country, :city, :region, :phone_number,
+                                 :password, :password_confirmation)
   end
 end
