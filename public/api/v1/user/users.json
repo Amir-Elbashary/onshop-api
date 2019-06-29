@@ -80,6 +80,20 @@
               "type": "string",
               "description": "User phone number",
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "New password",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user[password_confirmation]",
+              "type": "string",
+              "description": "Confirm new password",
+              "required": false
             }
           ],
           "responseMessages": [
