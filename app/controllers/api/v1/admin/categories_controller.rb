@@ -24,26 +24,6 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
   end
 
   def index
-    if params[:id].present?
-      if @category.root?
-        products_found =  0
-
-        @category.children.each do |child|
-          products_found + child.products.count
-        end
-
-        render json: { category_type: 'main category',
-                       products_found: products_found,
-                       main_category: @category,
-                       sub_categories: @category.children }, status: :ok
-      else
-        render json: { category_type: 'sub category',
-                       products_found: @category.products.count,
-                       sub_category: @category,
-                       main_category: @category.parent }, status: :ok
-      end
-    end
-
     @categories = Category.roots unless params[:id]
   end
 
