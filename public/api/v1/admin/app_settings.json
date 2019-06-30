@@ -1,0 +1,141 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "app_settings",
+  "apis": [
+    {
+      "path": "/v1/admin/app_settings.json",
+      "operations": [
+        {
+          "summary": "Get App settings",
+          "notes": "Valid admin token needed only",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Admin::AppSettings#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/app_settings/{id}.json",
+      "operations": [
+        {
+          "summary": "Update App settings",
+          "notes": "send \"id\" as an ID on path parameter, use it as placeholder since token is what is really needed",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[name_en]",
+              "type": "string",
+              "description": "App English Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[name_ar]",
+              "type": "string",
+              "description": "App Arabic Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[description_en]",
+              "type": "string",
+              "description": "App English Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[description_ar]",
+              "type": "string",
+              "description": "App Arabic Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[email]",
+              "type": "string",
+              "description": "App Email",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[keywords]",
+              "type": "array",
+              "description": "Keywords",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[logo]",
+              "type": "string",
+              "description": "App English Description",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Admin::AppSettings#update",
+          "method": "patch"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

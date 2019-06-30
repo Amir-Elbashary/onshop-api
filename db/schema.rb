@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_130619) do
+ActiveRecord::Schema.define(version: 2019_06_30_122449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,27 @@ ActiveRecord::Schema.define(version: 2019_06_29_130619) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["gender"], name: "index_admins_on_gender"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "app_setting_translations", force: :cascade do |t|
+    t.integer "app_setting_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "description"
+    t.index ["app_setting_id"], name: "index_app_setting_translations_on_app_setting_id"
+    t.index ["locale"], name: "index_app_setting_translations_on_locale"
+  end
+
+  create_table "app_settings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "keywords", array: true
+    t.string "email"
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "app_tokens", force: :cascade do |t|
