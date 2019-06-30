@@ -4,6 +4,18 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
 
   swagger_controller :users, 'User'
 
+  swagger_api :show do
+    summary 'Get user profile info'
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    response :ok
+    response :unauthorized
+  end
+
+  def show
+    render json: current_user, status: :ok
+  end
+
   swagger_api :update_profile do
     summary 'Adding existing users to update their own profile'
     notes "Provide the ability of updating user's own profile via their panel"
