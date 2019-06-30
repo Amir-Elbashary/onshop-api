@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User profile info', type: :request do
+RSpec.describe 'Updating user profile info', type: :request do
   before do
     @app_token = create(:app_token)
     @user = create(:user)
