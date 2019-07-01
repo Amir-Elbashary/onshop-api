@@ -58,6 +58,7 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
   def show
     @variants = @product.variants
     @reviews = @product.reviews
+    @related_products = @product.category.products.limit(8).order("RANDOM()")
   end
 
   private
