@@ -1,6 +1,7 @@
 class Api::V1::User::ReviewsController < Api::V1::User::BaseUserController
   rescue_from ActiveRecord::RecordNotUnique, with: :already_exists
   load_and_authorize_resource
+  skip_load_resource only: :index
   before_action :require_same_user, only: %i[update destroy]
 
   swagger_controller :reviews, 'User'
@@ -46,6 +47,25 @@ class Api::V1::User::ReviewsController < Api::V1::User::BaseUserController
       render json: @review, status: :ok
     else
       render json: { message: @review.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  swagger_api :index do
+    summary 'Listing user reviews'
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    param :query, :page, :integer, :optional, 'Page Number'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
+  def index
+    if current_user.reviews.any?
+      render json: current_user.reviews.page(params[:page]).per_page(32), status: :ok
+    else
+      render json: { message: 'no reviews yer' }, status: :ok
     end
   end
 
