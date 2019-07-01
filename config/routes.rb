@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       namespace :user do
         resources :registrations, only: %i[create]
         resources :sessions, only: %i[create destroy]
-        resources :reviews, except: %i[index show]
+        resources :reviews, except: %i[show]
 
         resources :users do
           collection do

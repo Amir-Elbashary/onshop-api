@@ -4,7 +4,6 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
   skip_load_resource
   before_action :set_category, only: :index
   before_action :set_product, only: :show
-  # skip_before_action :authenticate_user, only: :index
 
   swagger_controller :products, 'OnShop'
 
@@ -58,7 +57,7 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
 
   def show
     @variants = @product.variants
-    # render json: @product.to_json(include: :variants), status: :ok
+    @reviews = @product.reviews
   end
 
   private
