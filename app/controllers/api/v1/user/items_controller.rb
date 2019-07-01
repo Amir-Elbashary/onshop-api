@@ -51,9 +51,7 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
     response :not_found
   end
 
-  def index
-    render json: @cart.items, status: :ok
-  end
+  def index; end
 
   swagger_api :update do
     summary 'Updating item\'s quantities on cart'
