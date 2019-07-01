@@ -42,6 +42,10 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
                     status: :unprocessable_entity
     end
 
+    if params[:user][:current_password]
+      return render json: { message: 'current password is incorrect' }, status: :unprocessable_entity unless current_user.valid_password?(params[:user][:current_password])
+    end
+
     if params[:user][:password].present? || params[:user][:password_confirmation].present?
       return render json: { message: 'password and password confirmation do not match' },
                     status: :unprocessable_entity if params[:user][:password] != params[:user][:password_confirmation]
@@ -72,8 +76,13 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
-                                 :country, :city, :region, :phone_number,
-                                 :password, :password_confirmation)
+    if params[:user][:current_password]
+      params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
+                                   :country, :city, :region, :phone_number,
+                                   :password, :password_confirmation)
+    else
+      params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
+                                   :country, :city, :region, :phone_number)
+    end
   end
 end
