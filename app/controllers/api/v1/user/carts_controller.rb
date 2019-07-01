@@ -25,6 +25,7 @@ class Api::V1::User::CartsController < Api::V1::User::BaseUserController
     notes "This API get specific cart info along with it's items"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    param :path, :id, :integer, :required, 'Cart ID'
     response :ok
     response :unauthorized
   end
