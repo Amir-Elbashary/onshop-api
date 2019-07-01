@@ -15,7 +15,7 @@ RSpec.describe 'Getting current app statistics by an admin', type: :request do
       response_body = JSON.parse(response.body)
 
       expect(response.code).to eq('200')
-      expect(response_body.size).to eq(5)
+      expect(response_body.size).to eq(6)
     end
   end
 
