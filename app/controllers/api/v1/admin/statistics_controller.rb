@@ -13,11 +13,13 @@ class Api::V1::Admin::StatisticsController < Api::V1::Admin::BaseAdminController
 
   def show
     @products = Product.count
+    @merchants = Merchant.count
     @categories = Category.count
     @orders = 'Coming Soon'
     @users = User.count
     @visitors = 'Coming Soon'
     render json: { products: @products,
+                   merchants: @merchants,
                    categories: @categories,
                    orders: @orders,
                    users: @users,
