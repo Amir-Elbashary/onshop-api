@@ -102,6 +102,13 @@
               "type": "string",
               "description": "User Authentication Token",
               "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Cart ID",
+              "required": true
             }
           ],
           "responseMessages": [
