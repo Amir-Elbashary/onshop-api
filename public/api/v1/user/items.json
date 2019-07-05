@@ -236,6 +236,13 @@
               "type": "integer",
               "description": "Cart ID",
               "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Item ID",
+              "required": true
             }
           ],
           "responseMessages": [
