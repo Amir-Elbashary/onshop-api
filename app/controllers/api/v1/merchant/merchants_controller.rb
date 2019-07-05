@@ -4,6 +4,19 @@ class Api::V1::Merchant::MerchantsController < Api::V1::Merchant::BaseMerchantCo
 
   swagger_controller :merchants, 'Merchant'
 
+  swagger_api :show do
+    summary 'Getting merchant info'
+    notes "This API show info of the current logged in merchant"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
+    response :ok
+    response :unauthorized
+  end
+
+  def show
+    render json: current_merchant, status: :ok
+  end
+
   swagger_api :update do
     summary 'Updating merchant info'
     notes "Update merchant profile info"
