@@ -8,6 +8,45 @@
       "path": "/v1/merchant/merchants/{id}.json",
       "operations": [
         {
+          "summary": "Getting merchant info",
+          "notes": "This API show info of the current logged in merchant",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Merchant Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Merchant::Merchants#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/merchant/merchants/{id}.json",
+      "operations": [
+        {
           "summary": "Updating merchant info",
           "notes": "Update merchant profile info",
           "parameters": [
