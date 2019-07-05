@@ -10,7 +10,12 @@ json.variants do
   end
 end
 
-json.reviews @reviews, :id, :user_id, :product_id, :review, :rating, :created_at, :updated_at
+json.reviews do
+  json.array! @reviews do |review|
+    json.extract! review, :id, :user_id, :product_id, :review, :rating, :created_at, :updated_at
+    json.user_name review.user.full_name
+  end
+end
 
 json.related_product do
   json.array! @related_products, partial: 'product', as: :product
