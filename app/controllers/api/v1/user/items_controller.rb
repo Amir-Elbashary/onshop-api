@@ -83,7 +83,7 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
     param :path, :cart_id, :integer, :required, 'Cart ID'
-    param :path, :item_id, :integer, :required, 'Item ID'
+    param :path, :id, :integer, :required, 'Item ID'
     response :ok
     response :unauthorized
     response :unprocessable_entity
