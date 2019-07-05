@@ -65,7 +65,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
 
     unless parent_category
       new_parent = true
-      parent_category = Category.create(name: params[:parent_category].downcase.strip.squeeze)
+      parent_category = Category.create!(name: params[:parent_category].downcase.strip.squeeze)
     end
 
     # Checking for sub categories (as children)
@@ -84,7 +84,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
 
       next if valid_child == false
 
-      Category.create(name: child.downcase.strip.squeeze, parent: parent_category)
+      Category.create!(name: child.downcase.strip.squeeze, parent: parent_category)
       added_children += 1
     end
 
