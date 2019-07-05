@@ -35,10 +35,10 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
                        authentication_token: @user.authentication_token,
                        user: @user }, status: :ok
       else
-        render json: { errors: 'Invalid email or password' }, status: :unprocessable_entity
+        render json: { success: false, errors: 'invalid email or password' }, status: :unprocessable_entity
       end
     else
-      render json: { errors: 'You should sign up first' }, status: :unprocessable_entity
+      render json: { success: false, errors: 'you should sign up first' }, status: :unprocessable_entity
     end
   end
 

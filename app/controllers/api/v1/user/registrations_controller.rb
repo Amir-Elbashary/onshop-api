@@ -28,7 +28,9 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
     @user = User.new(user_params)
 
     if @user.save
-      render json: { success: true, user: @user }, status: :ok
+      render json: { success: true,
+                     authentication_token: @user.authentication_token,
+                     user: @user }, status: :ok
     else
       render json: { success: false, errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
