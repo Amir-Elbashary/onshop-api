@@ -3,6 +3,7 @@ json.extract! item, :id, :cart_id, :variant_id, :quantity, :created_at, :updated
 json.variant do
   json.id item.variant.id
   json.product_id item.variant.product_id
+  json.product_name item.variant.product.name
   json.price item.variant.price
   json.discount item.variant.discount
   json.image item.variant.image
