@@ -46,6 +46,7 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
     param :path, :cart_id, :integer, :required, 'Cart ID'
+    param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
     response :not_found
