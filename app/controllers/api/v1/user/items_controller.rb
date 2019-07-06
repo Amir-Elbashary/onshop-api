@@ -34,7 +34,10 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
     end
 
     if @item.save
-      render json: { message: 'item added to cart', variant: @variant, product: @variant.product }, status: :ok
+      render json: { message: 'item added to cart',
+                     item: @item,
+                     variant: @variant,
+                     product: @variant.product }, status: :ok
     else
       render json: @item.errors.full_messages, status: :unprocessable_entity
     end
