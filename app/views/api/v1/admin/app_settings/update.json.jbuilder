@@ -1,1 +1,1 @@
-json.partial! @app_settings, as: :app_settings
+json.partial! 'api/v1/shared/app_settings', app_settings: @app_settings

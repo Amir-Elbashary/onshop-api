@@ -1,1 +1,1 @@
-json.array! @variants, partial: 'variant', as: :variant
+json.array! @variants, partial: 'api/v1/shared/variant', as: :variant

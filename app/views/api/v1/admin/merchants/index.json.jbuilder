@@ -1,1 +1,1 @@
-json.array! @merchants, partial: 'merchant', as: :merchant
+json.array! @merchants, partial: 'api/v1/shared/merchant', as: :merchant
