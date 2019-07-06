@@ -97,6 +97,20 @@
             },
             {
               "paramType": "form",
+              "name": "variant[name_en]",
+              "type": "string",
+              "description": "Variant name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[name_ar]",
+              "type": "string",
+              "description": "Variant arabic name",
+              "required": false
+            },
+            {
+              "paramType": "form",
               "name": "variant[color_en]",
               "type": "string",
               "description": "Product variant color",
@@ -271,6 +285,27 @@
               "type": "integer",
               "description": "Product ID",
               "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Variant ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "variant[name_en]",
+              "type": "string",
+              "description": "Variant name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "variant[name_ar]",
+              "type": "string",
+              "description": "Variant arabic name",
+              "required": false
             },
             {
               "paramType": "form",

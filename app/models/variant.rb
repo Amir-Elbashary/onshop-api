@@ -1,6 +1,6 @@
 class Variant < ApplicationRecord
   mount_uploader :image, ImageUploader
-  translates :color, :size, fallbacks_for_empty_translations: true
+  translates :name, :color, :size, fallbacks_for_empty_translations: true
   globalize_accessors locales: [:en, :ar]
   globalize_validations locales: [:en, :ar]
 

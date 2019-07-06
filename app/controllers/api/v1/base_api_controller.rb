@@ -15,13 +15,13 @@ class Api::V1::BaseApiController < ApplicationController
     render json: { error: 'unauthorized access' }, status: :unauthorized
   end
 
-  def set_locale 
-    if params[:loc] == 'en'
-      I18n.locale = :en
-    elsif params[:loc] == 'ar'
-      I18n.locale = :ar 
-    else
-      I18n.default_locale
-    end
+  def set_locale
+    I18n.locale = if params[:loc] == 'en'
+                    :en
+                  elsif params[:loc] == 'ar'
+                    :ar
+                  else
+                    I18n.default_locale
+                  end
   end
 end
