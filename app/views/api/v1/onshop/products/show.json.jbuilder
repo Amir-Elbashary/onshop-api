@@ -11,5 +11,10 @@ json.reviews do
 end
 
 json.related_product do
-  json.array! @related_products, partial: 'api/v1/shared/product', as: :product
+  json.array! @related_products do |related_product|
+    json.partial! 'api/v1/shared/product', product: related_product
+    json.variants do
+      json.array! related_product.variants, partial: 'api/v1/shared/variant', as: :variant
+    end
+  end
 end
