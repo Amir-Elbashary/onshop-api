@@ -80,6 +80,10 @@
       "description": "User"
     },
     {
+      "path": "/api/v1/user/subscriptions.{format}",
+      "description": "User"
+    },
+    {
       "path": "/api/v1/onshop/categories.{format}",
       "description": "OnShop"
     },
