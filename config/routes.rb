@@ -49,6 +49,12 @@ Rails.application.routes.draw do
             get :active_cart
           end
         end
+
+        resources :subscriptions, only: %i[create index] do
+          collection do
+            post :toggle
+          end
+        end
       end
 
       namespace :onshop do
