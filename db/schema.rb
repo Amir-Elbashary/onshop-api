@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_114427) do
+ActiveRecord::Schema.define(version: 2019_07_14_115955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(version: 2019_07_13_114427) do
     t.string "name"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "user_name"
+    t.string "email"
+    t.string "phone_number"
+    t.text "message"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_contacts_on_status"
   end
 
   create_table "favourites", force: :cascade do |t|
