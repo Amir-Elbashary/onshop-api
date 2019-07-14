@@ -1,0 +1,73 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "contacts",
+  "apis": [
+    {
+      "path": "/v1/user/contacts.json",
+      "operations": [
+        {
+          "summary": "Sending message to support (Contact us)",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "contact[user_name]",
+              "type": "string",
+              "description": "Full Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "contact[email]",
+              "type": "email",
+              "description": "User Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "contact[phone_number]",
+              "type": "string",
+              "description": "Phone Number",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "contact[message]",
+              "type": "text",
+              "description": "Message",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 201,
+              "responseModel": null,
+              "message": "Created"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::User::Contacts#create",
+          "method": "post"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
