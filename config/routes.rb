@@ -14,6 +14,12 @@ Rails.application.routes.draw do
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
+
+        resources :contacts, only: %i[index show] do
+          member do
+            post :toggle
+          end
+        end
       end
 
       namespace :merchant do
@@ -25,9 +31,10 @@ Rails.application.routes.draw do
       end
 
       namespace :user do
-        resources :registrations, only: %i[create]
+        resources :registrations, only: :create
         resources :sessions, only: %i[create destroy]
-        resources :reviews, except: %i[show]
+        resources :reviews, except: :show
+        resources :contacts, only: :create
 
         resources :users do
           collection do
