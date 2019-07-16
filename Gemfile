@@ -19,7 +19,7 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.7'
 # =============== Authentication Gems ===============
 gem 'devise', '~> 4.6', '>= 4.6.1'
 gem 'cancancan', '~> 2.3'
-# gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-facebook', '~> 5.0'
 
 # ================ APIs Related Gems ================
 gem 'jbuilder', '~> 2.5'

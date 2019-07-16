@@ -31,7 +31,11 @@ Rails.application.routes.draw do
       end
 
       namespace :user do
-        resources :registrations, only: :create
+        resources :registrations, only: :create do
+          collection do
+            post :social_media
+          end
+        end
         resources :sessions, only: %i[create destroy]
         resources :reviews, except: :show
         resources :contacts, only: :create
