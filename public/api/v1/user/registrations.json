@@ -5,6 +5,79 @@
   "resourcePath": "registrations",
   "apis": [
     {
+      "path": "/v1/user/registrations/social_media.json",
+      "operations": [
+        {
+          "summary": "Signup, or signin using Social Media",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "email",
+              "description": "User Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[first_name]",
+              "type": "name",
+              "description": "User Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[last_name]",
+              "type": "name",
+              "description": "User Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[provider]",
+              "type": "provider",
+              "description": "User provider",
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "Facebook",
+                  "Gmail"
+                ]
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "user[uid]",
+              "type": "uid",
+              "description": "User Identifier on Social Media",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            }
+          ],
+          "nickname": "Api::V1::User::Registrations#social_media",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/v1/user/registrations.json",
       "operations": [
         {
