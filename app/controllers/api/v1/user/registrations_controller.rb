@@ -36,7 +36,42 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
     end
   end
 
+  swagger_api :social_media do
+    summary "Signup, or signin using Social Media"
+    param :header, "X-APP-Token", :string, :required, "App Authentication Token"
+    param :form, "user[email]", :email, :required, "User Email"
+    param :form, "user[first_name]", :name, :required, "User Name"
+    param :form, "user[last_name]", :name, :required, "User Name"
+    param_list :form, "user[provider]", :provider, :required, "User provider", ["Facebook", "Gmail"]
+    param :form, "user[uid]", :uid, :required, "User Identifier on Social Media"
+    response :ok
+    response :bad_request
+  end   
+        
+  def social_media
+    user = User.from_omniauth(construct_authhash)
+
+    if user.persisted?
+      sign_in user
+      user.email = nil if user.email.partition('@').last == "onshop.com"
+
+      render json: user, status: :ok
+    else
+      render json: { errors: user.errors }, status: :bad_request
+    end 
+  end
+        
   private
+
+  def construct_authhash
+    OmniAuth::AuthHash.new(uid: permitted_params[:uid], first_name: permitted_params[:first_name],
+                           last_name: permitted_params[:last_name], provider: permitted_params[:provider],
+                           info: { email: permitted_params.fetch(:email, nil) })
+  end   
+        
+  def permitted_params         
+    params.require(:user).permit(:email, :first_name, :last_name, :provider, :uid)
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
