@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
 
   describe 'Has associations' do
     it 'belongs to cart' do
-      should belong_to :cart
+      should belong_to(:cart)
     end
 
     it 'belongs to variant' do

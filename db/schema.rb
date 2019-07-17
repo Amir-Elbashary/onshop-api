@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_084743) do
+ActiveRecord::Schema.define(version: 2019_07_17_104850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,9 @@ ActiveRecord::Schema.define(version: 2019_07_16_084743) do
     t.integer "state", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 1
     t.index ["state"], name: "index_carts_on_state"
+    t.index ["status"], name: "index_carts_on_status"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -142,6 +144,18 @@ ActiveRecord::Schema.define(version: 2019_07_16_084743) do
     t.index ["email"], name: "index_merchants_on_email", unique: true
     t.index ["gender"], name: "index_merchants_on_gender"
     t.index ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "cart_id"
+    t.integer "order_number"
+    t.integer "total_items", default: 0
+    t.decimal "total_price", default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_orders_on_cart_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_translations", force: :cascade do |t|
@@ -247,6 +261,8 @@ ActiveRecord::Schema.define(version: 2019_07_16_084743) do
   add_foreign_key "favourites", "users"
   add_foreign_key "items", "carts"
   add_foreign_key "items", "variants"
+  add_foreign_key "orders", "carts"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "merchants"
   add_foreign_key "reviews", "products"

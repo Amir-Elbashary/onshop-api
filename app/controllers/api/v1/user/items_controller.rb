@@ -2,6 +2,7 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
   load_and_authorize_resource
   skip_load_resource
   before_action :set_cart
+  before_action :ensure_cart_unlocked, except: :index
   before_action :set_item, only: %i[update destroy]
   before_action :set_variant, except: %i[index destroy]
   before_action :require_same_user
@@ -117,6 +118,10 @@ class Api::V1::User::ItemsController < Api::V1::User::BaseUserController
 
   def set_variant
     @variant = Variant.find(params[:item][:variant_id])
+  end
+
+  def ensure_cart_unlocked
+    return render json: { message: 'cart is locked becuase it has opened order, please cancel your order before modifying the cart' }, status: :unprocessable_entity if @cart.locked?
   end
 
   def require_same_user

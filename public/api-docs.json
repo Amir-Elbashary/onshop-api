@@ -56,11 +56,11 @@
       "description": "Merchant"
     },
     {
-      "path": "/api/v1/user/registrations.{format}",
+      "path": "/api/v1/user/sessions.{format}",
       "description": "User"
     },
     {
-      "path": "/api/v1/user/sessions.{format}",
+      "path": "/api/v1/user/orders.{format}",
       "description": "User"
     },
     {
@@ -69,6 +69,10 @@
     },
     {
       "path": "/api/v1/user/contacts.{format}",
+      "description": "User"
+    },
+    {
+      "path": "/api/v1/user/registrations.{format}",
       "description": "User"
     },
     {

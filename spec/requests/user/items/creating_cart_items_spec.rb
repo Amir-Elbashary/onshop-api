@@ -138,4 +138,30 @@ RSpec.describe 'Creating cart items (Add item to cart)', type: :request do
       expect(Cart.first.items.first.quantity).to eq(1)
     end
   end
+
+  context 'when adding item while cart is locked' do
+    it 'should ask for order canceling first' do
+      params = { 'item[variant_id]' => @variant1.id,
+                 'item[quantity]' => 2 }
+
+      post "/v1/user/carts/#{@cart.id}/items", headers: @headers, params: params
+
+      expect(response.code).to eq('200')
+      expect(Cart.first.status).to eq('unlocked')
+      expect(@cart.items.first.variant.product.name).to eq(@variant1.product.name)
+      expect(Cart.first.items.count).to eq(1)
+
+      @cart.locked!
+
+      params = { 'item[variant_id]' => @variant2.id,
+                 'item[quantity]' => 1 }
+
+      post "/v1/user/carts/#{@cart.id}/items", headers: @headers, params: params
+
+      expect(response.code).to eq('422')
+      expect(Cart.first.status).to eq('locked')
+      expect(@cart.items.last.variant.product.name).to eq(@variant1.product.name)
+      expect(Cart.first.items.count).to eq(1)
+    end
+  end
 end
