@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  has_many :orders # Won't be destroyed for now even if user was destroyed
   has_many :carts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :favourites, dependent: :destroy

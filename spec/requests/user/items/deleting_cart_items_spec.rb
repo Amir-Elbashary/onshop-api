@@ -43,4 +43,15 @@ RSpec.describe 'Deleting item from cart', type: :request do
       expect(@cart.items.count).to eq(1)
     end
   end
+
+  context 'when deleting item while cart is locked' do
+    it 'should ask for order canceling first' do
+      @cart.locked!
+
+      delete "/v1/user/carts/#{@cart.id}/items/#{@item.id}", headers: @headers
+
+      expect(response.code).to eq('422')
+      expect(@cart.items.count).to eq(1)
+    end
+  end
 end

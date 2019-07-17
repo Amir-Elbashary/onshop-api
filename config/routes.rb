@@ -31,14 +31,16 @@ Rails.application.routes.draw do
       end
 
       namespace :user do
+        resources :sessions, only: %i[create destroy]
+        resources :orders
+        resources :reviews, except: :show
+        resources :contacts, only: :create
+
         resources :registrations, only: :create do
           collection do
             post :social_media
           end
         end
-        resources :sessions, only: %i[create destroy]
-        resources :reviews, except: :show
-        resources :contacts, only: :create
 
         resources :users do
           collection do

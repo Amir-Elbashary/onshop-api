@@ -9,7 +9,7 @@ class Api::V1::Admin::ContactsController < Api::V1::Admin::BaseAdminController
     summary 'Listing user contacting messages'
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
-    param :query, :filter, :string, :optional, '(open/opened), (close/closed), or all'
+    param :query, :filter, :string, :required, '(open/opened), (close/closed), or all'
     param :query, :page, :integer, :optional, 'Page'
     response :ok
     response :unauthorized
