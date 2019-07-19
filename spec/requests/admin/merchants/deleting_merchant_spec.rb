@@ -8,7 +8,7 @@ RSpec.describe 'Deleting merchant by admin', type: :request do
     @merchant = create(:merchant)
   end
 
-  context 'with ID presented' do
+  context 'with valid ID presented' do
     it 'should delete the merchant permanently' do
       expect(Merchant.count).to eq(1)
 

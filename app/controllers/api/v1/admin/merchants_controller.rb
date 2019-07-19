@@ -1,6 +1,6 @@
 class Api::V1::Admin::MerchantsController < Api::V1::Admin::BaseAdminController
   load_and_authorize_resource
-  skip_load_resource expect: :index
+  skip_load_resource except: :index
   before_action :set_merchant, only: :destroy
 
   swagger_controller :merchants, 'Admin'
