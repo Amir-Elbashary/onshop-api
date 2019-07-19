@@ -20,6 +20,12 @@ Rails.application.routes.draw do
             post :toggle
           end
         end
+
+        resources :subscriptions, only: %i[index destroy] do
+          member do
+            post :toggle
+          end
+        end
       end
 
       namespace :merchant do
