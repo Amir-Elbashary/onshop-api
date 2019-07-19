@@ -1,0 +1,155 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "/",
+  "resourcePath": "subscriptions",
+  "apis": [
+    {
+      "path": "/v1/admin/subscriptions/{id}/toggle.json",
+      "operations": [
+        {
+          "summary": "Toggling subscription status",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Subscription ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Subscriptions#toggle",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/subscriptions.json",
+      "operations": [
+        {
+          "summary": "Listing all subscriptions",
+          "notes": "This API lists all subscriptions available on the system",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Subscriptions#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/subscriptions/{id}.json",
+      "operations": [
+        {
+          "summary": "Deleting subscription from OnShop",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Subscription ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Subscriptions#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

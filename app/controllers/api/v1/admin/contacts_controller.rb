@@ -1,7 +1,6 @@
 class Api::V1::Admin::ContactsController < Api::V1::Admin::BaseAdminController
   load_and_authorize_resource
-  skip_load_resource
-  before_action :set_contact, only: %i[show toggle]
+  skip_load_resource only: :index
 
   swagger_controller :contacts, 'Admin'
 
@@ -55,11 +54,5 @@ class Api::V1::Admin::ContactsController < Api::V1::Admin::BaseAdminController
     end
 
     render json: { id: @contact.id, status: @contact.status }, status: :ok
-  end
-
-  private
-
-  def set_contact
-    @contact = Contact.find(params[:id])
   end
 end
