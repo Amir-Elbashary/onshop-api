@@ -1,6 +1,6 @@
 class AppSetting < ApplicationRecord
   mount_uploader :logo, ImageUploader
-  translates :name, :description, fallbacks_for_empty_translations: true
+  translates :name, :description, :privacy, fallbacks_for_empty_translations: true
   globalize_accessors locales: [:en, :ar]
   globalize_validations locales: [:en, :ar]
 

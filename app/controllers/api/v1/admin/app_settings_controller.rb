@@ -25,6 +25,8 @@ class Api::V1::Admin::AppSettingsController < Api::V1::Admin::BaseAdminControlle
     param :form, 'app_setting[name_ar]', :string, :optional, 'App Arabic Name'
     param :form, 'app_setting[description_en]', :string, :optional, 'App English Description'
     param :form, 'app_setting[description_ar]', :string, :optional, 'App Arabic Description'
+    param :form, 'app_setting[privacy_en]', :text, :optional, 'App English Privacy'
+    param :form, 'app_setting[privacy_ar]', :text, :optional, 'App Arabic Privacy'
     param :form, 'app_setting[email]', :string, :optional, 'App Email'
     param :form, 'app_setting[keywords]', :array, :optional, 'Keywords'
     param :form, 'app_setting[logo]', :string, :optional, 'App English Description'
@@ -42,7 +44,8 @@ class Api::V1::Admin::AppSettingsController < Api::V1::Admin::BaseAdminControlle
   private
 
   def app_setting_params
-    params.require(:app_setting).permit(:name_en, :name_ar, :description_en, :description_ar, :email, :keywords, :logo)
+    params.require(:app_setting).permit(:name_en, :name_ar, :description_en, :description_ar,
+                                        :privacy_en, :privacy_ar, :email, :keywords, :logo)
   end
 
   def set_app_settings
