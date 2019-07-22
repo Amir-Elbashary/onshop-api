@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Get App settings",
-          "notes": "Valid admin token needed only",
+          "notes": "Valid admin is token needed only",
           "parameters": [
             {
               "paramType": "header",
@@ -90,6 +90,20 @@
               "name": "app_setting[description_ar]",
               "type": "string",
               "description": "App Arabic Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[privacy_en]",
+              "type": "text",
+              "description": "App English Privacy",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[privacy_ar]",
+              "type": "text",
+              "description": "App Arabic Privacy",
               "required": false
             },
             {

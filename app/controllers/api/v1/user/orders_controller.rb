@@ -1,6 +1,7 @@
 class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
   load_and_authorize_resource
   before_action :set_cart, only: :create
+  before_action :set_order, only: :checkout
 
   swagger_controller :orders, 'User'
 
@@ -53,6 +54,33 @@ class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
     @cart.unlocked! if @order.destroy
   end
 
+  swagger_api :checkout do
+    summary 'Checking out Order'
+    notes "This API checking out the order and deactivate the cart!"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    param :path, :id, :integer, :required, 'Order ID'
+    param :query, :success, :string, :required, 'true or false'
+    response :ok
+    response :unauthorized
+    response :unprocessable_entity
+    response :not_found
+  end
+
+  def checkout
+    return render json: { error: 'this order does not belong to this user' }, status: :unauthorized unless current_user.orders.include?(@order)
+
+    if params[:success].downcase == 'true'
+      @order.cart.inactive!
+      render json: { message: 'checkout successful, cart closed' }, status: :ok
+    elsif params[:success].downcase == 'false'
+      @order.cart.active!
+      render json: { message: 'checkout failed, cart still opened' }, status: :unprocessable_entity
+    else
+      return render json: { message: 'send true or false as success param' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def order_params
@@ -61,5 +89,9 @@ class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
 
   def set_cart
     @cart = Cart.find(params[:order][:cart_id])
+  end
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end

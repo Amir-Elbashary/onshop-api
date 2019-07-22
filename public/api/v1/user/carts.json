@@ -8,8 +8,8 @@
       "path": "/v1/user/carts/active_cart.json",
       "operations": [
         {
-          "summary": "Get user active cart",
-          "notes": "This API get the only current active user that is currently active",
+          "summary": "Get/Create user active cart",
+          "notes": "This API gets user's current active card or Creates one if no active one exists",
           "parameters": [
             {
               "paramType": "header",

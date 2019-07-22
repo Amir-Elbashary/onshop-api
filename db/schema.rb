@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_104850) do
+ActiveRecord::Schema.define(version: 2019_07_22_092535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_104850) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.text "description"
+    t.text "privacy"
     t.index ["app_setting_id"], name: "index_app_setting_translations_on_app_setting_id"
     t.index ["locale"], name: "index_app_setting_translations_on_locale"
   end
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_104850) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "privacy"
   end
 
   create_table "app_tokens", force: :cascade do |t|
@@ -100,6 +102,24 @@ ActiveRecord::Schema.define(version: 2019_07_17_104850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["status"], name: "index_contacts_on_status"
+  end
+
+  create_table "faq_translations", force: :cascade do |t|
+    t.integer "faq_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "question"
+    t.text "answer"
+    t.index ["faq_id"], name: "index_faq_translations_on_faq_id"
+    t.index ["locale"], name: "index_faq_translations_on_locale"
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.text "question"
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "favourites", force: :cascade do |t|

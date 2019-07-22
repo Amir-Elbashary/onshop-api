@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
+        resources :faqs
 
         resources :contacts, only: %i[index show] do
           member do
@@ -38,7 +39,11 @@ Rails.application.routes.draw do
 
       namespace :user do
         resources :sessions, only: %i[create destroy]
-        resources :orders
+        resources :orders do
+          member do
+            post :checkout
+          end
+        end
         resources :reviews, except: :show
         resources :contacts, only: :create
 
@@ -51,6 +56,7 @@ Rails.application.routes.draw do
         resources :users do
           collection do
             put :update_profile
+            get :orders
             get :favourite_products
           end
         end
@@ -77,9 +83,11 @@ Rails.application.routes.draw do
       end
 
       namespace :onshop do
+        resources :app_settings, only: :index
         resources :categories
         resources :products
         resources :reviews, only: %i[index show]
+        resources :faqs, only: :index
       end
     end
   end

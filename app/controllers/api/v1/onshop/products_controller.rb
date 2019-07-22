@@ -40,7 +40,7 @@ class Api::V1::Onshop::ProductsController < Api::V1::Onshop::BaseOnshopControlle
       @products = @products.includes(:variants).where(variants: { price: price_range })
     end
 
-    @products = @products.with_translations.where('lower(product_translations.name) like ?', "%#{params[:search].downcase.strip.squeeze}%") if params[:search]
+    @products = @products.with_translations.where('lower(product_translations.name) like ?', "%#{params[:search].downcase.strip.squish}%") if params[:search]
   end
 
   swagger_api :show do

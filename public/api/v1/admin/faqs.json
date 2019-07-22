@@ -2,14 +2,51 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "/",
-  "resourcePath": "users",
+  "resourcePath": "faqs",
   "apis": [
     {
-      "path": "/v1/user/users/update_profile.json",
+      "path": "/v1/admin/faqs.json",
       "operations": [
         {
-          "summary": "Adding existing users to update their own profile",
-          "notes": "Provide the ability of updating user's own profile via their panel",
+          "summary": "Listing all FAQs",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Admin::Faqs#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/admin/faqs.json",
+      "operations": [
+        {
+          "summary": "Creating new FAQ",
           "parameters": [
             {
               "paramType": "header",
@@ -27,72 +64,30 @@
             },
             {
               "paramType": "form",
-              "name": "user[first_name]",
-              "type": "string",
-              "description": "User first name",
+              "name": "faq[question_en]",
+              "type": "text",
+              "description": "FAQ English Question",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "user[last_name]",
-              "type": "string",
-              "description": "User last name",
+              "name": "faq[question_ar]",
+              "type": "text",
+              "description": "FAQ Arabic Question",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "faq[answer_en]",
+              "type": "text",
+              "description": "FAQ English Answer",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "user[gender]",
-              "type": "string",
-              "description": "User gender",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[shipping_address]",
-              "type": "string",
-              "description": "User Shipping Address",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user[country]",
-              "type": "string",
-              "description": "User country",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[city]",
-              "type": "string",
-              "description": "User city",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[region]",
-              "type": "string",
-              "description": "User region",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[phone_number]",
-              "type": "string",
-              "description": "User phone number",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[password]",
-              "type": "string",
-              "description": "New password",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[password_confirmation]",
-              "type": "string",
-              "description": "Confirm new password",
+              "name": "faq[answer_ar]",
+              "type": "text",
+              "description": "FAQ Arabic Answer",
               "required": false
             }
           ],
@@ -113,16 +108,16 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::User::Users#update_profile",
-          "method": "put"
+          "nickname": "Api::V1::Admin::Faqs#create",
+          "method": "post"
         }
       ]
     },
     {
-      "path": "/v1/user/users/orders.json",
+      "path": "/v1/admin/faqs/{id}.json",
       "operations": [
         {
-          "summary": "Get user orders",
+          "summary": "Showing FAQ data",
           "parameters": [
             {
               "paramType": "header",
@@ -135,7 +130,14 @@
               "paramType": "header",
               "name": "X-User-Token",
               "type": "string",
-              "description": "User Authentication Token",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "FAQ ID",
               "required": true
             }
           ],
@@ -156,17 +158,16 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::User::Users#orders",
+          "nickname": "Api::V1::Admin::Faqs#show",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/v1/user/users/favourite_products.json",
+      "path": "/v1/admin/faqs/{id}.json",
       "operations": [
         {
-          "summary": "User favourite products",
-          "notes": "Listing user favourite products",
+          "summary": "Updating FAQ",
           "parameters": [
             {
               "paramType": "header",
@@ -179,21 +180,42 @@
               "paramType": "header",
               "name": "X-User-Token",
               "type": "string",
-              "description": "User Authentication Token",
+              "description": "Admin Authentication Token",
               "required": true
             },
             {
-              "paramType": "query",
-              "name": "page",
-              "type": "string",
-              "description": null,
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "FAQ ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "faq[question_en]",
+              "type": "text",
+              "description": "FAQ English Question",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "faq[question_ar]",
+              "type": "text",
+              "description": "FAQ Arabic Question",
               "required": false
             },
             {
-              "paramType": "query",
-              "name": "loc",
-              "type": "string",
-              "description": null,
+              "paramType": "form",
+              "name": "faq[answer_en]",
+              "type": "text",
+              "description": "FAQ English Answer",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "faq[answer_ar]",
+              "type": "text",
+              "description": "FAQ Arabic Answer",
               "required": false
             }
           ],
@@ -207,18 +229,28 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::User::Users#favourite_products",
-          "method": "get"
+          "nickname": "Api::V1::Admin::Faqs#update",
+          "method": "patch"
         }
       ]
     },
     {
-      "path": "/v1/user/users/{id}.json",
+      "path": "/v1/admin/faqs/{id}.json",
       "operations": [
         {
-          "summary": "Get user profile info",
+          "summary": "Deleting FAQ",
           "parameters": [
             {
               "paramType": "header",
@@ -231,7 +263,14 @@
               "paramType": "header",
               "name": "X-User-Token",
               "type": "string",
-              "description": "User Authentication Token",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "FAQ ID",
               "required": true
             }
           ],
@@ -245,10 +284,15 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::User::Users#show",
-          "method": "get"
+          "nickname": "Api::V1::Admin::Faqs#destroy",
+          "method": "delete"
         }
       ]
     }

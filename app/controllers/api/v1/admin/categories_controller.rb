@@ -59,13 +59,13 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
     existing_children = 0
 
     # Checking for parent category existance (find or create)
-    parent_category = Category.with_translations(:en).where('lower(category_translations.name) = ?', "#{params[:parent_category].downcase.strip.squeeze}").first
+    parent_category = Category.with_translations(:en).where('lower(category_translations.name) = ?', "#{params[:parent_category].downcase.strip.squish}").first
 
     new_parent = false if parent_category
 
     unless parent_category
       new_parent = true
-      parent_category = Category.create!(name: params[:parent_category].downcase.strip.squeeze)
+      parent_category = Category.create!(name: params[:parent_category].downcase.strip.squish)
     end
 
     # Checking for sub categories (as children)
@@ -75,7 +75,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
       valid_child = true
 
       parent_category.children.each do |category|
-        if category.translations.where('lower(category_translations.name) = ?', "#{child.downcase.strip.squeeze}").any?
+        if category.translations.where('lower(category_translations.name) = ?', "#{child.downcase.strip.squish}").any?
           existing_children += 1
           valid_child = false
           break
@@ -84,7 +84,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
 
       next if valid_child == false
 
-      Category.create!(name: child.downcase.strip.squeeze, parent: parent_category)
+      Category.create!(name: child.downcase.strip.squish, parent: parent_category)
       added_children += 1
     end
 
@@ -114,10 +114,10 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
 
   def update
     if params[:name].present?
-      @existing_category = Category.find_by(name: params[:name].downcase.strip.squeeze)
+      @existing_category = Category.find_by(name: params[:name].downcase.strip.squish)
 
       if @category == @existing_category
-        if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
+        if @category.update(name_en: params[:name].downcase.strip.squish, name_ar: params[:name_ar], image: params[:image])
           return render json: { message: 'category info updated' }, status: :ok
         end
       end
@@ -129,7 +129,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
             return render json: { error: 'parent category with same name already exists' }, status: :unprocessable_entity
           end
         else
-          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
+          if @category.update(name_en: params[:name].downcase.strip.squish, name_ar: params[:name_ar], image: params[:image])
             render json: { message: 'category info updated' }, status: :ok
           else
             render json: @category.errors.full_messages, status: :unprocessable_entity
@@ -142,7 +142,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
         child_exists = false
 
         @category.parent.children.each do |child|
-          if child.translations.where('category_translations.name = ?', "#{params[:name].downcase.strip.squeeze}").any?
+          if child.translations.where('category_translations.name = ?', "#{params[:name].downcase.strip.squish}").any?
             child_exists = true
             break
           end
@@ -151,7 +151,7 @@ class Api::V1::Admin::CategoriesController < Api::V1::Admin::BaseAdminController
         if child_exists == true
           return render json: { error: 'sub category with same name already exists within it\'s parent category' }, status: :unprocessable_entity
         else
-          if @category.update(name_en: params[:name].downcase.strip.squeeze, name_ar: params[:name_ar], image: params[:image])
+          if @category.update(name_en: params[:name].downcase.strip.squish, name_ar: params[:name_ar], image: params[:image])
             render json: { message: 'category info updated' }, status: :ok
           else
             render json: @category.errors.full_messages, status: :unprocessable_entity
