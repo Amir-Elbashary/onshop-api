@@ -73,6 +73,23 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     @favourite_products = current_user.favourite_products.page(params[:page]).per_page(32)
   end
 
+  swagger_api :orders do
+    summary 'Get user orders'
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    response :ok
+    response :not_found
+    response :unauthorized
+  end
+
+  def orders
+    if current_user.orders.any?
+      @orders = current_user.orders
+    else
+      render json: { message: 'no orders found' }, status: :not_found
+    end
+  end
+
   private
 
   def user_params

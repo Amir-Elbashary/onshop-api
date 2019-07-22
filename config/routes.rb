@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         resources :users do
           collection do
             put :update_profile
+            get :orders
             get :favourite_products
           end
         end
