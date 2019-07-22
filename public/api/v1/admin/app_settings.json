@@ -94,6 +94,20 @@
             },
             {
               "paramType": "form",
+              "name": "app_setting[privacy_en]",
+              "type": "text",
+              "description": "App English Privacy",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "app_setting[privacy_ar]",
+              "type": "text",
+              "description": "App Arabic Privacy",
+              "required": false
+            },
+            {
+              "paramType": "form",
               "name": "app_setting[email]",
               "type": "string",
               "description": "App Email",
