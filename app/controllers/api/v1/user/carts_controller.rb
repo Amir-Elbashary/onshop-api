@@ -37,8 +37,8 @@ class Api::V1::User::CartsController < Api::V1::User::BaseUserController
   end
 
   swagger_api :active_cart do
-    summary 'Get user active cart'
-    notes "This API get the only current active user that is currently active"
+    summary 'Get/Create user active cart'
+    notes "This API gets user's current active card or Creates one if no active one exists"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
     response :ok
