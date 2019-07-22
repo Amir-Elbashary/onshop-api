@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Get App settings",
-          "notes": "Valid admin token needed only",
+          "notes": "Valid admin is token needed only",
           "parameters": [
             {
               "paramType": "header",

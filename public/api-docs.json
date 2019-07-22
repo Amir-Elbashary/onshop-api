@@ -100,6 +100,10 @@
       "description": "User"
     },
     {
+      "path": "/api/v1/onshop/app_settings.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/onshop/categories.{format}",
       "description": "OnShop"
     },

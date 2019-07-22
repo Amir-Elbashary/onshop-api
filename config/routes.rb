@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       end
 
       namespace :onshop do
+        resources :app_settings, only: :index
         resources :categories
         resources :products
         resources :reviews, only: %i[index show]
