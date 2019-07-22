@@ -7,7 +7,7 @@ class Api::V1::Admin::AppSettingsController < Api::V1::Admin::BaseAdminControlle
 
   swagger_api :index do
     summary 'Get App settings'
-    notes 'Valid admin token needed only'
+    notes 'Valid admin is token needed only'
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
     response :ok
@@ -35,8 +35,6 @@ class Api::V1::Admin::AppSettingsController < Api::V1::Admin::BaseAdminControlle
 
   def update
     unless @app_settings.update(app_setting_params)
-    #  render json: @app_settings, status: :ok
-    #else
       render json: @app_settings.errors.full_messages, status: :unprocessable_entity
     end
   end
