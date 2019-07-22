@@ -39,7 +39,11 @@ Rails.application.routes.draw do
 
       namespace :user do
         resources :sessions, only: %i[create destroy]
-        resources :orders
+        resources :orders do
+          member do
+            post :checkout
+          end
+        end
         resources :reviews, except: :show
         resources :contacts, only: :create
 
