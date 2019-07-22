@@ -1,6 +1,12 @@
 if @category
   products_count = []
-  @category.children.each { |c| products_count << c.products.count }
+
+  @category.children.each do |child|
+    child.products.each do |product|
+      products_count << product.variants.count
+    end
+  end
+
   json.products products_count.inject(:+)
 
   json.partial! 'api/v1/shared/category', category: @category
