@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
+        resources :faqs
 
         resources :contacts, only: %i[index show] do
           member do
@@ -81,6 +82,7 @@ Rails.application.routes.draw do
         resources :categories
         resources :products
         resources :reviews, only: %i[index show]
+        resources :faqs, only: :index
       end
     end
   end

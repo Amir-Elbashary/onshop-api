@@ -36,6 +36,10 @@
       "description": "Admin"
     },
     {
+      "path": "/api/v1/admin/faqs.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/contacts.{format}",
       "description": "Admin"
     },
@@ -113,6 +117,10 @@
     },
     {
       "path": "/api/v1/onshop/reviews.{format}",
+      "description": "OnShop"
+    },
+    {
+      "path": "/api/v1/onshop/faqs.{format}",
       "description": "OnShop"
     }
   ],
