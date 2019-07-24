@@ -20,6 +20,10 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'Has associations' do
+    it 'has many logins' do
+      should have_many(:logins)
+    end
+
     it 'has many products' do
       should have_many :products
     end

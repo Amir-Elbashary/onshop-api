@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_092535) do
+ActiveRecord::Schema.define(version: 2019_07_24_105432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,20 @@ ActiveRecord::Schema.define(version: 2019_07_22_092535) do
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_items_on_cart_id"
     t.index ["variant_id"], name: "index_items_on_variant_id"
+  end
+
+  create_table "logins", force: :cascade do |t|
+    t.bigint "admin_id"
+    t.bigint "merchant_id"
+    t.bigint "user_id"
+    t.string "token"
+    t.string "ip_address"
+    t.string "agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_logins_on_admin_id"
+    t.index ["merchant_id"], name: "index_logins_on_merchant_id"
+    t.index ["user_id"], name: "index_logins_on_user_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -281,6 +295,9 @@ ActiveRecord::Schema.define(version: 2019_07_22_092535) do
   add_foreign_key "favourites", "users"
   add_foreign_key "items", "carts"
   add_foreign_key "items", "variants"
+  add_foreign_key "logins", "admins"
+  add_foreign_key "logins", "merchants"
+  add_foreign_key "logins", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
