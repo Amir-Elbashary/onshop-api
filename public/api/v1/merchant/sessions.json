@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Sign in To OnShop",
-          "notes": "      Signing in should give you `authentication_token`.<br />\n      You should add `authentication_token` to all upgoing requests\n      in header to authenticate your self!<br />\n      Header should be like this:</br>\n      <b>X-User-Token</b> 1G8_s7P-V-4MGojaKD7a<br />\n      <br />\n",
+          "notes": "      Signing in should give you JWT Token.<br />\n      You should add this token to all upgoing requests\n      in header to authenticate your self!<br />\n      Header should be like this:</br>\n      <b>X-User-Token</b> your_token<br />\n      <br />\n      exp is the expiry time and you should enter it to seconds<br/>\n      Assuming we need 2 days: exp = 2 * 24 * 60 * 60<br/>\n      Default timeout is 1 week\n",
           "parameters": [
             {
               "paramType": "header",
@@ -31,6 +31,13 @@
               "type": "password",
               "description": "Merchant password",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "exp",
+              "type": "integer",
+              "description": "Exiration time in seconds",
+              "required": false
             }
           ],
           "responseMessages": [

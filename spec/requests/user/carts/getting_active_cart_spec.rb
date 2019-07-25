@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Getting user active cart', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @user = create(:user_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
 
   context 'when there is an active cart' do

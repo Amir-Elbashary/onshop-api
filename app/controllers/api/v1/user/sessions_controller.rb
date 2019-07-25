@@ -1,39 +1,45 @@
 class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
   skip_authorization_check
   skip_before_action :authenticate_user
+  before_action :set_user, only: :create
+  before_action :set_expiration_time, only: :create
 
   swagger_controller :sessions, 'User'
 
   swagger_api :create do
     summary 'Sign in To OnShop'
     notes <<-eos
-      Signing in should give you `authentication_token`.<br />
-      You should add `authentication_token` to all upgoing requests
+      Signing in should give you JWT Token.<br />
+      You should add this token to all upgoing requests
       in header to authenticate your self!<br />
       Header should be like this:</br>
-      <b>X-User-Token</b> 1G8_s7P-V-4MGojaKD7a<br />
+      <b>X-User-Token</b> your_token<br />
       <br />
+      exp is the expiry time and you should enter it to seconds<br/>
+      Assuming we need 2 days: exp = 2 * 24 * 60 * 60<br/>
+      Default timeout is 1 week
     eos
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
-    param :form, 'user[email]', :email, :required, 'User Email'
-    param :form, 'user[password]', :password, :required, 'User password'
+    param :form, 'user[email]', :string, :required, 'User Email'
+    param :form, 'user[password]', :string, :required, 'User Password'
+    param :query, :exp, :integer, :optional, 'Exiration time in seconds'
     response :ok
     response :unprocessable_entity
     response :unauthorized
   end
 
   def create
-    user_email = params[:user][:email]
-    user_password = params[:user][:password]
-    @user = User.find_for_database_authentication(email: user_email)
     if @user
-      if @user.valid_password?(user_password)
-        sign_in @user, store: false
-        @user.generate_authentication_token!
-        @user.save
+      if @user.valid_password?(@user_password)
+        payload = { email: @user_email, exp: @exp }
+        token = JWT.encode(payload, hmac_secret, 'HS256')
+
+        @login = Login.create(user: @user, token: token, ip_address: request.remote_ip, agent: request.user_agent) if token
+
         render json: { success: true,
-                       authentication_token: @user.authentication_token,
-                       user: @user }, status: :ok
+                       token: token,
+                       user: @user.as_json(except: :authentication_token),
+                       login: @login.as_json(except: :token) }, status: :ok
       else
         render json: { success: false, errors: 'invalid email or password' }, status: :unprocessable_entity
       end
@@ -51,13 +57,20 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
   end
 
   def destroy
-    @user = current_user
     if current_user
-      @user.generate_authentication_token!
-      @user.save
-      render json: { success: true, status: 'signed out' }, status: :ok
+      @current_login.token = nil
+      @current_login.save
+      render json: { message: 'logged out successfully' }, status: :ok
     else
-      render json: { error: 'unauthorized access' }, status: :unauthorized
+      render json: { message: 'session expired or user already logged out' }, status: :unauthorized
     end
+  end
+
+  private
+
+  def set_user
+    @user_email = params[:user][:email]
+    @user_password = params[:user][:password]
+    @user = User.find_for_database_authentication(email: @user_email)
   end
 end

@@ -5,10 +5,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :validatable
-  before_create :generate_authentication_token!
 
   validates :first_name, :last_name, presence: true
 
+  has_many :logins, dependent: :destroy
   has_many :orders # Won't be destroyed for now even if user was destroyed
   has_many :carts, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -24,9 +24,5 @@ class User < ApplicationRecord
       user.last_name = auth.last_name
       user.password = Devise.friendly_token[0, 20]
     end
-  end
-
-  def generate_authentication_token!
-    self.authentication_token = Devise.friendly_token
   end
 end

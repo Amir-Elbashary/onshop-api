@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Listing user orders', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
+    @user = create(:user_with_logins)
     @cart = create(:cart, user: @user, status: 0)
     @variant1 = create(:variant, quantity: 2, price: 100)
     @variant2 = create(:variant, quantity: 1, price: 200)
     @item1 = create(:item, cart: @cart, variant: @variant1, quantity: @variant1.quantity)
     @item2 = create(:item, cart: @cart, variant: @variant2, quantity: @variant2.quantity)
     @order = create(:order, cart: @cart, user: @user)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
   
   context 'when presenting valid user token' do

@@ -14,16 +14,19 @@ RSpec.describe 'Signing in/out as admin', type: :request do
       post '/v1/admin/sessions.json', headers: headers, params: params
 
       expect(response.code).to eq('200')
-      expect(Admin.first.authentication_token).not_to eq(@admin.authentication_token)
+      expect(Admin.first.logins.count).to eq(1)
+      expect(Admin.first.logins.first.token).not_to eq(nil)
     end
 
     it 'should be able to sign out' do
-      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+      @login = create(:login, admin: @admin)
+      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
 
       delete '/v1/admin/sessions/id.json', headers: headers 
 
       expect(response.code).to eq('200')
-      expect(Admin.first.authentication_token).not_to eq(@admin.authentication_token)
+      expect(Admin.first.logins.count).to eq(1)
+      expect(Admin.first.logins.first.token).to eq(nil)
     end
   end
 

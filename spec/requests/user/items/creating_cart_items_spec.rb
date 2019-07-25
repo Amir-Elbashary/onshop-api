@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Creating cart items (Add item to cart)', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
+    @user = create(:user_with_logins)
     @cart = create(:cart, user: @user)
     @variant1 = create(:variant, quantity: 2)
     @variant2 = create(:variant, quantity: 1)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
 
   describe 'with valid data' do

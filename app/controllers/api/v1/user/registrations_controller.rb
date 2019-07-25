@@ -21,16 +21,21 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
 
   def create
     if params[:user][:gender].present? && !['unspecified', 'male', 'female'].include?(params[:user][:gender])
-      return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' },
-                    status: :unprocessable_entity
+      return render json: { message: 'only unspecified, male and female are allowed as gender, or leave it blank' }, status: :unprocessable_entity
     end
 
     @user = User.new(user_params)
 
     if @user.save
+      payload = { email: @user.email, exp: 86400 }
+      token = JWT.encode(payload, hmac_secret, 'HS256')
+
+      @login = Login.create(user: @user, token: token, ip_address: request.remote_ip, agent: request.user_agent) if token
+
       render json: { success: true,
-                     authentication_token: @user.authentication_token,
-                     user: @user }, status: :ok
+                     token: token,
+                     user: @user.as_json(except: :authentication_token),
+                     login: @login.as_json(except: :token) }, status: :ok
     else
       render json: { success: false, errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -50,12 +55,25 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
         
   def social_media
     user = User.from_omniauth(construct_authhash)
+    payload = { email: user.email }
+    token = JWT.encode(payload, hmac_secret, 'HS256')
+
 
     if user.persisted?
-      sign_in user
+      login = user.logins.first
+
+      if login
+        unless login.token
+          login.token = token
+          login.save
+        end
+      else
+        Login.create(user: user, token: token, ip_address: request.remote_ip, agent: request.user_agent) if token
+      end
+
       user.email = nil if user.email.partition('@').last == "onshop.com"
 
-      render json: user, status: :ok
+      render json: { token: user.logins.first.token, user: user.as_json(except: :authentication_token) }, status: :ok
     else
       render json: { errors: user.errors }, status: :bad_request
     end 

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Editing products by merchant', type: :request do
   before do
     @app_token = create(:app_token)
-    @merchant = create(:merchant)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
+    @merchant = create(:merchant_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
     @category = create(:category)
     @sub_category = create(:category, parent_id: @category.id)
     @merchant_product = create(:product, merchant: @merchant)

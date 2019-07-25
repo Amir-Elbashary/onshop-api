@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Creating product variant as merchant', type: :request do
   before do
     @app_token = create(:app_token)
-    @merchant = create(:merchant)
+    @merchant = create(:merchant_with_logins)
     @product = create(:product, merchant: @merchant)
     @other_merchant = create(:merchant)
     @others_product = create(:product, merchant: @other_merchant)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
   end
 
   context 'with valid data' do

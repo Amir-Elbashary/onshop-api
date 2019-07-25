@@ -20,7 +20,7 @@ RSpec.describe 'User registration', type: :request do
 
     expect(response.code).to eq('200')
     expect(User.count).to eq(1)
-    expect(User.first.authentication_token).not_to eq(nil)
+    expect(User.first.logins.first.token).not_to eq(nil)
   end
 
   scenario 'can register via facebook' do
@@ -40,7 +40,7 @@ RSpec.describe 'User registration', type: :request do
 
     expect(response.code).to eq('200')
     expect(User.count).to eq(1)
-    expect(User.first.authentication_token).not_to eq(nil)
+    expect(User.first.logins.first.token).not_to eq(nil)
     expect(User.first.provider).to eq('Facebook')
     expect(User.first.uid).to eq('88888888')
   end
@@ -62,7 +62,7 @@ RSpec.describe 'User registration', type: :request do
 
     expect(response.code).to eq('200')
     expect(User.count).to eq(1)
-    expect(User.first.authentication_token).not_to eq(nil)
+    expect(User.first.logins.first.token).not_to eq(nil)
     expect(User.first.provider).to eq('Gmail')
     expect(User.first.uid).to eq('88888888')
   end

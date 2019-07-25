@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Deleting subscriptions', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
     @subscription = create(:subscription)
   end
 

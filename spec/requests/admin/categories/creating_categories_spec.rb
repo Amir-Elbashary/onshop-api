@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Creating categories and sub categories together', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
   end
 
   context 'with valid data' do
@@ -61,8 +61,8 @@ end
 RSpec.describe 'Creating parent category only' do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
   end
 
   context 'with valid data' do
@@ -114,8 +114,8 @@ end
 RSpec.describe 'Creating sub categories to and existing category' do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
   end
 
   context 'with valid data' do
