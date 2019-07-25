@@ -38,7 +38,7 @@ class Api::V1::Merchant::SessionsController < Api::V1::Merchant::BaseMerchantCon
 
         render json: { success: true,
                        token: token,
-                       user: @merchant.as_json(except: :authentication_token),
+                       merchant: @merchant.as_json(except: :authentication_token),
                        login: @login.as_json(except: :token) }, status: :ok
       else
         render json: { success: false, errors: 'invalid email or password' }, status: :unprocessable_entity

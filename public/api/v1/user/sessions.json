@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Sign in To OnShop",
-          "notes": "      Signing in should give you JWT Token.<br />\n      You should add this token to all upgoing requests\n      in header to authenticate your self!<br />\n      Header should be like this:</br>\n      <b>X-User-Token</b> your_token<br />\n      <br />\n      <b>Payload</b> is a hash like this: {'email' : 'example@email.com'}<br />\n      It contains email, password, and exp<br/>\n      exp is the expiry time and you should convert it to seconds<br/>\n      Assuming we need 2 days: exp = 2 * 24 * 60 * 60<br/>\n      Default timeout is 1 week\n",
+          "notes": "      Signing in should give you JWT Token.<br />\n      You should add this token to all upgoing requests\n      in header to authenticate your self!<br />\n      Header should be like this:</br>\n      <b>X-User-Token</b> your_token<br />\n      <br />\n      exp is the expiry time and you should enter it to seconds<br/>\n      Assuming we need 2 days: exp = 2 * 24 * 60 * 60<br/>\n      Default timeout is 1 week\n",
           "parameters": [
             {
               "paramType": "header",

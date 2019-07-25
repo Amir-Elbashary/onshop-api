@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Changing AppToken by admin', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
+    @admin = create(:admin_with_logins)
   end
 
   context 'with valid credentials' do
     it 'should be able to generate new token' do
-      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
 
       post '/v1/admin/app_tokens.json', headers: headers
 
@@ -18,7 +18,7 @@ RSpec.describe 'Changing AppToken by admin', type: :request do
 
     it 'should use the new generated token' do
       # Generating new app token
-      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
 
       post '/v1/admin/app_tokens.json', headers: headers
 

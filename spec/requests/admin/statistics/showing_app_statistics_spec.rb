@@ -3,13 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Getting current app statistics by an admin', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
   end
 
   context 'with valid admin token' do
     it 'should show app statistics' do
-      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
       get "/v1/admin/statistics/id", headers: headers
 
       response_body = JSON.parse(response.body)
