@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Listing categories', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
+    @admin = create(:admin_with_logins)
     @category = create(:category)
     @sub_category1 = create(:category, parent_id: @category.id)
     @sub_category2 = create(:category, parent_id: @category.id)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
   end
 
   describe 'when passing category ID' do

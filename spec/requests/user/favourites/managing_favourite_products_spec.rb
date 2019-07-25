@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Managing favourite products by user', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @user = create(:user_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
     @product1 = create(:product)
     @product2 = create(:product)
   end

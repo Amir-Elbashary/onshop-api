@@ -18,4 +18,10 @@ RSpec.describe Admin, type: :model do
       should validate_presence_of(:last_name)
     end
   end
+
+  describe 'Has associations' do
+    it 'has many logins' do
+      should have_many(:logins)
+    end
+  end
 end

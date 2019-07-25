@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Listing cart items', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
+    @user = create(:user_with_logins)
     @cart = create(:cart, user: @user)
     @item1 = create(:item, cart: @cart)
     @item2 = create(:item, cart: @cart)
     @other_user = create(:user)
     @others_cart = create(:cart, user: @other_user)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
   
   context 'when presenting valid cart ID' do

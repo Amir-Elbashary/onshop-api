@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Updating user profile info', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user, password: 'useruser', password_confirmation: 'useruser')
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @user = create(:user_with_logins, password: 'useruser', password_confirmation: 'useruser')
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
 
   describe 'with valid info (with password)' do

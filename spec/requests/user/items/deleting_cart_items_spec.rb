@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Deleting item from cart', type: :request do
   before do
     @app_token = create(:app_token)
-    @user = create(:user)
+    @user = create(:user_with_logins)
     @cart = create(:cart, user: @user)
     @item = create(:item, cart: @cart)
     @other_item = create(:item)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @user.logins.first.token }
   end
   
   context 'while providing item ID which belongs to the same cart' do

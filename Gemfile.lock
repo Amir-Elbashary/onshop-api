@@ -316,6 +316,7 @@ DEPENDENCIES
   guard (~> 2.15)
   guard-rspec (~> 4.7, >= 4.7.3)
   jbuilder (~> 2.5)
+  jwt
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.9, >= 4.9.3)
   omniauth-facebook (~> 5.0)

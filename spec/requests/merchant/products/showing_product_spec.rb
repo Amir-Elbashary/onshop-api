@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Showing product variant', type: :request do
   before do
     @app_token = create(:app_token)
-    @merchant = create(:merchant)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
+    @merchant = create(:merchant_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
     @product = create(:product, merchant: @merchant)
     @product_variant1 = create(:variant, product: @product)
     @product_variant2 = create(:variant, product: @product)

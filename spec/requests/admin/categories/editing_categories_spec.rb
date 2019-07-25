@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Editing categories', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @admin = create(:admin_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
     @category = create(:category)
     @category2 = create(:category)
     @sub_category1 = create(:category, parent_id: @category.id)

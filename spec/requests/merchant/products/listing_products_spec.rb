@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Listing products', type: :request do
   before do
     @app_token = create(:app_token)
-    @merchant = create(:merchant)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
+    @merchant = create(:merchant_with_logins)
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
     @merchant_product1 = create(:product, merchant: @merchant)
     @merchant_product2 = create(:product, merchant: @merchant)
     @others_product = create(:product)

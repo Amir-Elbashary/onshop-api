@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Showing FAQ', type: :request do
   before do
     @app_token = create(:app_token)
-    @admin = create(:admin)
+    @admin = create(:admin_with_logins)
     @faq = create(:faq)
-    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.authentication_token }
+    @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @admin.logins.first.token }
   end
 
   context 'when presenting valid FAQ ID' do
