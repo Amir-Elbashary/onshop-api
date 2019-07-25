@@ -15,9 +15,7 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
       Header should be like this:</br>
       <b>X-User-Token</b> your_token<br />
       <br />
-      <b>Payload</b> is a hash like this: {'email' : 'example@email.com'}<br />
-      It contains email, password, and exp<br/>
-      exp is the expiry time and you should convert it to seconds<br/>
+      exp is the expiry time and you should enter it to seconds<br/>
       Assuming we need 2 days: exp = 2 * 24 * 60 * 60<br/>
       Default timeout is 1 week
     eos
@@ -74,13 +72,5 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
     @user_email = params[:user][:email]
     @user_password = params[:user][:password]
     @user = User.find_for_database_authentication(email: @user_email)
-  end
-
-  def set_expiration_time
-    @exp = if params[:exp]
-             Time.now.to_i + params[:exp].to_i
-           else
-             Time.now.to_i + 7 * 24 * 60 * 60
-           end
   end
 end

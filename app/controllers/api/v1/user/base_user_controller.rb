@@ -19,14 +19,6 @@ class Api::V1::User::BaseUserController < Api::V1::BaseApiController
     render json: { message: 'unauthorized access, please re-login' }, status: :unauthorized
   end
 
-  def hmac_secret
-    if Rails.env.production?
-      Rails.application.secrets.secret_key_base
-    else
-      ENV['SECRET_KEY_BASE']
-    end
-  end
-
   def session_expired
     login ||= Login.find_by(token: request.headers['X-User-Token'])
     login.token = nil

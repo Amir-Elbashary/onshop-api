@@ -14,16 +14,19 @@ RSpec.describe 'Signing in/out as merchant', type: :request do
       post '/v1/merchant/sessions.json', headers: headers, params: params
 
       expect(response.code).to eq('200')
-      expect(Merchant.first.authentication_token).not_to eq(@merchant.authentication_token)
+      expect(Merchant.first.logins.count).to eq(1)
+      expect(Merchant.first.logins.first.token).not_to eq(nil)
     end
 
     it 'should be able to sign out' do
-      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.authentication_token }
+      @login = create(:login, merchant: @merchant)
+      headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
 
       delete '/v1/merchant/sessions/id.json', headers: headers 
 
       expect(response.code).to eq('200')
-      expect(Merchant.first.authentication_token).not_to eq(@merchant.authentication_token)
+      expect(Merchant.first.logins.count).to eq(1)
+      expect(Merchant.first.logins.first.token).to eq(nil)
     end
   end
 
