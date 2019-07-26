@@ -103,7 +103,7 @@ RSpec.describe 'Creating cart items (Add item to cart)', type: :request do
 
     context 'when providing wrong variant ID' do
       it 'should return not found' do
-        params = { 'item[variant_id]' => 88,
+        params = { 'item[variant_id]' => 8888,
                    'item[quantity]' => 4 }
 
         post "/v1/user/carts/#{@cart.id}/items", headers: @headers, params: params
