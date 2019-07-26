@@ -8,6 +8,7 @@ class Api::V1::Onshop::AppSettingsController < Api::V1::Onshop::BaseOnshopContro
     summary 'Get App settings'
     notes 'Valid App token is needed only'
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
   end
