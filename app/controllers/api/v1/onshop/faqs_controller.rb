@@ -8,6 +8,7 @@ class Api::V1::Onshop::FaqsController < Api::V1::Onshop::BaseOnshopController
     summary 'Get all FAQs'
     notes 'Valid App token is needed only'
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :query, :loc, :string, 'Locale'
     response :ok
     response :unauthorized
   end

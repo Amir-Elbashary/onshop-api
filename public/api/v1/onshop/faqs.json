@@ -17,6 +17,13 @@
               "type": "string",
               "description": "App Authentication Token",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "loc",
+              "type": "string",
+              "description": null,
+              "required": false
             }
           ],
           "responseMessages": [
