@@ -39,7 +39,7 @@ class Api::V1::Admin::SessionsController < Api::V1::Admin::BaseAdminController
         render json: { success: true,
                        token: token,
                        admin: @admin.as_json(except: :authentication_token),
-                       login: @login.as_json(except: :token) }, status: :ok
+                       login: @login.as_json(except: %i[id admin_id merchant_id user_id token]) }, status: :ok
       else
         render json: { success: false, errors: 'invalid email or password' }, status: :unprocessable_entity
       end

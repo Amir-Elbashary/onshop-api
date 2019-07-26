@@ -35,7 +35,7 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
       render json: { success: true,
                      token: token,
                      user: @user.as_json(except: :authentication_token),
-                     login: @login.as_json(except: :token) }, status: :ok
+                     login: @login.as_json(except: %i[id admin_id merchant_id user_id token]) }, status: :ok
     else
       render json: { success: false, errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
