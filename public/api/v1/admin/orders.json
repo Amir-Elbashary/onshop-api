@@ -2,14 +2,13 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "/",
-  "resourcePath": "app_settings",
+  "resourcePath": "orders",
   "apis": [
     {
-      "path": "/v1/onshop/app_settings.json",
+      "path": "/v1/admin/orders.json",
       "operations": [
         {
-          "summary": "Get App settings",
-          "notes": "Valid App token is needed only",
+          "summary": "Get all orders",
           "parameters": [
             {
               "paramType": "header",
@@ -19,8 +18,15 @@
               "required": true
             },
             {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "Admin Authentication Token",
+              "required": true
+            },
+            {
               "paramType": "query",
-              "name": "loc",
+              "name": "page",
               "type": "string",
               "description": null,
               "required": false
@@ -36,9 +42,14 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Onshop::AppSettings#index",
+          "nickname": "Api::V1::Admin::Orders#index",
           "method": "get"
         }
       ]
