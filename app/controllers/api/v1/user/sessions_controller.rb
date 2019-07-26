@@ -39,7 +39,7 @@ class Api::V1::User::SessionsController < Api::V1::User::BaseUserController
         render json: { success: true,
                        token: token,
                        user: @user.as_json(except: :authentication_token),
-                       login: @login.as_json(except: :token) }, status: :ok
+                       login: @login.as_json(except: %i[id admin_id merchant_id user_id token]) }, status: :ok
       else
         render json: { success: false, errors: 'invalid email or password' }, status: :unprocessable_entity
       end
