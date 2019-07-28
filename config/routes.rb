@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         resources :statistics, only: :show
         resources :merchants
         resources :users
-        resources :orders, only: :index
+        resources :orders, only: %i[index show]
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories

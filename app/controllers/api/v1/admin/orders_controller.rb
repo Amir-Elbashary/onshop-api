@@ -21,4 +21,16 @@ class Api::V1::Admin::OrdersController < Api::V1::Admin::BaseAdminController
       render json: { message: 'no orders found' }, status: :not_found
     end
   end
+
+  swagger_api :show do
+    summary 'Show order'
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
+    param :path, :id, :integer, :required, 'Order ID'
+    response :ok
+    response :not_found
+    response :unauthorized
+  end
+
+  def show; end
 end
