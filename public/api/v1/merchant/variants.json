@@ -146,13 +146,6 @@
             },
             {
               "paramType": "form",
-              "name": "variant[discount]",
-              "type": "text",
-              "description": "Product variant discount",
-              "required": false
-            },
-            {
-              "paramType": "form",
               "name": "variant[quantity]",
               "type": "text",
               "description": "Product variant quantity",
@@ -341,13 +334,6 @@
               "type": "text",
               "description": "Product variant price",
               "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "variant[discount]",
-              "type": "text",
-              "description": "Product variant discount",
-              "required": false
             },
             {
               "paramType": "form",
