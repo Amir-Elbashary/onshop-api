@@ -60,6 +60,10 @@
       "description": "Merchant"
     },
     {
+      "path": "/api/v1/merchant/discounts.{format}",
+      "description": "Merchant"
+    },
+    {
       "path": "/api/v1/merchant/variants.{format}",
       "description": "Merchant"
     },
