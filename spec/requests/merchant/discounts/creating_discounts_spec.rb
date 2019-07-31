@@ -11,7 +11,7 @@ RSpec.describe 'Creating discount as a merchant', type: :request do
   end
 
   context 'with valid data' do
-    it 'should create a discount that is made for one or multiple products' do
+    it 'should create a discount that is assigned for one or multiple products' do
       params = { 'discount[merchant_id]' => @merchant.id,
                  'discount[product_ids]' => @merchant.products.pluck(:id),
                  'discount[percentage]' => 10,
