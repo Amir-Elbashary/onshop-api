@@ -10,7 +10,7 @@ RSpec.describe 'Creating products as merchant', type: :request do
   end
 
   context 'with valid data' do
-    it 'should create a products that is pending to be approved' do
+    it 'should create a product' do
       params = { 'product[merchant_id]' => @merchant.id,
                  'product[category_id]' => @sub_category.id,
                  'product[name_en]' => 'New product',

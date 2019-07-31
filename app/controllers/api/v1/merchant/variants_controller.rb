@@ -9,7 +9,7 @@ class Api::V1::Merchant::VariantsController < Api::V1::Merchant::BaseMerchantCon
 
   swagger_api :create do
     summary 'Creating product variant by merchant'
-    notes "Create a product variant to be pending approval of admins"
+    notes "Create a product variant"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
     param :form, 'variant[product_id]', :integer, :required, 'Merchant ID'
