@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_105432) do
+ActiveRecord::Schema.define(version: 2019_07_30_162520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,18 @@ ActiveRecord::Schema.define(version: 2019_07_24_105432) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["status"], name: "index_contacts_on_status"
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.bigint "merchant_id"
+    t.bigint "product_id"
+    t.integer "percentage"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_discounts_on_merchant_id"
+    t.index ["product_id"], name: "index_discounts_on_product_id"
   end
 
   create_table "faq_translations", force: :cascade do |t|
@@ -282,7 +294,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_105432) do
     t.string "color"
     t.string "size"
     t.decimal "price", default: "0.0"
-    t.decimal "discount", default: "0.0"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -292,6 +303,8 @@ ActiveRecord::Schema.define(version: 2019_07_24_105432) do
   end
 
   add_foreign_key "carts", "users"
+  add_foreign_key "discounts", "merchants"
+  add_foreign_key "discounts", "products"
   add_foreign_key "favourites", "users"
   add_foreign_key "items", "carts"
   add_foreign_key "items", "variants"

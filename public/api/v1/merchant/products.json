@@ -72,7 +72,7 @@
       "operations": [
         {
           "summary": "Creating product by merchant",
-          "notes": "Create a product to be pending approval of admins",
+          "notes": "Create a product using this API",
           "parameters": [
             {
               "paramType": "header",

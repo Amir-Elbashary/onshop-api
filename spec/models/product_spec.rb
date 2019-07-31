@@ -13,7 +13,7 @@ RSpec.describe Product, type: :model do
 
   describe 'Has associations' do
     it 'has many variants' do
-      should have_many :variants
+      should have_many(:variants)
     end
 
     it 'belongs to merchant' do
@@ -25,7 +25,11 @@ RSpec.describe Product, type: :model do
     end
 
     it 'has many reviews' do
-      should have_many :reviews
+      should have_many(:reviews)
+    end
+
+    it 'has many discounts' do
+      should have_one(:discount)
     end
   end
 end

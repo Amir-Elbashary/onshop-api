@@ -25,7 +25,11 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'has many products' do
-      should have_many :products
+      should have_many(:products)
+    end
+
+    it 'has many discounts' do
+      should have_many(:discounts)
     end
   end
 end
