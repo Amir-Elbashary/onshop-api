@@ -13,6 +13,7 @@ class Category < ApplicationRecord
 
   has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
   has_many :products, dependent: :destroy
+  has_one :offer, dependent: :destroy
   belongs_to :parent, class_name: 'Category', optional: true
 
   # accepts_nested_attributes_for :sub_categories, allow_destroy: true,

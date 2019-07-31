@@ -44,6 +44,10 @@
       "description": "Admin"
     },
     {
+      "path": "/api/v1/admin/offers.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/contacts.{format}",
       "description": "Admin"
     },

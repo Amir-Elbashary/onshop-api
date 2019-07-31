@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Deleting discounts', type: :request do
+RSpec.describe 'Deleting discounts as a merchant', type: :request do
   before do
     @app_token = create(:app_token)
     @merchant = create(:merchant_with_logins)
@@ -13,7 +13,7 @@ RSpec.describe 'Deleting discounts', type: :request do
     @headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => @merchant.logins.first.token }
   end
 
-  context 'while providing product ID which belongs to the same merchant' do
+  context 'while providing product IDs which belongs to the same merchant' do
     it 'should delete that product/s discount' do
       params = { 'discount[product_ids]' => @merchant.products.pluck(:id) }
 
@@ -28,7 +28,7 @@ RSpec.describe 'Deleting discounts', type: :request do
     end
   end
 
-  context 'while providing product ID which does not belong to the same merchant' do
+  context 'while providing product IDs which does not belong to the same merchant' do
     it 'should not delete that product/s discount' do
       params = { 'discount[product_ids]' => Product.pluck(:id) }
 
