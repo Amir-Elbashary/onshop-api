@@ -13,6 +13,7 @@ class Product < ApplicationRecord
 
   has_many :variants, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_one :discount, dependent: :destroy
   belongs_to :merchant
   belongs_to :category
 

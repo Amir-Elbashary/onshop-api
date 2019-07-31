@@ -8,7 +8,6 @@ class Variant < ApplicationRecord
 
   validates :price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
-  validates :discount, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 
   validate :validates_globalized_attributes

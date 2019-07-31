@@ -9,6 +9,7 @@ class Merchant < ApplicationRecord
 
   has_many :logins, dependent: :destroy
   has_many :products, dependent: :destroy
+  has_many :discounts, dependent: :destroy
 
   def generate_authentication_token!
     self.authentication_token = Devise.friendly_token

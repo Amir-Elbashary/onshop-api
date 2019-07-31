@@ -72,7 +72,7 @@
       "operations": [
         {
           "summary": "Creating product variant by merchant",
-          "notes": "Create a product variant to be pending approval of admins",
+          "notes": "Create a product variant",
           "parameters": [
             {
               "paramType": "header",
@@ -143,13 +143,6 @@
               "type": "text",
               "description": "Product variant price",
               "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "variant[discount]",
-              "type": "text",
-              "description": "Product variant discount",
-              "required": false
             },
             {
               "paramType": "form",
@@ -341,13 +334,6 @@
               "type": "text",
               "description": "Product variant price",
               "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "variant[discount]",
-              "type": "text",
-              "description": "Product variant discount",
-              "required": false
             },
             {
               "paramType": "form",
