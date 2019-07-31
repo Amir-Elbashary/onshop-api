@@ -13,11 +13,15 @@ RSpec.describe Category, type: :model do
 
   describe 'Has associations' do
     it 'has many sub categories' do
-      should have_many :sub_categories
+      should have_many(:sub_categories)
     end
 
     it 'has many products' do
-      should have_many :products
+      should have_many(:products)
+    end
+
+    it 'has one offer' do
+      should have_one(:offer)
     end
 
     it 'belongs to parent category' do

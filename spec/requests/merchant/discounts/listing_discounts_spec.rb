@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Listing discounts', type: :request do
+RSpec.describe 'Listing discounts as a merchant', type: :request do
   before do
     @app_token = create(:app_token)
     @merchant = create(:merchant_with_logins)

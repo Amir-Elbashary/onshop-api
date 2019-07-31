@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :sessions, only: %i[create destroy]
         resources :categories
         resources :faqs
+        resources :offers
 
         resources :contacts, only: %i[index show] do
           member do

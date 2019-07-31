@@ -13,7 +13,7 @@ class Api::V1::Merchant::DiscountsController < Api::V1::Merchant::BaseMerchantCo
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Merchant Authentication Token'
     param :form, 'discount[merchant_id]', :integer, :required, 'Merchant ID'
-    param :form, 'discount[product_ids]', :integer, :required, 'Product ID'
+    param :form, 'discount[product_ids]', :array, :required, 'Product IDs'
     param :form, 'discount[percentage]', :integer, :required, 'Percantage 0~100'
     param :form, 'discount[starts_at]', :datetime, :required, 'Discount start date'
     param :form, 'discount[ends_at]', :datetime, :required, 'Discount end date'
