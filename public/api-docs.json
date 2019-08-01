@@ -48,6 +48,10 @@
       "description": "Admin"
     },
     {
+      "path": "/api/v1/admin/coupons.{format}",
+      "description": "Admin"
+    },
+    {
       "path": "/api/v1/admin/contacts.{format}",
       "description": "Admin"
     },
