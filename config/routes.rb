@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         resources :categories
         resources :faqs
         resources :offers
+        resources :coupons
 
         resources :contacts, only: %i[index show] do
           member do
