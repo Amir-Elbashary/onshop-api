@@ -33,6 +33,8 @@ RSpec.describe 'Listing products', type: :request do
 
       expect(response.code).to eq('200')
       expect(response_body['products'].count).to eq(5)
+      expect(response_body['products'][0]['variants'][0]['price'].to_f).to eq(@variant1.price)
+      expect(response_body['products'][0]['variants'][0]['old_price'].to_f).to eq(@variant1.price)
     end
   end
 
@@ -109,6 +111,55 @@ RSpec.describe 'Listing products', type: :request do
         expect(response.code).to eq('200')
         expect(response_body['products'].count).to eq(3)
       end
+    end
+  end
+
+  context 'when having discount for a product' do
+    it 'should list price after discount and old price' do
+      create(:discount, merchant: @variant1.product.merchant, product: @variant1.product, percentage: 10)
+      params = { page: 1 }
+
+      get '/v1/onshop/products', headers: @headers, params: params
+      response_body = JSON.parse(response.body)
+
+      expect(response.code).to eq('200')
+      expect(response_body['products'].count).to eq(5)
+      expect(response_body['products'][0]['variants'][0]['price'].to_f).to eq(90.0)
+      expect(response_body['products'][0]['variants'][0]['old_price']).to eq('100.0')
+    end
+  end
+
+  context 'when having offer for a product category' do
+    it 'should list price after discounting offer and old price' do
+      create(:offer, category: @variant1.product.category, percentage: 20)
+      params = { page: 1 }
+
+      get '/v1/onshop/products', headers: @headers, params: params
+      response_body = JSON.parse(response.body)
+
+      expect(response.code).to eq('200')
+      expect(response_body['products'].count).to eq(5)
+      expect(response_body['products'][0]['variants'][0]['price'].to_f).to eq(80.0)
+      expect(response_body['products'][0]['variants'][0]['old_price']).to eq('100.0')
+    end
+  end
+
+  context 'when having offer and discount for a product category' do
+    it 'should list price after discounting offer and old price' do
+      create(:offer, category: @variant1.product.category, percentage: 20)
+      create(:discount, merchant: @variant1.product.merchant, product: @variant1.product, percentage: 10)
+      params = { page: 1 }
+
+      get '/v1/onshop/products', headers: @headers, params: params
+      response_body = JSON.parse(response.body)
+
+      variant_price = response_body['products'][0]['variants'][0]['price']
+      price_after_discount = variant_price.to_f - (Offer.first.percentage / 100)
+
+      expect(response.code).to eq('200')
+      expect(response_body['products'].count).to eq(5)
+      expect(response_body['products'][0]['variants'][0]['price'].to_f).to eq(80.0)
+      expect(response_body['products'][0]['variants'][0]['old_price']).to eq('100.0')
     end
   end
 end
