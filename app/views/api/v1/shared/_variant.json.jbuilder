@@ -11,10 +11,10 @@ json.category_name variant.product.category.name
 offer = variant.product.category.offer
 discount = variant.product.discount
 
-if offer
+if offer && offer.active?
   json.price variant.price - (variant.price * offer.percentage / 100)
   json.old_price variant.price
-elsif discount
+elsif discount && discount.active?
   json.price variant.price - (variant.price * discount.percentage / 100)
   json.old_price variant.price
 else

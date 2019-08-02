@@ -84,15 +84,15 @@
       "description": "User"
     },
     {
-      "path": "/api/v1/user/orders.{format}",
-      "description": "User"
-    },
-    {
       "path": "/api/v1/user/reviews.{format}",
       "description": "User"
     },
     {
       "path": "/api/v1/user/contacts.{format}",
+      "description": "User"
+    },
+    {
+      "path": "/api/v1/user/orders.{format}",
       "description": "User"
     },
     {

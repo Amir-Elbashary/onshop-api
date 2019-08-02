@@ -15,6 +15,7 @@ class Ability
       authorize_models(MERCHANT_MODELS, MERCHANT_AUTHORIZED_MODELS)
     when User
       # Users have access to specific models only
+      can :is_favourite, Product
       can :favourite_product, Product
       authorize_models(USER_MODELS, USER_AUTHORIZED_MODELS)
     end

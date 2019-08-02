@@ -44,13 +44,14 @@ Rails.application.routes.draw do
 
       namespace :user do
         resources :sessions, only: %i[create destroy]
+        resources :reviews, except: :show
+        resources :contacts, only: :create
+
         resources :orders do
           member do
             post :checkout
           end
         end
-        resources :reviews, except: :show
-        resources :contacts, only: :create
 
         resources :registrations, only: :create do
           collection do
@@ -63,17 +64,23 @@ Rails.application.routes.draw do
             put :update_profile
             get :orders
             get :favourite_products
+            post :clear_favourites
           end
         end
 
         resources :products do
           member do
+            get :is_favourite
             post :favourite_product
           end
         end
 
         resources :carts do
           resources :items, expect: :show
+
+          member do
+            post :clear
+          end
           
           collection do
             get :active_cart
