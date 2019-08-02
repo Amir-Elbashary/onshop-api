@@ -162,4 +162,22 @@ RSpec.describe 'Listing products', type: :request do
       expect(response_body['products'][0]['variants'][0]['old_price']).to eq('100.0')
     end
   end
+
+  context 'when having expired offer for a product category' do
+    it 'should list same price after discounting offer and old price' do
+      create(:offer, category: @variant1.product.category,
+                     percentage: 20,
+                     starts_at: (Time.zone.now - 4.days),
+                     ends_at: (Time.zone.now - 2.days))
+      params = { page: 1 }
+
+      get '/v1/onshop/products', headers: @headers, params: params
+      response_body = JSON.parse(response.body)
+
+      expect(response.code).to eq('200')
+      expect(response_body['products'].count).to eq(5)
+      expect(response_body['products'][0]['variants'][0]['price'].to_f).to eq(100.0)
+      expect(response_body['products'][0]['variants'][0]['old_price']).to eq('100.0')
+    end
+  end
 end
