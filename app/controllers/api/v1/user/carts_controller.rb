@@ -1,7 +1,6 @@
 class Api::V1::User::CartsController < Api::V1::User::BaseUserController
   load_and_authorize_resource
-  skip_load_resource
-  before_action :set_cart, only: :show
+  before_action :check_ownership, only: %i[show clear]
   before_action :set_carts, only: :index
   before_action :set_active_cart, only: :active_cart
 
@@ -31,8 +30,6 @@ class Api::V1::User::CartsController < Api::V1::User::BaseUserController
   end
 
   def show
-    # Cart items is to be added soon within the cart object
-    return render json: { message: 'not allowed, this cart does not belong to this user' }, status: :unauthorized unless current_user.carts.include?(@cart)
     render json: @cart, status: :ok if @cart
   end
 
@@ -51,10 +48,28 @@ class Api::V1::User::CartsController < Api::V1::User::BaseUserController
     render json: @new_cart, status: :ok
   end
 
+  swagger_api :clear do
+    summary 'Clear cart items'
+    notes "This API clears user's cart items as long as it's unlocked!"
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    param :path, :id, :integer, :required, 'Cart ID'
+    response :ok
+    response :unauthorized
+    response :not_found
+    response :unprocessable_entity
+  end
+
+  def clear
+    return render json: { success: false, message: 'cart is locked, please cancel it\'s order first' }, status: :unprocessable_entity if @cart.locked? 
+
+    render json: { success: true, message: 'cart cleared' }, status: :ok if @cart.items.destroy_all
+  end
+
   private
 
-  def set_cart
-    @cart = Cart.find(params[:id])
+  def check_ownership
+    return render json: { message: 'not allowed, this cart does not belong to this user' }, status: :unauthorized unless current_user.carts.include?(@cart)
   end
 
   def set_carts
