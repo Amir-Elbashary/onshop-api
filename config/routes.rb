@@ -64,6 +64,7 @@ Rails.application.routes.draw do
             put :update_profile
             get :orders
             get :favourite_products
+            post :clear_favourites
           end
         end
 

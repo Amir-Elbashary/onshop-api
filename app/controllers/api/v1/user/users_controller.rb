@@ -73,6 +73,18 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     @favourite_products = current_user.favourite_products.page(params[:page]).per_page(32)
   end
 
+  swagger_api :clear_favourites do
+    summary 'clears user favourite products'
+    param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
+    param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
+    response :ok
+    response :unauthorized
+  end
+
+  def clear_favourites
+    return render json: { message: 'favourites cleared' }, status: :ok if current_user.favourites.destroy_all
+  end
+
   swagger_api :orders do
     summary 'Get user orders'
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
