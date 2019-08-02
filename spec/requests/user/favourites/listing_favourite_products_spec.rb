@@ -23,8 +23,7 @@ RSpec.describe 'Getting user favourite products', type: :request do
     end
   end
 
-
-  context 'when providing invalid product token' do
+  context 'when providing invalid user token' do
     it 'should return unauthorized access' do
       headers = { 'X-APP-Token' => @app_token.token, 'X-User-Token' => 'invalid token' }
 

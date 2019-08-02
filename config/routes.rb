@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
         resources :products do
           member do
+            get :is_favourite
             post :favourite_product
           end
         end
