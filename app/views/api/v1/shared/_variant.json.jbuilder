@@ -21,5 +21,3 @@ else
   json.price variant.price
   json.old_price variant.price
 end
-
-
