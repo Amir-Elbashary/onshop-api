@@ -16,7 +16,8 @@ RSpec.describe 'Creating order', type: :request do
     context 'if cart contains at least one item' do
       it 'should create order for this cart and lock the cart' do
         params = { 'order[cart_id]' => @cart.id,
-                   'order[user_id]' => @user.id }
+                   'order[user_id]' => @user.id,
+                   'order[payment_method]' => 'cash' }
 
         post '/v1/user/orders', headers: @headers, params: params
 
@@ -26,6 +27,31 @@ RSpec.describe 'Creating order', type: :request do
         expect(Order.first.total_items).to eq(3)
         expect(Order.first.total_price).to eq(400)
         expect(Order.first.cart.status).to eq('locked')
+        expect(Order.first.payment_method).to eq('cash')
+      end
+
+      it 'should not create order for this cart if payment method is blank' do
+        params = { 'order[cart_id]' => @cart.id,
+                   'order[user_id]' => @user.id,
+                   'order[payment_method]' => '' }
+
+        post '/v1/user/orders', headers: @headers, params: params
+
+        expect(response.code).to eq('422')
+        expect(Order.count).to eq(0)
+        expect(@cart.status).to eq('unlocked')
+      end
+
+      it 'should not create order for this cart if payment method is invalid' do
+        params = { 'order[cart_id]' => @cart.id,
+                   'order[user_id]' => @user.id,
+                   'order[payment_method]' => 'cash on delivery' }
+
+        post '/v1/user/orders', headers: @headers, params: params
+
+        expect(response.code).to eq('422')
+        expect(Order.count).to eq(0)
+        expect(@cart.status).to eq('unlocked')
       end
     end
 
@@ -34,7 +60,8 @@ RSpec.describe 'Creating order', type: :request do
         cart = create(:cart, user: @user)
 
         params = { 'order[cart_id]' => cart.id,
-                   'order[user_id]' => @user.id }
+                   'order[user_id]' => @user.id,
+                   'order[payment_method]' => 'cash' }
 
         post '/v1/user/orders', headers: @headers, params: params
 
@@ -50,7 +77,8 @@ RSpec.describe 'Creating order', type: :request do
       order = create(:order, cart: @cart, user: @user)
 
       params = { 'order[cart_id]' => @cart.id,
-                 'order[user_id]' => @user.id }
+                 'order[user_id]' => @user.id,
+                 'order[payment_method]' => 'cash' }
 
       post '/v1/user/orders', headers: @headers, params: params
 
@@ -67,7 +95,8 @@ RSpec.describe 'Creating order', type: :request do
       item2 = create(:item, cart: cart, variant: variant2, quantity: variant2.quantity)
 
       params = { 'order[cart_id]' => cart.id,
-                 'order[user_id]' => @user.id }
+                 'order[user_id]' => @user.id,
+                 'order[payment_method]' => 'cash' }
 
       post '/v1/user/orders', headers: @headers, params: params
 

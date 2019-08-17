@@ -1,5 +1,6 @@
 class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
   load_and_authorize_resource
+  skip_load_resource only: :create
   before_action :set_cart, only: :create
   before_action :set_order, only: :checkout
 
@@ -12,15 +13,22 @@ class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
     param :header, 'X-User-Token', :string, :required, 'User Authentication Token'
     param :form, 'order[user_id]', :integer, :required, 'User ID'
     param :form, 'order[cart_id]', :integer, :required, 'Cart ID'
+    param :form, 'order[payment_method]', :string, :required, 'cash or paypal'
     response :ok
     response :unauthorized
     response :unprocessable_entity
   end
 
   def create
+    unless ['cash', 'paypal'].include?(params[:order][:payment_method].downcase)
+      return render json: { message: 'only cash and paypal are allowed as payment methods' }, status: :unprocessable_entity
+    end
+
     return render json: { message: 'cart does not belong to this user' }, status: :unprocessable_entity unless current_user.carts.include?(@cart)
     return render json: { message: 'order already exists' }, status: :unprocessable_entity if @cart.order
     return render json: { message: 'cart is empty' }, status: :unprocessable_entity unless @cart.items.any?
+
+    @order = Order.new(order_params)
 
     return render json: @order.errors.full_messages, status: :unprocessable_entity unless @order.save
 
@@ -84,7 +92,7 @@ class Api::V1::User::OrdersController < Api::V1::User::BaseUserController
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :cart_id)
+    params.require(:order).permit(:user_id, :cart_id, :payment_method)
   end
 
   def set_cart

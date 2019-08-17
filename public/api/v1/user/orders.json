@@ -101,6 +101,13 @@
               "type": "integer",
               "description": "Cart ID",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[payment_method]",
+              "type": "string",
+              "description": "cash or paypal",
+              "required": true
             }
           ],
           "responseMessages": [
