@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
         resources :orders do
           member do
+            post :coupon
             post :checkout
           end
         end

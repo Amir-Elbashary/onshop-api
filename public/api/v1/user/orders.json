@@ -5,6 +5,68 @@
   "resourcePath": "orders",
   "apis": [
     {
+      "path": "/v1/user/orders/{id}/coupon.json",
+      "operations": [
+        {
+          "summary": "Applying coupon to order",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "X-APP-Token",
+              "type": "string",
+              "description": "App Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "X-User-Token",
+              "type": "string",
+              "description": "User Authentication Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Order ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[coupon_code]",
+              "type": "string",
+              "description": "Coupon Code",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::User::Orders#coupon",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/v1/user/orders/{id}/checkout.json",
       "operations": [
         {
