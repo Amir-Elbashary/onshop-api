@@ -1,6 +1,5 @@
 class Coupon < ApplicationRecord
   include OfferHelpers
-  #before_create :generate_coupon_code!
   before_validation :generate_coupon_code!, on: :create
 
   validates :percentage, :code, :starts_at, :ends_at, presence: true
