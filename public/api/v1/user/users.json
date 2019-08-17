@@ -76,6 +76,13 @@
             },
             {
               "paramType": "form",
+              "name": "user[zip_code]",
+              "type": "string",
+              "description": "User zip code",
+              "required": false
+            },
+            {
+              "paramType": "form",
               "name": "user[phone_number]",
               "type": "string",
               "description": "User phone number",
