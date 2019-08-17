@@ -11,13 +11,18 @@ Rails.application.routes.draw do
         resources :statistics, only: :show
         resources :merchants
         resources :users
-        resources :orders, only: %i[index show]
         resources :app_tokens, only: :create
         resources :sessions, only: %i[create destroy]
         resources :categories
         resources :faqs
         resources :offers
         resources :coupons
+
+        resources :orders, only: %i[index show] do
+          member do
+            post :confirm
+          end
+        end
 
         resources :contacts, only: %i[index show] do
           member do
