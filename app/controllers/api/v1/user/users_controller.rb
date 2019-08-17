@@ -28,6 +28,7 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
     param :form, 'user[country]', :string, :optional, 'User country'
     param :form, 'user[city]', :string, :optional, 'User city'
     param :form, 'user[region]', :string, :optional, 'User region'
+    param :form, 'user[zip_code]', :string, :optional, 'User zip code'
     param :form, 'user[phone_number]', :string, :optional, 'User phone number'
     param :form, 'user[password]', :string, :optional, 'New password'
     param :form, 'user[password_confirmation]', :string, :optional, 'Confirm new password'
@@ -107,11 +108,11 @@ class Api::V1::User::UsersController < Api::V1::User::BaseUserController
   def user_params
     if params[:user][:current_password]
       params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
-                                   :country, :city, :region, :phone_number,
+                                   :country, :city, :region, :zip_code, :phone_number,
                                    :password, :password_confirmation)
     else
       params.require(:user).permit(:first_name, :last_name, :gender, :shipping_address,
-                                   :country, :city, :region, :phone_number)
+                                   :country, :city, :region, :zip_code, :phone_number)
     end
   end
 end

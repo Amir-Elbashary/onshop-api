@@ -175,8 +175,8 @@
       "path": "/v1/admin/users/{id}.json",
       "operations": [
         {
-          "summary": "Deleting merchant from OnShop",
-          "notes": "WARNING: This will delete the merchant and all his associated items permanently",
+          "summary": "Deleting user from OnShop",
+          "notes": "WARNING: This will delete the user permanently unless he has active carts/orders",
           "parameters": [
             {
               "paramType": "header",
@@ -196,7 +196,7 @@
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Merchant ID",
+              "description": "User ID",
               "required": true
             }
           ],

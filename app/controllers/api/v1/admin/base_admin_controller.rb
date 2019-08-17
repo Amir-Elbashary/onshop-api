@@ -1,4 +1,5 @@
 class Api::V1::Admin::BaseAdminController < Api::V1::BaseApiController
+  rescue_from ActiveRecord::InvalidForeignKey, with: :has_relations
   before_action :authenticate_admin
 
   def current_admin
@@ -11,6 +12,10 @@ class Api::V1::Admin::BaseAdminController < Api::V1::BaseApiController
   end 
 
   private
+
+  def has_relations
+    render json: { error: 'this user is associated with active carts/orders, please delete them first' }, status: :forbidden
+  end
 
   def authenticate_admin
     JWT.decode(request.headers['X-User-Token'], hmac_secret, true, { algorithm: 'HS256' }) if current_admin

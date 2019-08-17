@@ -30,7 +30,7 @@ RSpec.describe 'Showing product variant', type: :request do
 
   context 'when presenting invalid product ID' do
     it 'should not return any variants' do
-      get "/v1/merchant/products/88/variants/#{@product_variant.id}", headers: @headers
+      get "/v1/merchant/products/8888/variants/#{@product_variant.id}", headers: @headers
 
       expect(response.code).to eq('404')
     end
@@ -38,7 +38,7 @@ RSpec.describe 'Showing product variant', type: :request do
 
   context 'when presenting invalid variant ID' do
     it 'should not return any variants' do
-      get "/v1/merchant/products/#{@product.id}/variants/88", headers: @headers
+      get "/v1/merchant/products/#{@product.id}/variants/8888", headers: @headers
 
       expect(response.code).to eq('404')
     end
