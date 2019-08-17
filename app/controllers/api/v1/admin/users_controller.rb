@@ -54,11 +54,11 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::BaseAdminController
   def index; end
 
   swagger_api :destroy do
-    summary 'Deleting merchant from OnShop'
-    notes "WARNING: This will delete the merchant and all his associated items permanently"
+    summary 'Deleting user from OnShop'
+    notes "WARNING: This will delete the user permanently unless he has active carts/orders"
     param :header, 'X-APP-Token', :string, :required, 'App Authentication Token'
     param :header, 'X-User-Token', :string, :required, 'Admin Authentication Token'
-    param :path, :id, :integer, :required, 'Merchant ID'
+    param :path, :id, :integer, :required, 'User ID'
     response :ok
     response :unauthorized
     response :not_found

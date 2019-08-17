@@ -1,12 +1,17 @@
 class Api::V1::BaseApiController < ApplicationController
   respond_to :json
-  rescue_from ActiveRecord::RecordNotFound, ActiveRecord::InvalidForeignKey, with: :not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::InvalidForeignKey, with: :has_relations
   rescue_from JWT::ExpiredSignature, with: :session_expired
   before_action :authenticate_app_token!
   before_action :set_locale
 
   def not_found
     render json: { error: 'object not found, or does not exists' }, status: :not_found
+  end
+
+  def has_relations
+    render json: { error: 'this object is associated with other objects, please delete them first' }, status: :forbidden
   end
 
   private
