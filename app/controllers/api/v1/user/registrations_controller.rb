@@ -14,6 +14,7 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
     param :form, 'user[first_name]', :string, :required, 'User first name'
     param :form, 'user[last_name]', :string, :required, 'User last name'
     param :form, 'user[gender]', :string, :optional, 'User gender'
+    param :form, 'user[zip_code]', :string, :optional, 'User zip code'
     response :ok
     response :unauthorized
     response :unprocessable_entity
@@ -93,6 +94,6 @@ class Api::V1::User::RegistrationsController < Api::V1::User::BaseUserController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :first_name, :last_name, :gender)
+                                 :first_name, :last_name, :gender, :zip_code)
   end
 end
