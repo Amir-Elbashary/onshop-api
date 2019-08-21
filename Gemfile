@@ -27,8 +27,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'swagger-docs'
 gem 'rack-cors'
 
-# ============ Action Cable Related Gems ============
-# gem 'redis', '~> 4.0'
+# ============ Active Job Related Gems ============
+gem 'sidekiq'
 
 # =============== Images Related Gems ===============
 gem 'carrierwave'
