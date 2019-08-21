@@ -1,0 +1,9 @@
+---
+:retry: false
+:pidfile: /tmp/sidekiq.pid
+:queues:
+  - default
+  - mailers
+  - low
+production:
+  :concurrency: 20

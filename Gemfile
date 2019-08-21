@@ -27,8 +27,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'swagger-docs'
 gem 'rack-cors'
 
-# ============ Action Cable Related Gems ============
-# gem 'redis', '~> 4.0'
+# ============ Active Job Related Gems ============
+gem 'sidekiq'
 
 # =============== Images Related Gems ===============
 gem 'carrierwave'
@@ -58,6 +58,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd', '~> 1.5', '>= 1.5.2'
+  gem 'letter_opener'
 
   # ============ Deployment Related Gems ============
   gem 'capistrano', '~> 3.7', '>= 3.7.1'
@@ -65,12 +66,3 @@ group :development do
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-rbenv', '~> 2.1'
 end
-
-
-
-
-
-
-
-
-

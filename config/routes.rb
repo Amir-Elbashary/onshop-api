@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   devise_for :users
   devise_for :merchants
   devise_for :admins
@@ -87,7 +89,7 @@ Rails.application.routes.draw do
           member do
             post :clear
           end
-          
+
           collection do
             get :active_cart
           end
