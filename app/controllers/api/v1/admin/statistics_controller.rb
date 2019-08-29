@@ -15,13 +15,17 @@ class Api::V1::Admin::StatisticsController < Api::V1::Admin::BaseAdminController
     @products = Product.count
     @merchants = Merchant.count
     @categories = Category.count
-    @orders = 'Coming Soon'
+    @orders = Order.count
+    @paid_orders = Order.paid.count
+    @pending_orders = Order.pending.count
     @users = User.count
     @visitors = 'Coming Soon'
     render json: { products: @products,
                    merchants: @merchants,
                    categories: @categories,
                    orders: @orders,
+                   paid_orders: @paid_orders,
+                   pending_orders: @pending_orders,
                    users: @users,
                    visitors: @visitors }, status: :ok
   end
